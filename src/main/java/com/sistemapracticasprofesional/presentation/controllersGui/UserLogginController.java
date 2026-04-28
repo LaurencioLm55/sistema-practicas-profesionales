@@ -1,7 +1,9 @@
-package com.sistemapracticasprofesional.controllersGui;
+package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import com.sistemapracticasprofesional.logic.dto.UserDto;
+import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
+import com.sistemapracticasprofesional.logic.validators.GuiValidator;
 import com.sistemapracticasprofesional.logic.dao.UserDao;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -20,33 +22,33 @@ public class UserLogginController {
     private Alert alert;
 
     @FXML
-    private void isUserRegister(){
+    private void handelLogin(){
         
         UserDto userDto = new UserDto();
-        UserDao userDao = new UserDao();
+        UserLogginController userLogginController = new UserLogginController();
         getData(userDto);
 
         try{
-            
-            boolean success = userDao.isUserRegistred(userDto);
+          
+            String type = userLogginController.logginUser(userDto);
 
-            if(success){
+            switch (type) {
+                case "Practicante":
+                    
+                    break;
+                case "Profesor":
 
-                alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle(null);
-                alert.setHeaderText("aaaaaaa");
-                alert.setContentText(null);
+                    break;
+                case "Coordinador":
 
-            }else{
+                    break;
 
-                alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle(null);
-                alert.setHeaderText("No se puede iniciar secion");
-                alert.setContentText("Usuario o contraseña incorrecta");
-
+                default:
+                    
+                    break;
             }
 
-        }catch (DaoException e){
+        }catch(BusinessLogicException e){
 
             alert = new Alert(AlertType.ERROR);
             alert.setTitle(null);
@@ -58,8 +60,17 @@ public class UserLogginController {
 
     private void getData( UserDto userDto ){
 
-        userDto.setUserName(userNameTextField.getText());
-        userDto.setPassword(passwordField.getText());
+        GuiValidator validator = new GuiValidator();
+
+        String userName = userNameTextField.getText();
+        String userPassword = passwordField.getText();
+
+        if ( validator.validateText( userNameTextField.getText() ) && validator.validateText( userPassword ) ){ 
+
+            userDto.setUserName(userNameTextField.getText());
+            userDto.setPassword(passwordField.getText());
+
+        }
 
     }
 
