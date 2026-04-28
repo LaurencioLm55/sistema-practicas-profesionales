@@ -15,19 +15,20 @@ public class UserLoginService {
     private NavigationServices navigationServices;
 
     public void logginUser(UserDto userDto) throws BusinessLogicException{
-
+        
         String type = null;
 
         validator = new UserValidator(userDto);
+        
 
-        if(validator.isUserValid()){
-
-            if(userDao.isUserRegistred(userDto)){
-
+        if(validator.isUserValid() == true){
+           
+            if(userDao.isUserRegistred(userDto) == true){
+                
                 userDto.setIdUser(userDao.getIdUser(userDto));
 
                 type = userDao.getUserType(userDto);
-
+                System.out.println(type);
                 startPresentationWhitType(type);
 
             }else{
@@ -79,6 +80,7 @@ public class UserLoginService {
         resourcePath = "src/main/java/com/sistemapracticasprofesional/presentation/views/GuiCoordinatorMenu.fxml";
         namePath = "/com/sistemapracticasprofesional/presentation/views/GuiCoordinatorMenu.fxml";
         title = "Ventana princiapal Practicante";
+
 
         navigationServices = new NavigationServices(resourcePath, namePath, title);
 

@@ -13,7 +13,7 @@ public class UserDto {
         this.password = password;
     }
 
-    public int gatIdUser(){
+    public int getIdUser(){
         return this.idUser;
     }
 

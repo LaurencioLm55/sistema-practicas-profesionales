@@ -47,7 +47,7 @@ public class UserDao implements IUser {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, userDto.gatIdUser());
+            preparedStatement.setInt(1, userDto.getIdUser());
             preparedStatement.setString(2, userDto.getUserName());
             preparedStatement.setString(3, userDto.getPassword());
 
@@ -55,7 +55,7 @@ public class UserDao implements IUser {
 
         } catch (SQLException e) {
 
-            LOGGER.error("Error registering user with id {}", userDto.gatIdUser(), e);
+            LOGGER.error("Error registering user with id {}", userDto.getIdUser(), e);
             throw new DaoException("Error registering user", e);
         }
 
@@ -71,11 +71,11 @@ public class UserDao implements IUser {
             preparedStatement.setString(1, userDto.getUserName());
             preparedStatement.setString(2, userDto.getPassword());
 
-            preparedStatement.setInt(3, userDto.gatIdUser());
+            preparedStatement.setInt(3, userDto.getIdUser());
 
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
-            LOGGER.error("Error updating name for user id {}", userDto.gatIdUser(), e);
+            LOGGER.error("Error updating name for user id {}", userDto.getIdUser(), e);
             throw new DaoException("Error updating user name", e);
         }
     }
@@ -110,7 +110,7 @@ public class UserDao implements IUser {
         
         int result = 0;
         
-        String query = "SELECT Id_usuario FROM usuario WHERE nombre = ? AND contraseña = ?";
+        String query = "SELECT Id_usuario FROM usuario WHERE nombre = ? AND contraseña = ?;";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -148,8 +148,8 @@ public class UserDao implements IUser {
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setString(1, userDto.getUserName());
+                
+            preparedStatement.setInt(1, userDto.getIdUser());
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 

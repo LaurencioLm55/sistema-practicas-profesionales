@@ -10,8 +10,9 @@ public class UserValidator {
     }
 
     public boolean isUserValid(){
-        if ( isUserNameValid() && isUserPasswordValid() ) {
-
+        
+        if ( isUserNameValid(this.userDto) == true && isUserPasswordValid(this.userDto) == true ) {
+            
             return true;
 
         }
@@ -19,31 +20,27 @@ public class UserValidator {
         return false;
     }
 
-    public boolean isUserNameValid(){
+    public boolean isUserNameValid( UserDto userDto ){
+        
+        if (userDto.getUserName() != null || !userDto.getUserName().isBlank()){
 
-        if (userDto.getUserName() != null || userDto.getUserName().isBlank()){
-
-            if(!userDto.getUserName().contains(" ")){
-                
-                if(userDto.getUserName().matches("[a-zA-Z0-9]")){
-
+                if(userDto.getUserName().matches("[a-zA-Z0-9]+")){
+                   
                     return true;
 
+                    
                 }
-
-            }
-
         }
 
         return false;
 
     }
 
-    public boolean isUserPasswordValid() {
+    public boolean isUserPasswordValid( UserDto userDto ) {
 
-        if (userDto.getPassword() != null || userDto.getPassword().isBlank()){
+        if (userDto.getPassword() != null || !userDto.getPassword().isBlank()){
 
-            if(userDto.getPassword().matches("[a-zA-z]")){
+            if(userDto.getPassword().matches("[a-zA-z0-9]+")){
 
                 return true;
 
