@@ -4,11 +4,9 @@ import com.sistemapracticasprofesional.logic.dto.UserDto;
 
 public class UserValidator {
     private UserDto userDto; 
-    private String textToValidate;
 
     public UserValidator (UserDto userDto) {
         this.userDto = userDto;
-
     }
 
     public boolean isUserValid(){
@@ -42,14 +40,15 @@ public class UserValidator {
     }
 
     public boolean isUserPasswordValid() {
+
         if (userDto.getPassword() != null || userDto.getPassword().isBlank()){
-            /* 
-            if(userDto.getPassword().matches(text)){
+
+            if(userDto.getPassword().matches("[a-zA-z]")){
 
                 return true;
 
             }
-                */
+                
 
         }
 

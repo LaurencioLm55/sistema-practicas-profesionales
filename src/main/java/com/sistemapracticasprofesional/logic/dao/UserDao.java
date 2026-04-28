@@ -104,4 +104,71 @@ public class UserDao implements IUser {
             throw new DaoException("Error getting user", e);
         }
     }
+
+    @Override
+    public int getIdUser(UserDto userDto){
+        
+        int result = 0;
+        
+        String query = "SELECT Id_usuario FROM usuario WHERE nombre = ? AND contraseña = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userDto.getUserName());
+            preparedStatement.setString(2, userDto.getPassword());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                if (resultSet.next()) {
+                   
+                    result = resultSet.getInt("Id_usuario");
+                    
+                }
+
+            }
+
+            return result;
+
+        } catch (SQLException e) {
+
+            LOGGER.error("Error getting id {}", userDto.getUserName(), e);
+            throw new DaoException("Error getting user", e);
+
+        }
+
+    }
+
+    @Override
+    public String getUserType( UserDto userDto ) {
+        
+        String type = null;
+
+        String query = "Call obtener_tipo_usuario(?);";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userDto.getUserName());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                if (resultSet.next()) {
+                    type = resultSet.getString("tipo");
+                }
+
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error("Error checking if user is registered: {}", userDto.getUserName(), e);
+            throw new DaoException("Error verifying user", e);
+        }
+
+        return type;
+        
+    }
+
+    
+        
+
 }

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.controllers.UserLoginController">
+   <top>
+      <VBox alignment="CENTER" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="containerTitle" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="title" text="Pagina de inicio" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Bold" size="42.0" />
+                     </font>
+                  </Label>
+                  <Region prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets left="24.0" right="24.0" />
+                     </padding>
+                  </Region>
+                  <ImageView fx:id="logo" fitHeight="100.0" fitWidth="120.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../../resources/images/LogoUv.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets left="25.0" right="25.0" />
+               </padding>
+            </HBox>
+            <MenuBar prefHeight="32.0" prefWidth="1249.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Gestion de proyectos">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Registrar Encargado de proyecto" />
+                        <MenuItem mnemonicParsing="false" text="Registrar proyecto" />
+                        <MenuItem mnemonicParsing="false" text="Asignar Proyecto" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gestion de organización vincualda">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Registrar Organización" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gestionar practicantes">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Registrar practicante" />
+                        <MenuItem mnemonicParsing="false" text="Inactivar Practicante" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Reportes">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Generar reportes" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Cuenta">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Actualizar cuenta" />
+                        <MenuItem mnemonicParsing="false" text="Cerrar secion" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <Label alignment="TOP_CENTER" text="¡Bienvenido!" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+   </center>
+</BorderPane>
