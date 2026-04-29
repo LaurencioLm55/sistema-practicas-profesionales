@@ -1,5 +1,4 @@
-package com.sistemapracticasprofesional.controllersGui;
-
+package com.sistemapracticasprofesional.presentation.controllersGui;
 import com.sistemapracticasprofesional.logic.dto.AffiliatedOrganizationDto;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
 import com.sistemapracticasprofesional.logic.dao.AffiliatedOrganizationDao;
