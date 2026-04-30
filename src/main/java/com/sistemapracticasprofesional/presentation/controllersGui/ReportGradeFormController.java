@@ -1,4 +1,4 @@
-package com.sistemapracticasprofesional.controllersGui;
+package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
