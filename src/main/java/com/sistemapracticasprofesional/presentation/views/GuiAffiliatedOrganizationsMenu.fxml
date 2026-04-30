@@ -11,10 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0"
-            xmlns="http://javafx.com/javafx/26"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.AffiliatedOrganizationsMenuController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.AffiliatedOrganizationsMenuController">
 
    <top>
       <VBox alignment="CENTER" prefHeight="125.0" style="-fx-background-color: #00529e;">
@@ -44,7 +41,7 @@
    <center>
       <VBox alignment="CENTER" spacing="25.0">
          <children>
-            <Button onAction="#handleRegisterOrganization" prefWidth="360.0" style="-fx-background-color: #09001F;" text="Registrar organizacion" textFill="WHITE">
+            <Button fx:id="buttonRegistrarOrganizacion" onAction="#handleRegisterOrganization" prefWidth="360.0" style="-fx-background-color: #09001F;" text="Registrar organizacion" textFill="WHITE">
                <font><Font size="18.0" /></font>
             </Button>
 

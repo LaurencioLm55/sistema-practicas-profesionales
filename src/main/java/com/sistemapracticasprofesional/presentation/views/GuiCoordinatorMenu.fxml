@@ -48,11 +48,16 @@
                         <MenuItem mnemonicParsing="false" text="Asignar Proyecto" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Gestion de organización vincualda">
-                  <items>
-                        <MenuItem mnemonicParsing="false" text="Registrar Organización" />
-                  </items>
-                </Menu>
+                     <Button onAction="#handleRegisterCourse"
+                        prefWidth="360.0"
+                        style="-fx-background-color: #09001F;"
+                        text="Registrar experiencia educativa"
+                        textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  
                 <Menu mnemonicParsing="false" text="Gestionar practicantes">
                   <items>
                         <MenuItem mnemonicParsing="false" text="Registrar practicante" />
