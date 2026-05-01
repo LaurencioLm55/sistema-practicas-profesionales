@@ -43,25 +43,16 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Gestion de proyectos">
                   <items>
-                        <MenuItem mnemonicParsing="false" text="Registrar Encargado de proyecto" />
-                        <MenuItem mnemonicParsing="false" text="Registrar proyecto" />
-                        <MenuItem mnemonicParsing="false" text="Asignar Proyecto" />
+                        <MenuItem fx:id="registrerProjectAttentanMenuItem" mnemonicParsing="false" onAction="#handelStartRegistrerProjectAttendant" text="Registrar Encargado de proyecto" />
+                        <MenuItem fx:id="registrerProjectMenuItem" mnemonicParsing="false" onAction="#handelStartRegistrerAffiliatedOrganization" text="Registrar proyecto" />
+                        <MenuItem fx:id="assignProjectMenuItem" mnemonicParsing="false" onAction="#handelStartAssignProject" text="Asignar Proyecto" />
                   </items>
                 </Menu>
-                     <Button onAction="#handleRegisterCourse"
-                        prefWidth="360.0"
-                        style="-fx-background-color: #09001F;"
-                        text="Registrar experiencia educativa"
-                        textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
                   
                 <Menu mnemonicParsing="false" text="Gestionar practicantes">
                   <items>
-                        <MenuItem mnemonicParsing="false" text="Registrar practicante" />
-                        <MenuItem mnemonicParsing="false" text="Inactivar Practicante" />
+                        <MenuItem fx:id="registrerInternMenuItem" mnemonicParsing="false" onAction="#handleStartRegistrerIntern" text="Registrar practicante" />
+                        <MenuItem fx:id="disableInternMenuItem" mnemonicParsing="false" onAction="#handelStartDisableIntern" text="Inactivar Practicante" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Reportes">
@@ -71,7 +62,7 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Cuenta">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Actualizar cuenta" />
+                      <MenuItem fx:id="updateDataUserMenuItem" mnemonicParsing="false" onAction="#handeStartUpdateDataUser" text="Actualizar cuenta" />
                         <MenuItem mnemonicParsing="false" text="Cerrar secion" />
                     </items>
                   </Menu>
