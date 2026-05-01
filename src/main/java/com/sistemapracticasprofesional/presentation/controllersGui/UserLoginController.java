@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.slf4j.LoggerFactory;
 
-import com.sistemapracticasprofesional.logic.dao.AffiliatedOrganizationDao;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.service.UserLoginService;
@@ -17,7 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 public class UserLoginController {
 
@@ -38,21 +37,11 @@ public class UserLoginController {
         UserDto userDto = new UserDto();
         createUserDto(userDto);
 
-          try{
-
-            Navigation navigation = new Navigation();
-            navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Test");
-
-        }catch (IOException e){
-
-            LOGGER.error("Ruta no encontrada", e);
-            showAlert(Alert.AlertType.ERROR, "No se pudo abrir la ventan");
-
-        }
-
         try{
             
-            userLoginService.logginUser(userDto);
+            String typeUser = userLoginService.logginUser(userDto);
+
+            startPresentationWhitType( typeUser, event );
 
         }catch(BusinessLogicException e){
 
@@ -62,6 +51,8 @@ public class UserLoginController {
             alert.setContentText(null);
 
         }
+
+        
     }
 
     private void createUserDto(UserDto userDto){
@@ -79,6 +70,80 @@ public class UserLoginController {
             alert.setTitle(null);
             alert.setHeaderText(messange);
             alert.showAndWait();
+
+    }
+
+    private void startPresentationWhitType(String typeUser, ActionEvent event){
+
+
+        switch (typeUser) {
+            case "Practicante":
+
+                startIntern(event);
+
+                break;
+
+            case "Profesor":
+
+                startProfessor(event);
+
+                break;
+            
+            case "Coordinador":
+
+                startCoordinator(event);
+
+                break;
+        
+            default:
+
+                break;
+        }
+
+    }
+
+    private void startIntern(ActionEvent event){
+
+        try{
+
+            Navigation.changeScene(event, "GuiInternsMenu.fxml", "Menu de inicio");
+
+        }catch (IOException e) {
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
+            
+        }
+
+    }
+
+    private void startProfessor(ActionEvent event){
+
+        try{
+
+            Navigation.changeScene(event, "GuiProfessorMenu.fxml", "Menu de inicio");
+
+        }catch (IOException e) {
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
+            
+        }
+    
+    }
+
+    private void startCoordinator(ActionEvent event){
+        
+        try{
+
+            Navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Menu de inicio");
+
+        }catch (IOException e) {
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
+            
+        }
 
     }
 

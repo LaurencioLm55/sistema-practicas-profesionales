@@ -4,6 +4,7 @@ import com.sistemapracticasprofesional.logic.dao.UserDao;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.validators.UserValidator;
+import com.sistemapracticasprofesional.presentation.util.Navigation;
 
 public class UserLoginService {
 
@@ -12,9 +13,8 @@ public class UserLoginService {
     private String title;
     private UserDao userDao = new UserDao();
     private UserValidator validator;
-    private NavigationServices navigationServices;
 
-    public void logginUser(UserDto userDto) throws BusinessLogicException{
+    public String logginUser(UserDto userDto) throws BusinessLogicException{
         
         String type = null;
 
@@ -28,8 +28,6 @@ public class UserLoginService {
                 userDto.setIdUser(userDao.getIdUser(userDto));
 
                 type = userDao.getUserType(userDto);
-                System.out.println(type);
-                startPresentationWhitType(type);
 
             }else{
 
@@ -43,66 +41,8 @@ public class UserLoginService {
 
         }
 
+        return type;
 
-    }
-
-    private void startPresentationWhitType(String typeUser){
-
-
-        switch (typeUser) {
-            case "Practicante":
-
-                startIntern();
-
-                break;
-
-            case "Profesor":
-
-                startProfessor();
-
-                break;
-            
-            case "Coordinator":
-
-                startCoordinator();
-
-                break;
-        
-            default:
-
-                break;
-        }
-
-    }
-
-    private void startIntern(){
-
-        resourcePath = "src/main/java/com/sistemapracticasprofesional/presentation/views/GuiCoordinatorMenu.fxml";
-        namePath = "/com/sistemapracticasprofesional/presentation/views/GuiCoordinatorMenu.fxml";
-        title = "Ventana princiapal Practicante";
-
-
-        navigationServices = new NavigationServices(resourcePath, namePath, title);
-
-    }
-
-    private void startProfessor(){
-
-        resourcePath = "src/main/java/com/sistemapracticasprofesional/presentation/views/";
-        namePath = "/com/sistemapracticasprofesional/presentation/views/";
-        title = "Ventana princiapal Profesor";
-
-        navigationServices = new NavigationServices(resourcePath, namePath, title);
-
-    }
-
-    private void startCoordinator(){
-
-        resourcePath = "src/main/java/com/sistemapracticasprofesional/presentation/views/";
-        namePath = "/com/sistemapracticasprofesional/presentation/views/";
-        title = "Ventana princiapal Coordinador";
-
-        navigationServices = new NavigationServices(resourcePath, namePath, title);
 
     }
 
