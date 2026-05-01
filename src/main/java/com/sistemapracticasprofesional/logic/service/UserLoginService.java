@@ -4,13 +4,11 @@ import com.sistemapracticasprofesional.logic.dao.UserDao;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.validators.UserValidator;
-import com.sistemapracticasprofesional.presentation.util.Navigation;
+import com.sistemapracticasprofesional.presentation.util.UserSession;
+
 
 public class UserLoginService {
 
-    private String resourcePath;
-    private String namePath;
-    private String title;
     private UserDao userDao = new UserDao();
     private UserValidator validator;
 
@@ -28,6 +26,8 @@ public class UserLoginService {
                 userDto.setIdUser(userDao.getIdUser(userDto));
 
                 type = userDao.getUserType(userDto);
+
+                UserSession.getInstance().initializeSession(userDto, type);
 
             }else{
 

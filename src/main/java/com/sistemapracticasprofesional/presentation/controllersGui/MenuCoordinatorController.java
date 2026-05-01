@@ -1,6 +1,9 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
+import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
+import com.sistemapracticasprofesional.presentation.util.UserSession;
+
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -128,8 +131,38 @@ public class MenuCoordinatorController{
     }
 
     @FXML
+    private void handleRegisterCourse(ActionEvent event) {
+
+        try {
+            Navigation.changeScene(
+                    event,
+                    "GuiRegistrerCourses.fxml",
+                    "Registrar experiencia educativa"
+            );
+        } catch (IOException e) {
+           
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
+
+        }
+
+    }
+
+    @FXML
     public void handeCloseSession ( ActionEvent event ){
 
+       try{
+
+            UserSession.getInstance().closeSession();
+
+            Navigation.changeScene(event, "GuiUserLogin.fxml", "Inicio de sesion");
+
+       }catch (IOException e){
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
+
+       }
 
 
     }
@@ -143,18 +176,6 @@ public class MenuCoordinatorController{
 
     }
 
-   @FXML
-    private void handleRegisterCourse(ActionEvent event) {
-        try {
-            Navigation.changeScene(
-                    event,
-                    "GuiRegistrerCourses.fxml",
-                    "Registrar experiencia educativa"
-            );
-        } catch (IOException e) {
-           
-        }
-    }
 
 }
 

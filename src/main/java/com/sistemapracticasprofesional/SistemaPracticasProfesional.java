@@ -15,9 +15,10 @@ public class SistemaPracticasProfesional extends Application {
         FXMLLoader loader = new FXMLLoader(getCourseViewUrl());
 
         Scene scene = new Scene(loader.load());
-        stage.setTitle("Course Registration");
+        stage.setTitle("Inicio de sesion");
         stage.setScene(scene);
         stage.show();
+
     }
 
     private URL getCourseViewUrl() throws IOException {

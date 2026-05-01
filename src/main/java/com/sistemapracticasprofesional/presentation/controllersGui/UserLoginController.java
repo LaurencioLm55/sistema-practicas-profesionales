@@ -45,10 +45,7 @@ public class UserLoginController {
 
         }catch(BusinessLogicException e){
 
-            alert = new Alert(AlertType.ERROR);
-            alert.setTitle(null);
-            alert.setHeaderText("No se puede iniciar secion");
-            alert.setContentText(null);
+            showAlert(AlertType.INFORMATION, "No se puede iniciar sesion");
 
         }
 
@@ -96,7 +93,7 @@ public class UserLoginController {
                 break;
         
             default:
-
+                showAlert(AlertType.INFORMATION, "Usuario no encontrado");
                 break;
         }
 

@@ -60,10 +60,17 @@
                       <MenuItem mnemonicParsing="false" text="Generar reportes" />
                     </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="Cursos">
+                    <items>
+                      <MenuItem fx:id="registrerCourse" mnemonicParsing="false" onAction="#handleRegisterCourse" text="Agregar curso" />
+                        <MenuItem mnemonicParsing="false" text="Actualizar curso" />
+                        <MenuItem fx:id="closeSessionMenuaItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Eliminar cusrso" />
+                    </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Cuenta">
                     <items>
                       <MenuItem fx:id="updateDataUserMenuItem" mnemonicParsing="false" onAction="#handeStartUpdateDataUser" text="Actualizar cuenta" />
-                        <MenuItem mnemonicParsing="false" text="Cerrar secion" />
+                        <MenuItem fx:id="closeSessionMenuItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Cerrar secion" />
                     </items>
                   </Menu>
               </menus>

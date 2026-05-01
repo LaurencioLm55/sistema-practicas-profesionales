@@ -1,5 +1,7 @@
 package com.sistemapracticasprofesional.presentation.util;
 
+import com.sistemapracticasprofesional.logic.dto.UserDto;
+
 public class UserSession {
 
     private static UserSession instance;
@@ -22,10 +24,10 @@ public class UserSession {
 
     }
 
-    public void initializeSession ( int idUser, String name, String role ){
+    public void initializeSession ( UserDto userDto, String role ){
 
-        this.idUser = idUser;
-        this.name = name;
+        this.idUser = userDto.getIdUser();
+        this.name = userDto.getUserName();
         this.role = role;
 
     }
