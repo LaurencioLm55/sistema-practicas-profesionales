@@ -1,6 +1,6 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
-<<<<<<< HEAD
+
 import com.sistemapracticasprofesional.presentation.util.Navigation;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -17,10 +17,10 @@ public class MenuCoordinatorController {
                     "Registrar experiencia educativa"
             );
         } catch (IOException e) {
-           
+        
         }
     }
-=======
+
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
@@ -28,6 +28,6 @@ import javafx.scene.control.Alert;
 
 public class MenuCoordinatorController{
     
->>>>>>> 7205d83e5b869438c999fce132b135a806f871c9
+
 }
 

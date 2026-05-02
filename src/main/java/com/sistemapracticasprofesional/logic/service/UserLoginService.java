@@ -62,7 +62,7 @@ public class UserLoginService {
 
                 break;
             
-            case "Coordinator":
+            case "Coordinador":
 
                 startCoordinator();
 
@@ -108,3 +108,4 @@ public class UserLoginService {
 
 
 }
+
