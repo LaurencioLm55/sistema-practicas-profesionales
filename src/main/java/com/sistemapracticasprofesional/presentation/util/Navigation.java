@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public class Navigation {
@@ -27,10 +28,20 @@ public class Navigation {
         FXMLLoader loader = new FXMLLoader(resource);
         Scene scene = new Scene(loader.load());
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = getStageFromEvent(event);
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
     }
+
+    private static Stage getStageFromEvent(ActionEvent event) {
+    Object source = event.getSource();
+
+    if (source instanceof MenuItem menuItem) {
+        return (Stage) menuItem.getParentPopup().getOwnerWindow();
+    } else {
+        return (Stage) ((Node) source).getScene().getWindow();
+    }
+}
 
 }
