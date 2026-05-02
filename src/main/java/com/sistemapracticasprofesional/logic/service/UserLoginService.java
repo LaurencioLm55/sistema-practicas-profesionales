@@ -43,71 +43,8 @@ public class UserLoginService {
 
         return type;
 
-<<<<<<< HEAD
-    }
-
-    private void startPresentationWhitType(String typeUser){
-
-
-        switch (typeUser) {
-            case "Practicante":
-
-                startIntern();
-
-                break;
-
-            case "Profesor":
-
-                startProfessor();
-
-                break;
-            
-            case "Coordinador":
-
-                startCoordinator();
-
-                break;
-        
-            default:
-
-                break;
-        }
-
-    }
-
-    private void startIntern(){
-
-        resourcePath = "src/main/java/com/sistemapracticasprofesional/presentation/views/GuiCoordinatorMenu.fxml";
-        namePath = "/com/sistemapracticasprofesional/presentation/views/GuiCoordinatorMenu.fxml";
-        title = "Ventana princiapal Practicante";
-
-
-        navigationServices = new NavigationServices(resourcePath, namePath, title);
-
-    }
-
-    private void startProfessor(){
-
-        resourcePath = "src/main/java/com/sistemapracticasprofesional/presentation/views/";
-        namePath = "/com/sistemapracticasprofesional/presentation/views/";
-        title = "Ventana princiapal Profesor";
-
-        navigationServices = new NavigationServices(resourcePath, namePath, title);
-
-    }
-
-    private void startCoordinator(){
-
-        resourcePath = "src/main/java/com/sistemapracticasprofesional/presentation/views/";
-        namePath = "/com/sistemapracticasprofesional/presentation/views/";
-        title = "Ventana princiapal Coordinador";
-
-        navigationServices = new NavigationServices(resourcePath, namePath, title);
-=======
->>>>>>> 7a9df57abf7701f57db5978ea4974e7f5155b7a9
 
     }
 
 
 }
-

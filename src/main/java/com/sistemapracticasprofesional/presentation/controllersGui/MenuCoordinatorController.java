@@ -1,10 +1,7 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
-
-
 import com.sistemapracticasprofesional.presentation.util.Navigation;
 import com.sistemapracticasprofesional.presentation.util.UserSession;
-
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -141,10 +138,13 @@ public class MenuCoordinatorController{
                     "Registrar experiencia educativa"
             );
         } catch (IOException e) {
-        
-        }
-    }
+           
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
 
+        }
+
+    }
 
     @FXML
     public void handeCloseSession ( ActionEvent event ){

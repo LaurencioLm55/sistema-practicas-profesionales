@@ -48,14 +48,6 @@
                         <MenuItem fx:id="assignProjectMenuItem" mnemonicParsing="false" onAction="#handelStartAssignProject" text="Asignar Proyecto" />
                   </items>
                 </Menu>
-<<<<<<< HEAD
-                 <Menu mnemonicParsing="false" text="Gestion de cursos">
-                   <items>
-                         <MenuItem mnemonicParsing="false" onAction="#handleRegisterCourse" text="Registrar experiencia educativa" />
-                   </items>
-                 </Menu>
-=======
->>>>>>> 7a9df57abf7701f57db5978ea4974e7f5155b7a9
                   
                 <Menu mnemonicParsing="false" text="Gestionar practicantes">
                   <items>
