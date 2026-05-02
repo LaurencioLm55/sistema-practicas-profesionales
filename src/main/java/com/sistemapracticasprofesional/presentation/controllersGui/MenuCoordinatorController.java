@@ -1,10 +1,7 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
-<<<<<<< HEAD
 
-=======
-import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
->>>>>>> 7a9df57abf7701f57db5978ea4974e7f5155b7a9
+
 import com.sistemapracticasprofesional.presentation.util.Navigation;
 import com.sistemapracticasprofesional.presentation.util.UserSession;
 
@@ -144,27 +141,10 @@ public class MenuCoordinatorController{
                     "Registrar experiencia educativa"
             );
         } catch (IOException e) {
-<<<<<<< HEAD
         
         }
     }
 
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Alert;
-
-public class MenuCoordinatorController{
-    
-
-=======
-           
-            LOGGER.error("Ruta no encontrada", e);
-            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
-
-        }
-
-    }
 
     @FXML
     public void handeCloseSession ( ActionEvent event ){
@@ -195,6 +175,5 @@ public class MenuCoordinatorController{
     }
 
 
->>>>>>> 7a9df57abf7701f57db5978ea4974e7f5155b7a9
 }
 
