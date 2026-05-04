@@ -83,14 +83,6 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="handelLogin" mnemonicParsing="false" onAction="#handelLogin" style="-fx-background-color: #09001F;" text="Iniciar sesión" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets left="100.0" right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#handleOpenRegisterUser" text="Registrarse">
                      <font>
                         <Font size="18.0" />
                      </font>

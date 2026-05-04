@@ -63,6 +63,23 @@ public class UserDao implements IUser {
 
     }
 
+    public boolean insertUser(Connection connection, UserDto userDto) {
+        String query = "INSERT INTO usuario (Id_usuario, nombre, Contraseña, Id_rol) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userDto.getIdUser());
+            preparedStatement.setString(2, userDto.getUserName());
+            preparedStatement.setString(3, userDto.getPassword());
+            preparedStatement.setInt(4, userDto.getIdRole());
+
+            return preparedStatement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            LOGGER.error("Error registering user with id {}", userDto.getIdUser(), e);
+            throw new DaoException("Error registering user", e);
+        }
+    }
+
     @Override
     public boolean updateUser( UserDto userDto ) {
         String query = "UPDATE usuario SET nombre = ?, Contraseña = ? WHERE Id_usuario = ?";
@@ -147,7 +164,8 @@ public class UserDao implements IUser {
 
         String query = "SELECT rol.Nombre AS tipo_usuario "
         + "FROM usuario "
-        + "INNER JOIN rol ON usuario.Id_rol = rol.Id_rol "
+        + "INNER JOIN usuario_rol ON usuario.Id_usuario = usuario_rol.Id_usuario "
+        + "INNER JOIN rol ON usuario_rol.Id_rol = rol.Id_rol "
         + "WHERE usuario.Id_usuario = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();

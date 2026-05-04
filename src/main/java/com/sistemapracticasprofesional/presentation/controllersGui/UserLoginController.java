@@ -91,6 +91,12 @@ public class UserLoginController {
                 startCoordinator(event);
 
                 break;
+
+            case "Administrador":
+
+                startAdministrator(event);
+
+                break;
         
             default:
                 showAlert(AlertType.INFORMATION, "Usuario no encontrado");
@@ -134,6 +140,21 @@ public class UserLoginController {
         try{
 
             Navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Menu de inicio");
+
+        }catch (IOException e) {
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
+            
+        }
+
+    }
+
+    private void startAdministrator(ActionEvent event){
+        
+        try{
+
+            Navigation.changeScene(event, "GuiAdministratorMenu.fxml", "Menu administrador");
 
         }catch (IOException e) {
 

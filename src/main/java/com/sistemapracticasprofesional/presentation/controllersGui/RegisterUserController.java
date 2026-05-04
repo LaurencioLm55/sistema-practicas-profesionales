@@ -2,7 +2,6 @@ package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import com.sistemapracticasprofesional.logic.dao.RoleDao;
 import com.sistemapracticasprofesional.logic.dto.CoordinatorDto;
-import com.sistemapracticasprofesional.logic.dto.InternDto;
 import com.sistemapracticasprofesional.logic.dto.ProfessorDto;
 import com.sistemapracticasprofesional.logic.dto.RoleDto;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
@@ -67,28 +66,9 @@ public class RegisterUserController {
     private TextField professorShiftTextField;
 
     @FXML
-    private VBox internFields;
-
-    @FXML
-    private TextField internStudentIdTextField;
-
-    @FXML
-    private TextField internNameTextField;
-
-    @FXML
-    private TextField internAgeTextField;
-
-    @FXML
-    private TextField internGenderTextField;
-
-    @FXML
-    private TextField internMajorTextField;
-
-    @FXML
-    private TextField internIndigenousLanguageTextField;
-
-    @FXML
     private void initialize() {
+        setSectionVisible(coordinatorFields, false);
+        setSectionVisible(professorFields, false);
         loadRoles();
         roleComboBox.getSelectionModel().selectFirst();
         updateRoleFields();
@@ -101,11 +81,6 @@ public class RegisterUserController {
 
     @FXML
     private void handleRegisterUser() {
-        if (!passwordField.getText().equals(confirmPasswordField.getText())) {
-            showAlert(Alert.AlertType.ERROR, "Las contrasenas no coinciden");
-            return;
-        }
-
         try {
             UserDto userDto = createUserDto();
             RoleDto selectedRole = roleComboBox.getValue();
@@ -119,16 +94,17 @@ public class RegisterUserController {
 
             switch (selectedRole.getName()) {
                 case "Coordinador":
-                    userRegisterService.registerCoordinator(userDto, createCoordinatorDto());
+                    userRegisterService.registerCoordinator(userDto,
+                            confirmPasswordField.getText(),
+                            createCoordinatorDto());
                     break;
                 case "Profesor":
-                    userRegisterService.registerProfessor(userDto, createProfessorDto());
-                    break;
-                case "Practicante":
-                    userRegisterService.registerIntern(userDto, createInternDto());
+                    userRegisterService.registerProfessor(userDto,
+                            confirmPasswordField.getText(),
+                            createProfessorDto());
                     break;
                 default:
-                    showAlert(Alert.AlertType.ERROR, "Selecciona un tipo de usuario");
+                    showAlert(Alert.AlertType.ERROR, "El administrador solo puede registrar coordinadores y profesores");
                     return;
             }
 
@@ -142,9 +118,9 @@ public class RegisterUserController {
     @FXML
     private void handleBack(ActionEvent event) {
         try {
-            Navigation.changeScene(event, "GuiUserLogin.fxml", "Inicio de sesion");
+            Navigation.changeScene(event, "GuiAdministratorMenu.fxml", "Menu administrador");
         } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "No se pudo volver al inicio de sesion");
+            showAlert(Alert.AlertType.ERROR, "No se pudo volver al menu administrador");
         }
     }
 
@@ -175,18 +151,6 @@ public class RegisterUserController {
         return professorDto;
     }
 
-    private InternDto createInternDto() {
-        InternDto internDto = new InternDto(
-                internStudentIdTextField.getText(),
-                parseInteger(internAgeTextField.getText(), "Edad invalida"),
-                internNameTextField.getText(),
-                internIndigenousLanguageTextField.getText(),
-                internGenderTextField.getText(),
-                internMajorTextField.getText()
-        );
-        return internDto;
-    }
-
     private int parseInteger(String value, String errorMessage) {
         try {
             return Integer.parseInt(value);
@@ -201,19 +165,21 @@ public class RegisterUserController {
 
         setSectionVisible(coordinatorFields, "Coordinador".equals(roleName));
         setSectionVisible(professorFields, "Profesor".equals(roleName));
-        setSectionVisible(internFields, "Practicante".equals(roleName));
     }
 
     private void loadRoles() {
         roleComboBox.getItems().clear();
 
         try {
-            roleComboBox.getItems().addAll(roleDao.getAllRoles());
+            for (RoleDto roleDto : roleDao.getAllRoles()) {
+                if ("Coordinador".equals(roleDto.getName()) || "Profesor".equals(roleDto.getName())) {
+                    roleComboBox.getItems().add(roleDto);
+                }
+            }
         } catch (RuntimeException e) {
             roleComboBox.getItems().addAll(
                     new RoleDto(1, "Coordinador"),
-                    new RoleDto(2, "Profesor"),
-                    new RoleDto(3, "Practicante")
+                    new RoleDto(2, "Profesor")
             );
         }
     }

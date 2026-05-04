@@ -1,14 +1,26 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import com.sistemapracticasprofesional.logic.dto.InternDto;
-import com.sistemapracticasprofesional.logic.exception.ServiceException;
-import com.sistemapracticasprofesional.logic.exception.ValidationException;
-import com.sistemapracticasprofesional.logic.service.InternService;
+import com.sistemapracticasprofesional.logic.dto.UserDto;
+import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
+import com.sistemapracticasprofesional.logic.service.UserRegisterService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class RegisterInternController {
+
+   private static final int INTERN_ROLE_ID = 3;
+
+   @FXML
+   private TextField textFieldUserName;
+
+   @FXML
+   private PasswordField passwordField;
+
+   @FXML
+   private PasswordField confirmPasswordField;
 
    @FXML
    private TextField textFieldStudentId;
@@ -28,26 +40,21 @@ public class RegisterInternController {
    @FXML
    private TextField textFieldMajor;
 
-   private final InternService internService = new InternService();
+   private final UserRegisterService userRegisterService = new UserRegisterService();
 
    @FXML
    private void handleRegisterIntern() {
       try {
+         UserDto userDto = getUserFromFields();
          InternDto internDto = getInternFromFields();
 
-         internService.registerIntern(internDto);
+         userRegisterService.registerIntern(userDto, confirmPasswordField.getText(), internDto);
 
          showAlert(Alert.AlertType.INFORMATION, "Practicante registrado correctamente.");
          clearFields();
 
-      } catch (NumberFormatException e) {
-         showAlert(Alert.AlertType.WARNING, "La edad debe ser numerica.");
-
-      } catch (ValidationException e) {
-         showAlert(Alert.AlertType.WARNING, e.getMessage());
-
-      } catch (ServiceException e) {
-         showAlert(Alert.AlertType.ERROR, "No se pudo completar la operacion.");
+      } catch (BusinessLogicException | NumberFormatException e) {
+         showAlert(Alert.AlertType.ERROR, e.getMessage());
       }
    }
 
@@ -57,12 +64,23 @@ public class RegisterInternController {
    }
 
    private void clearFields() {
+      textFieldUserName.clear();
+      passwordField.clear();
+      confirmPasswordField.clear();
       textFieldStudentId.clear();
       textFieldAge.clear();
       textFieldName.clear();
       textFieldIndigenousLanguage.clear();
       textFieldGender.clear();
       textFieldMajor.clear();
+   }
+
+   private UserDto getUserFromFields() {
+      UserDto userDto = new UserDto();
+      userDto.setUserName(textFieldUserName.getText());
+      userDto.setPassword(passwordField.getText());
+      userDto.setIdRole(INTERN_ROLE_ID);
+      return userDto;
    }
 
    private InternDto getInternFromFields() {

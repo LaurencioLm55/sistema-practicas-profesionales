@@ -3,6 +3,7 @@ package com.sistemapracticasprofesional.logic.service;
 import com.sistemapracticasprofesional.logic.dao.UserDao;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
+import com.sistemapracticasprofesional.logic.util.PasswordUtils;
 import com.sistemapracticasprofesional.logic.validators.UserValidator;
 import com.sistemapracticasprofesional.presentation.util.UserSession;
 
@@ -20,6 +21,7 @@ public class UserLoginService {
         
 
         if(validator.isUserValid() == true){
+            userDto.setPassword(PasswordUtils.hashPassword(userDto.getPassword()));
            
             if(userDao.isUserRegistred(userDto) == true){
                 

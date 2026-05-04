@@ -50,6 +50,34 @@ public class CoordinatorDao implements ICoordinator{
         }
     }
 
+    public boolean insertCoordinator(Connection connection, CoordinatorDto coordinator) {
+        String registerQuery = "INSERT INTO coordinador "
+            + "(Numero_de_personal, Id_usuario, Nombre, EstadoCoordinador,"
+            + "Fecha_de_registro, Fecha_de_termino) "
+            + "VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(registerQuery)) {
+
+            preparedStatement.setInt(1, coordinator.getPersonnelNumber());
+            if (coordinator.getUserId() != null) {
+                preparedStatement.setInt(2, coordinator.getUserId());
+            } else {
+                preparedStatement.setNull(2, java.sql.Types.INTEGER);
+            }
+            preparedStatement.setString(3, coordinator.getName());
+            preparedStatement.setBoolean(4, mapStateToDatabaseValue(coordinator.getState()));
+            preparedStatement.setDate(5, coordinator.getEntryDate() != null
+                    ? Date.valueOf(coordinator.getEntryDate()) : null);
+            preparedStatement.setDate(6, coordinator.getExitDate() != null
+                    ? Date.valueOf(coordinator.getExitDate()) : null);
+
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            LOGGER.error("Error inserting coordinator with user id {}", coordinator.getUserId(), e);
+            throw new DaoException("Error registering coordinator", e);
+        }
+    }
+
     @Override
     public boolean updateCoordinator(CoordinatorDto coordinator) {
         

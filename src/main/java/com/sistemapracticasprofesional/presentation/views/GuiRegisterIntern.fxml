@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -70,50 +71,74 @@
                   <RowConstraints minHeight="34.0" prefHeight="40.0" />
                   <RowConstraints minHeight="34.0" prefHeight="40.0" />
                   <RowConstraints minHeight="34.0" prefHeight="40.0" />
+                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
+                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
+                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
                </rowConstraints>
 
                <children>
-                  <Label text="Matricula :">
+                  <Label text="Nombre de usuario :">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldStudentId" maxWidth="Infinity" promptText="Ej. S22000000" GridPane.columnIndex="1" />
+                  <TextField fx:id="textFieldUserName" maxWidth="Infinity" GridPane.columnIndex="1" />
 
-                  <Label text="Edad :" GridPane.rowIndex="1">
+                  <Label text="Contrasena :" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldAge" maxWidth="Infinity" promptText="Ej. 21" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="passwordField" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                  <Label text="Nombre completo :" GridPane.rowIndex="2">
+                  <Label text="Confirmar contrasena :" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldName" maxWidth="Infinity" promptText="Nombre completo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="confirmPasswordField" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                  <Label text="Lengua indigena :" GridPane.rowIndex="3">
+                  <Label text="Matricula :" GridPane.rowIndex="3">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldIndigenousLanguage" maxWidth="Infinity" promptText="Opcional" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textFieldStudentId" maxWidth="Infinity" promptText="Ej. S22000000" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                  <Label text="Genero :" GridPane.rowIndex="4">
+                  <Label text="Edad :" GridPane.rowIndex="4">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldGender" maxWidth="Infinity" promptText="Genero" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="textFieldAge" maxWidth="Infinity" promptText="Ej. 21" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-                  <Label text="Carrera :" GridPane.rowIndex="5">
+                  <Label text="Nombre completo :" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldMajor" maxWidth="Infinity" promptText="Carrera" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="textFieldName" maxWidth="Infinity" promptText="Nombre completo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                  <Label text="Lengua indigena :" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textFieldIndigenousLanguage" maxWidth="Infinity" promptText="Opcional" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+                  <Label text="Genero :" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textFieldGender" maxWidth="Infinity" promptText="Genero" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+                  <Label text="Carrera :" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textFieldMajor" maxWidth="Infinity" promptText="Carrera" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                </children>
             </GridPane>
          </children>

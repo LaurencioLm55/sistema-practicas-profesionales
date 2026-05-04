@@ -46,6 +46,33 @@ public class InternDao implements IIntern {
         }
     }
 
+    public boolean insertIntern(Connection connection, InternDto intern) {
+        String query = "INSERT INTO practicante "
+                + "(Matricula, Id_usuario, Nombre, Edad, Genero, Carrera, LenguaIndigena) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, intern.getStudentId());
+            if (intern.getUserId() != null) {
+                preparedStatement.setInt(2, intern.getUserId());
+            } else {
+                preparedStatement.setNull(2, java.sql.Types.INTEGER);
+            }
+            preparedStatement.setString(3, intern.getName());
+            preparedStatement.setInt(4, intern.getAge());
+            preparedStatement.setString(5, intern.getGender());
+            preparedStatement.setString(6, intern.getMajor());
+            preparedStatement.setString(7, intern.getIndigenousLanguage());
+
+            return preparedStatement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            LOGGER.error("Error inserting intern with student id {}", intern.getStudentId(), e);
+            throw new DaoException("Error registering intern", e);
+        }
+    }
+
     @Override
     public boolean updateIntern(InternDto intern) {
         String query = "UPDATE practicante SET Nombre = ?, Edad = ?, Genero = ?, Carrera = ?, LenguaIndigena = ? "

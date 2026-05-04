@@ -46,6 +46,31 @@ public class ProfessorDao implements IProfessor {
         }
     }
 
+    public boolean insertProfessor(Connection connection, ProfessorDto professor) {
+        String registerQuery = "INSERT INTO profesor (Numero_de_personal, Id_usuario,"
+                + " Nombre, turno) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(registerQuery)) {
+
+            preparedStatement.setInt(1, professor.getStaffNumber());
+
+            if (professor.getUserId() != null) {
+                preparedStatement.setInt(2, professor.getUserId());
+            } else {
+                preparedStatement.setNull(2, java.sql.Types.INTEGER);
+            }
+
+            preparedStatement.setString(3, professor.getName());
+            preparedStatement.setString(4, professor.getShift());
+
+            return preparedStatement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            LOGGER.error("Error inserting professor with staff number {}", professor.getStaffNumber(), e);
+            throw new DaoException("Error registering professor", e);
+        }
+    }
+
     @Override
     public boolean updateProfessor(ProfessorDto professor) {
         
