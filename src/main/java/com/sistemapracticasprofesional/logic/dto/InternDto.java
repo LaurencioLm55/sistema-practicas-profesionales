@@ -2,6 +2,7 @@ package com.sistemapracticasprofesional.logic.dto;
 
 public class InternDto {
     private String studentId;
+    private Integer userId;
     private int age;
     private String name;
     private String indigenousLanguage;
@@ -18,12 +19,31 @@ public class InternDto {
         this.major = major;
     }
 
+    public InternDto(String studentId, Integer userId, int age, String name, String indigenousLanguage,
+                     String gender, String major) {
+        this.studentId = studentId;
+        this.userId = userId;
+        this.age = age;
+        this.name = name;
+        this.indigenousLanguage = indigenousLanguage;
+        this.gender = gender;
+        this.major = major;
+    }
+
     public String getStudentId() {
         return studentId;
     }
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public int getAge() {

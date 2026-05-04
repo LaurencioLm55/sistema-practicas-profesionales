@@ -90,6 +90,11 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#handleOpenRegisterUser" text="Registrarse">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
          </children>

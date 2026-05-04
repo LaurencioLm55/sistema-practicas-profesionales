@@ -4,13 +4,16 @@ public class UserDto {
     private int idUser;
     private String userName;
     private String password;
-    
+    private int idRole;
+
     public UserDto(){}
     
-    public UserDto(int idUser, String userName, String password){
+    public UserDto(int idUser, String userName, String password, int idRole){
         this.idUser = idUser;
         this.userName = userName;
         this.password = password;
+        this.idRole = idRole;
+
     }
 
     public int getIdUser(){
@@ -36,6 +39,16 @@ public class UserDto {
     public void setPassword(String newPassword){
         this.password = newPassword;
     }
+
+    public int getIdRole() {
+        return idRole;
+    }
+
+    public void setIdRole(int idRole) {
+        this.idRole = idRole;
+    }
+    
+    
 
     @Override
     public int hashCode() {

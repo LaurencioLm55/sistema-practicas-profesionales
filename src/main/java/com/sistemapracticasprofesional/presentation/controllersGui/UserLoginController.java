@@ -144,4 +144,14 @@ public class UserLoginController {
 
     }
 
+    @FXML
+    private void handleOpenRegisterUser(ActionEvent event) {
+        try {
+            Navigation.changeScene(event, "GuiRegisterUser.fxml", "Registrar usuario");
+        } catch (IOException e) {
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo abrir la ventana de registro");
+        }
+    }
+
 }

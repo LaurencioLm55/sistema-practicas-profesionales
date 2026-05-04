@@ -42,7 +42,8 @@ public class UserDao implements IUser {
 
     @Override
     public boolean insertUser(UserDto userDto) {
-        String query = "INSERT INTO usuario (Id_usuario, nombre, Contraseña) VALUES (?, ?, ?)";
+        String query = "INSERT INTO usuario (Id_usuario, nombre, Contraseña, Id_rol) VALUES (?, ?, ?, ?)";
+
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -50,6 +51,7 @@ public class UserDao implements IUser {
             preparedStatement.setInt(1, userDto.getIdUser());
             preparedStatement.setString(2, userDto.getUserName());
             preparedStatement.setString(3, userDto.getPassword());
+            preparedStatement.setInt(4, userDto.getIdRole());
 
             return preparedStatement.executeUpdate() > 0;
 
@@ -63,14 +65,13 @@ public class UserDao implements IUser {
 
     @Override
     public boolean updateUser( UserDto userDto ) {
-        String query = "UPDATE usuario SET nombre = ? contraseña = ? WHERE Id_usuario = ?";
+        String query = "UPDATE usuario SET nombre = ?, Contraseña = ? WHERE Id_usuario = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, userDto.getUserName());
             preparedStatement.setString(2, userDto.getPassword());
-
             preparedStatement.setInt(3, userDto.getIdUser());
 
             return preparedStatement.executeUpdate() > 0;
@@ -144,7 +145,10 @@ public class UserDao implements IUser {
         
         String type = null;
 
-        String query = "Call obtener_tipo_usuario(?);";
+        String query = "SELECT rol.Nombre AS tipo_usuario "
+        + "FROM usuario "
+        + "INNER JOIN rol ON usuario.Id_rol = rol.Id_rol "
+        + "WHERE usuario.Id_usuario = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -154,7 +158,7 @@ public class UserDao implements IUser {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 if (resultSet.next()) {
-                    type = resultSet.getString("tipo");
+                    type = resultSet.getString("tipo_usuario");
                 }
 
             }
@@ -168,7 +172,44 @@ public class UserDao implements IUser {
         
     }
 
-    
-        
+    public boolean existsUserName(String userName){
+        String query = "SELECT EXISTS (SELECT 1 FROM usuario WHERE nombre = ?) AS existe";
 
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                
+            preparedStatement.setString(1, userName);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                if (resultSet.next()) {
+                    return resultSet.getInt("existe") == 1;
+                }
+
+            }
+
+            return false;
+
+        } catch (SQLException e) {
+            LOGGER.error("Error checking if user is registered: {}", userName, e);
+            throw new DaoException("Error verifying user", e);
+        }
+        
+    }
+    public boolean existsUserId(int idUser) {
+        String query = "SELECT EXISTS (SELECT 1 FROM usuario WHERE Id_usuario = ?) AS existe";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, idUser);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next() && resultSet.getInt("existe") == 1;
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Error checking if user id exists: {}", idUser, e);
+            throw new DaoException("Error verifying user id", e);
+        }
+    }
 }

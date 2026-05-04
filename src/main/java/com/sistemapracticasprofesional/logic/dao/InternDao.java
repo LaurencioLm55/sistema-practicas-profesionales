@@ -19,18 +19,24 @@ public class InternDao implements IIntern {
 
     @Override
     public boolean insertIntern(InternDto intern) {
-        String query = "INSERT INTO practicante (Matricula, Nombre, Edad, Genero, Carrera, LenguaIndigena) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO practicante "
+                + "(Matricula, Id_usuario, Nombre, Edad, Genero, Carrera, LenguaIndigena) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, intern.getStudentId());
-            preparedStatement.setString(2, intern.getName());
-            preparedStatement.setInt(3, intern.getAge());
-            preparedStatement.setString(4, intern.getGender());
-            preparedStatement.setString(5, intern.getMajor());
-            preparedStatement.setString(6, intern.getIndigenousLanguage());
+            if (intern.getUserId() != null) {
+                preparedStatement.setInt(2, intern.getUserId());
+            } else {
+                preparedStatement.setNull(2, java.sql.Types.INTEGER);
+            }
+            preparedStatement.setString(3, intern.getName());
+            preparedStatement.setInt(4, intern.getAge());
+            preparedStatement.setString(5, intern.getGender());
+            preparedStatement.setString(6, intern.getMajor());
+            preparedStatement.setString(7, intern.getIndigenousLanguage());
 
             return preparedStatement.executeUpdate() > 0;
 
@@ -126,6 +132,7 @@ public class InternDao implements IIntern {
     private InternDto mapResultSetToDto(ResultSet resultSet) throws SQLException {
         return new InternDto(
                 resultSet.getString("Matricula"),
+                resultSet.getObject("Id_usuario") != null ? resultSet.getInt("Id_usuario") : null,
                 resultSet.getInt("Edad"),
                 resultSet.getString("Nombre"),
                 resultSet.getString("LenguaIndigena"),
