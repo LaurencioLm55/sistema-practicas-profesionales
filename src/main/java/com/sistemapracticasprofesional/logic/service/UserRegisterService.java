@@ -12,8 +12,9 @@ import com.sistemapracticasprofesional.logic.dto.ProfessorDto;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
+import com.sistemapracticasprofesional.logic.exception.ValidationException;
 import com.sistemapracticasprofesional.logic.util.PasswordUtils;
-import com.sistemapracticasprofesional.logic.validators.UserValidator;
+import com.sistemapracticasprofesional.logic.validators.RegistrationValidator;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -31,8 +32,8 @@ public class UserRegisterService {
     public void registerCoordinator(UserDto userDto, String confirmPassword, CoordinatorDto coordinatorDto)
             throws BusinessLogicException {
 
-        validateUser(userDto, confirmPassword);
-        validateCoordinator(coordinatorDto);
+        validateRegistrationData(userDto, confirmPassword);
+        validateCoordinatorData(coordinatorDto);
         prepareUser(userDto);
         coordinatorDto.setUserId(userDto.getIdUser());
 
@@ -42,8 +43,8 @@ public class UserRegisterService {
     public void registerProfessor(UserDto userDto, String confirmPassword, ProfessorDto professorDto)
             throws BusinessLogicException {
 
-        validateUser(userDto, confirmPassword);
-        validateProfessor(professorDto);
+        validateRegistrationData(userDto, confirmPassword);
+        validateProfessorData(professorDto);
         prepareUser(userDto);
         professorDto.setUserId(userDto.getIdUser());
 
@@ -53,24 +54,17 @@ public class UserRegisterService {
     public void registerIntern(UserDto userDto, String confirmPassword, InternDto internDto)
             throws BusinessLogicException {
 
-        validateUser(userDto, confirmPassword);
-        validateIntern(internDto);
+        validateRegistrationData(userDto, confirmPassword);
+        validateInternData(internDto);
         prepareUser(userDto);
         internDto.setUserId(userDto.getIdUser());
 
         executeRegistration(userDto, () -> internDao.insertIntern(getConnection(), internDto));
     }
 
-    private void validateUser(UserDto userDto, String confirmPassword) throws BusinessLogicException {
-        UserValidator validator = new UserValidator(userDto);
-
-        if (!validator.isUserValid()) {
-            throw new BusinessLogicException("Datos del usuario invalidos");
-        }
-
-        if (!userDto.getPassword().equals(confirmPassword)) {
-            throw new BusinessLogicException("Las contrasenas no coinciden");
-        }
+    private void validateRegistrationData(UserDto userDto, String confirmPassword)
+            throws BusinessLogicException {
+        validate(() -> RegistrationValidator.validateUser(userDto, confirmPassword));
 
         if (userDao.existsUserName(userDto.getUserName())) {
             throw new BusinessLogicException("El nombre del usuario ya existe");
@@ -116,51 +110,16 @@ public class UserRegisterService {
         return idUser;
     }
 
-    private void validateCoordinator(CoordinatorDto coordinatorDto) throws BusinessLogicException {
-        if (coordinatorDto == null
-                || coordinatorDto.getPersonnelNumber() <= 0
-                || isBlank(coordinatorDto.getName())
-                || isBlank(coordinatorDto.getState())
-                || coordinatorDto.getEntryDate() == null) {
-            throw new BusinessLogicException("Datos del coordinador invalidos");
-        }
-
-        coordinatorDto.setName(coordinatorDto.getName().trim());
-        coordinatorDto.setState(coordinatorDto.getState().trim());
+    private void validateCoordinatorData(CoordinatorDto coordinatorDto) throws BusinessLogicException {
+        validate(() -> RegistrationValidator.validateCoordinator(coordinatorDto));
     }
 
-    private void validateProfessor(ProfessorDto professorDto) throws BusinessLogicException {
-        if (professorDto == null
-                || professorDto.getStaffNumber() <= 0
-                || isBlank(professorDto.getName())
-                || isBlank(professorDto.getShift())) {
-            throw new BusinessLogicException("Datos del profesor invalidos");
-        }
-
-        professorDto.setName(professorDto.getName().trim());
-        professorDto.setShift(professorDto.getShift().trim());
+    private void validateProfessorData(ProfessorDto professorDto) throws BusinessLogicException {
+        validate(() -> RegistrationValidator.validateProfessor(professorDto));
     }
 
-    private void validateIntern(InternDto internDto) throws BusinessLogicException {
-        if (internDto == null
-                || isBlank(internDto.getStudentId())
-                || internDto.getAge() <= 0
-                || isBlank(internDto.getName())
-                || isBlank(internDto.getGender())
-                || isBlank(internDto.getMajor())) {
-            throw new BusinessLogicException("Datos del practicante invalidos");
-        }
-
-        internDto.setStudentId(internDto.getStudentId().trim());
-        internDto.setName(internDto.getName().trim());
-        internDto.setGender(internDto.getGender().trim());
-        internDto.setMajor(internDto.getMajor().trim());
-
-        if (isBlank(internDto.getIndigenousLanguage())) {
-            internDto.setIndigenousLanguage(null);
-        } else {
-            internDto.setIndigenousLanguage(internDto.getIndigenousLanguage().trim());
-        }
+    private void validateInternData(InternDto internDto) throws BusinessLogicException {
+        validate(() -> RegistrationValidator.validateIntern(internDto));
     }
 
     private Connection getConnection() {
@@ -183,12 +142,21 @@ public class UserRegisterService {
         }
     }
 
-    private boolean isBlank(String text) {
-        return text == null || text.trim().isEmpty();
+    private void validate(Validation validation) throws BusinessLogicException {
+        try {
+            validation.validate();
+        } catch (ValidationException e) {
+            throw new BusinessLogicException(e.getMessage());
+        }
     }
 
     @FunctionalInterface
     private interface SpecializedRegister {
         boolean insert();
+    }
+
+    @FunctionalInterface
+    private interface Validation {
+        void validate() throws ValidationException;
     }
 }
