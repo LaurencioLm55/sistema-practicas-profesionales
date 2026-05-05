@@ -40,7 +40,7 @@ public class UserValidator {
 
         if (userDto.getPassword() != null && !userDto.getPassword().isBlank()){
 
-            if(userDto.getPassword().matches("[a-zA-Z0-9]+")){
+            if(userDto.getPassword().matches("^(?=.*[A-Z])(?=.*[!@#&$?*()-_;.,+%=¿¡])(?=.*\\d).{8}$")){
 
                 return true;
 
