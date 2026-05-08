@@ -1,11 +1,11 @@
-package com.sistemapracticasprofesional.logic.service;
+package com.sistemapracticasprofesional.logic.controllers;
 
 import com.sistemapracticasprofesional.logic.dao.AffiliatedOrganizationDao;
 import com.sistemapracticasprofesional.logic.dto.AffiliatedOrganizationDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.validators.AffiliatedOrganizationValidator;
 
-public class RegistrerAffiliatedOrganizationService {
+public class RegistrerAffiliatedOrganizationController {
 
     private AffiliatedOrganizationDao affiliatedOrganizationDao = new AffiliatedOrganizationDao();
     private AffiliatedOrganizationValidator affiliatedOrganizationValidator ;

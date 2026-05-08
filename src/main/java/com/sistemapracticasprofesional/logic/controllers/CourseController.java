@@ -1,27 +1,27 @@
-package com.sistemapracticasprofesional.logic.service;
+package com.sistemapracticasprofesional.logic.controllers;
 
 import com.sistemapracticasprofesional.logic.dao.CourseDao;
 import com.sistemapracticasprofesional.logic.dto.CourseDto;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
-import com.sistemapracticasprofesional.logic.exception.ServiceException;
+import com.sistemapracticasprofesional.logic.exception.ControllerException;
 import com.sistemapracticasprofesional.logic.exception.ValidationException;
 
-public class CourseService {
+public class CourseController {
 
     private final CourseDao courseDao = new CourseDao();
 
-    public void registerCourse(CourseDto courseDto) throws ValidationException, ServiceException {
+    public void registerCourse(CourseDto courseDto) throws ValidationException, ControllerException {
         validateCourse(courseDto);
 
         try {
             boolean registered = courseDao.registerCourse(courseDto);
 
             if (!registered) {
-                throw new ServiceException("No se pudo registrar la experiencia educativa.");
+                throw new ControllerException("No se pudo registrar la experiencia educativa.");
             }
 
         } catch (DaoException e) {
-            throw new ServiceException("Ocurrio un error al registrar la experiencia educativa.", e);
+            throw new ControllerException("Ocurrio un error al registrar la experiencia educativa.", e);
         }
     }
 
