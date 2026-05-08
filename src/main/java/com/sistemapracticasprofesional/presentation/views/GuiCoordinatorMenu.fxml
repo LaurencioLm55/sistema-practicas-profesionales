@@ -79,7 +79,7 @@
       </VBox>
    </top>
    <center>
-      <Label alignment="TOP_CENTER" text="¡Bienvenido!" BorderPane.alignment="CENTER">
+      <Label fx:id="welcomeLabel" alignment="TOP_CENTER" text="¡Bienvenido!" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>

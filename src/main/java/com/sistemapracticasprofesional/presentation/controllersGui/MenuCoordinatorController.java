@@ -3,6 +3,7 @@ package com.sistemapracticasprofesional.presentation.controllersGui;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
 import com.sistemapracticasprofesional.presentation.util.UserSession;
 import java.io.IOException;
+import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
@@ -14,6 +15,9 @@ import javafx.scene.control.Alert;
 public class MenuCoordinatorController{
 
     private Alert alert;
+
+    @FXML
+    private Label welcomeLabel;
     
     private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginController.class);
 
@@ -162,6 +166,12 @@ public class MenuCoordinatorController{
 
        }
 
+
+    }
+
+    public void setWelcomeLabel( String userName ){
+
+        welcomeLabel.setText( "¡Bienvenido " + userName + "!" );
 
     }
 

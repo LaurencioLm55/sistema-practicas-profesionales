@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,51 +13,71 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0"
-            xmlns="http://javafx.com/javafx/26"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.InternsMenuController">
-
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.InternsMenuController">
    <top>
-      <VBox alignment="CENTER" prefHeight="125.0" style="-fx-background-color: #00529e;">
-         <padding>
-            <Insets left="25.0" right="25.0" />
-         </padding>
+      <VBox alignment="CENTER" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER">
+            <HBox fx:id="containerTitle" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Gestion de practicantes" textFill="WHITE">
+                  <Label fx:id="title" text="Pagina de inicio" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI Bold" size="42.0" />
                      </font>
                   </Label>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <ImageView fitHeight="100.0" fitWidth="120.0" preserveRatio="true">
+                  <Region prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets left="24.0" right="24.0" />
+                     </padding>
+                  </Region>
+                  <ImageView fx:id="logo" fitHeight="100.0" fitWidth="120.0" pickOnBounds="true">
                      <image>
                         <Image url="@../../../resources/images/LogoUv.jpg" />
                      </image>
                   </ImageView>
                </children>
+               <padding>
+                  <Insets left="25.0" right="25.0" />
+               </padding>
             </HBox>
+            <MenuBar prefHeight="32.0" prefWidth="1249.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Proyecto">
+                  <items>
+                        <MenuItem fx:id="requestProjectMenuItem" mnemonicParsing="false" onAction="#handelStartRegistrerProjectAttendant" text="Solicitar proyecto" />
+                        <MenuItem mnemonicParsing="false" onAction="#handelStartAssignProject" text="Subir aceptación" />
+                  </items>
+                </Menu>
+                  
+                <Menu mnemonicParsing="false" text="Actividades">
+                  <items>
+                        <MenuItem fx:id="uploadActivityMenuItem" mnemonicParsing="false" onAction="#handleStartRegistrerIntern" text="Subir actividad" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Reportes">
+                    <items>
+                      <MenuItem fx:id="generateMonthlyReportMenuItem" mnemonicParsing="false" text="Generar reporte mensual" />
+                        <MenuItem fx:id="generatePartialReportMenuItem" mnemonicParsing="false" text="Generara reporte parcial" />
+                        <MenuItem fx:id="uploadMonthlyReportMenuItem" mnemonicParsing="false" text="Subir reporte mensual" />
+                        <MenuItem fx:id="uploadPartialReportMenuItem" mnemonicParsing="false" text="Subir reporte parcial" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Mensajes" />
+                  <Menu mnemonicParsing="false" text="Cuenta">
+                    <items>
+                      <MenuItem fx:id="updateDataUserMenuItem" mnemonicParsing="false" onAction="#handeStartUpdateDataUser" text="Actualizar cuenta" />
+                        <MenuItem fx:id="closeSessionMenuItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Cerrar secion" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
          </children>
       </VBox>
    </top>
-
    <center>
-      <VBox alignment="CENTER" spacing="25.0">
-         <children>
-            <Button onAction="#handleRegisterIntern" prefWidth="360.0" style="-fx-background-color: #09001F;" text="Registrar practicante" textFill="WHITE">
-               <font><Font size="18.0" /></font>
-            </Button>
-
-            <Button onAction="#handleConsultInterns" prefWidth="360.0" style="-fx-background-color: #09001F;" text="Consultar practicantes" textFill="WHITE">
-               <font><Font size="18.0" /></font>
-            </Button>
-
-            <Button onAction="#handleBack" prefWidth="360.0" style="-fx-background-color: #6b7280;" text="Regresar" textFill="WHITE">
-               <font><Font size="18.0" /></font>
-            </Button>
-         </children>
-      </VBox>
+      <Label fx:id="welcomeLabel" alignment="TOP_CENTER" text="¡Bienvenido!" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
    </center>
 </BorderPane>

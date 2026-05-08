@@ -3,6 +3,9 @@ package com.sistemapracticasprofesional;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
+import com.sistemapracticasprofesional.presentation.controllersGui.MenuCoordinatorController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +15,7 @@ public class SistemaPracticasProfesional extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getCourseViewUrl());
+        FXMLLoader loader = new FXMLLoader(getCourseViewUrl());   
 
         Scene scene = new Scene(loader.load());
         stage.setTitle("Inicio de sesion");
@@ -23,7 +26,7 @@ public class SistemaPracticasProfesional extends Application {
 
     private URL getCourseViewUrl() throws IOException {
         URL resource = getClass().getResource(
-                "/com/sistemapracticasprofesional/presentation/views/GuiUserLogin.fxml"
+                "/com/sistemapracticasprofesional/presentation/views/GuiCoordinatorMenu.fxml"
         );
 
         if (resource != null) {
@@ -31,7 +34,7 @@ public class SistemaPracticasProfesional extends Application {
         }
 
         File fxmlFile = new File(
-                "src/main/java/com/sistemapracticasprofesional/presentation/views/GuiUserLogin.fxml"
+                "src/main/java/com/sistemapracticasprofesional/presentation/viewsGuiCoordinatorMenu.fxml"
         );
 
         return fxmlFile.toURI().toURL();

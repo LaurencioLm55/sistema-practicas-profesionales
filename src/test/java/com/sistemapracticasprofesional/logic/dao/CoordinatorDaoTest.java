@@ -30,7 +30,7 @@ public class CoordinatorDaoTest {
         testUserId = TEST_USER_ID;
 
         if (userDao.getUser(testUserId) == null) {
-            UserDto user = new UserDto(testUserId, "Mtra. Estela Dominguez Romero", "S00983476");
+            UserDto user = new UserDto(testUserId, "Mtra. Estela Dominguez Romero", "S00983476", 1);
             userDao.insertUser(user);
         }
     }
