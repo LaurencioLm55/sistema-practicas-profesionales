@@ -1,4 +1,4 @@
-package com.sistemapracticasprofesional.logic.service;
+package com.sistemapracticasprofesional.logic.controllers;
 
 import com.sistemapracticasprofesional.logic.dao.UserDao;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
@@ -8,7 +8,7 @@ import com.sistemapracticasprofesional.logic.validators.UserValidator;
 import com.sistemapracticasprofesional.presentation.util.UserSession;
 
 
-public class UserLoginService {
+public class UserLoginController {
 
     private UserDao userDao = new UserDao();
     private UserValidator validator;
@@ -17,25 +17,15 @@ public class UserLoginService {
         
         String type = null;
 
-        validator = new UserValidator(userDto);
-        
-
-        if(validator.isUserValid() == true){
-            userDto.setPassword(PasswordUtils.hashPassword(userDto.getPassword()));
+        userDto.setPassword(PasswordUtils.hashPassword(userDto.getPassword()));
            
-            if(userDao.isUserRegistred(userDto) == true){
+        if(userDao.isUserRegistred(userDto) == true){
                 
-                userDto.setIdUser(userDao.getIdUser(userDto));
+            userDto.setIdUser(userDao.getIdUser(userDto));
 
-                type = userDao.getUserType(userDto);
+            type = userDao.getUserType(userDto);
 
-                UserSession.getInstance().initializeSession(userDto, type);
-
-            }else{
-
-                throw new BusinessLogicException("El usuario o contreaseña no son validos");
-
-            }
+            UserSession.getInstance().initializeSession(userDto, type);
 
         }else{
 
@@ -44,7 +34,6 @@ public class UserLoginService {
         }
 
         return type;
-
 
     }
 

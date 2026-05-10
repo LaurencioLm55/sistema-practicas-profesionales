@@ -1,4 +1,4 @@
-package com.sistemapracticasprofesional.logic.service;
+package com.sistemapracticasprofesional.logic.controllers;
 
 import com.sistemapracticasprofesional.dataaccess.DatabaseConnection;
 import com.sistemapracticasprofesional.logic.dao.CoordinatorDao;
@@ -18,7 +18,7 @@ import com.sistemapracticasprofesional.logic.validators.RegistrationValidator;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class UserRegisterService {
+public class UserRegisterController {
 
     private static final int MIN_USER_ID = 100000;
     private static final int USER_ID_RANGE = 900000;
