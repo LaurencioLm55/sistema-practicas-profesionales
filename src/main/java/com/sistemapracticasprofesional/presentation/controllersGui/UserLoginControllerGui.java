@@ -1,26 +1,24 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import java.io.IOException;
-
 import org.slf4j.LoggerFactory;
-
+import org.slf4j.Logger;
+import com.sistemapracticasprofesional.logic.controllers.UserLoginController;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
-import com.sistemapracticasprofesional.logic.service.UserLoginService;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert;
-import org.slf4j.Logger;
 
 
-public class UserLoginController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginController.class);
+public class UserLoginControllerGui {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginControllerGui.class);
 
     @FXML
     private TextField userNameTextField;
@@ -33,13 +31,13 @@ public class UserLoginController {
     @FXML
     private void handelLogin(ActionEvent event){
 
-        UserLoginService userLoginService = new UserLoginService();
+        UserLoginController userLoginController = new UserLoginController();
         UserDto userDto = new UserDto();
         createUserDto(userDto);
 
         try{
             
-            String typeUser = userLoginService.logginUser(userDto);
+            String typeUser = userLoginController.logginUser(userDto);
 
             startPresentationWhitType( typeUser, event );
 

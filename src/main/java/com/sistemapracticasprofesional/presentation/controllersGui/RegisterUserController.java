@@ -1,12 +1,12 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
+import com.sistemapracticasprofesional.logic.controllers.UserRegisterController;
 import com.sistemapracticasprofesional.logic.dao.RoleDao;
 import com.sistemapracticasprofesional.logic.dto.CoordinatorDto;
 import com.sistemapracticasprofesional.logic.dto.ProfessorDto;
 import com.sistemapracticasprofesional.logic.dto.RoleDto;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
-import com.sistemapracticasprofesional.logic.service.UserRegisterService;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 
 public class RegisterUserController {
 
-    private UserRegisterService userRegisterService = new UserRegisterService();
+    private UserRegisterController userRegisterController = new UserRegisterController();
     private RoleDao roleDao = new RoleDao();
 
     @FXML
@@ -94,12 +94,12 @@ public class RegisterUserController {
 
             switch (selectedRole.getName()) {
                 case "Coordinador":
-                    userRegisterService.registerCoordinator(userDto,
+                    userRegisterController.registerCoordinator(userDto,
                             confirmPasswordField.getText(),
                             createCoordinatorDto());
                     break;
                 case "Profesor":
-                    userRegisterService.registerProfessor(userDto,
+                    userRegisterController.registerProfessor(userDto,
                             confirmPasswordField.getText(),
                             createProfessorDto());
                     break;

@@ -1,7 +1,7 @@
 package com.sistemapracticasprofesional.logic.dto;
 
 public class AffiliatedOrganizationDto {
-    private int idOrganization;
+    private String idOrganization;
     private String name;
     private String address;
     private String sector;
@@ -14,7 +14,7 @@ public class AffiliatedOrganizationDto {
         
     }
     
-    public AffiliatedOrganizationDto(int idOrganization, String name, String address, String sector, String city, String state, String phoneNumber, String email){
+    public AffiliatedOrganizationDto(String idOrganization, String name, String address, String sector, String city, String state, String phoneNumber, String email){
        this.idOrganization = idOrganization;
        this.name = name;
        this.address = address;
@@ -35,11 +35,11 @@ public class AffiliatedOrganizationDto {
        this.email = email;
     }
     
-    public int getIdOrganization(){
+    public String getIdOrganization(){
         return this.idOrganization;
     }
     
-    public void setIdOrganization(int idOrganization){
+    public void setIdOrganization(String idOrganization){
         this.idOrganization = idOrganization;
     }
     
@@ -103,7 +103,7 @@ public class AffiliatedOrganizationDto {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + idOrganization;
+        result = prime * result + ((idOrganization == null) ? 0 : idOrganization.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((sector == null) ? 0 : sector.hashCode());

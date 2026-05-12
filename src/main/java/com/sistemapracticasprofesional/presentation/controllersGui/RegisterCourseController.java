@@ -1,9 +1,10 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
+import com.sistemapracticasprofesional.logic.controllers.CourseController;
 import com.sistemapracticasprofesional.logic.dto.CourseDto;
-import com.sistemapracticasprofesional.logic.exception.ServiceException;
+import com.sistemapracticasprofesional.logic.exception.ControllerException;
 import com.sistemapracticasprofesional.logic.exception.ValidationException;
-import com.sistemapracticasprofesional.logic.service.CourseService;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -25,14 +26,14 @@ public class RegisterCourseController {
    @FXML
    private TextField textFieldSection;
 
-   private final CourseService courseService = new CourseService();
+   private final CourseController courseController = new CourseController();
 
    @FXML
    private void handleRegisterCourse() {
       try {
          CourseDto courseDto = getCourseFromFields();
 
-         courseService.registerCourse(courseDto);
+         courseController.registerCourse(courseDto);
 
          showAlert(Alert.AlertType.INFORMATION, "Curso registrado correctamente.");
          clearFields();
@@ -43,7 +44,7 @@ public class RegisterCourseController {
       } catch (ValidationException e) {
          showAlert(Alert.AlertType.WARNING, e.getMessage());
 
-      } catch (ServiceException e) {
+      } catch (ControllerException e) {
          showAlert(Alert.AlertType.ERROR, "No se pudo completar la operación.");
       }
    }

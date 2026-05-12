@@ -1,20 +1,14 @@
 package com.sistemapracticasprofesional.logic.validators;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import com.sistemapracticasprofesional.logic.dto.AffiliatedOrganizationDto;
-import com.sistemapracticasprofesional.presentation.controllersGui.UserLoginController;
 
 public class AffiliatedOrganizationValidator {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginController.class);
 
     private AffiliatedOrganizationDto affiliatedOrganizationDto;
 
     public AffiliatedOrganizationValidator(){
-
     }
-
+    
     public AffiliatedOrganizationValidator(
         AffiliatedOrganizationDto affiliatedOrganizationDto){
 
@@ -23,8 +17,39 @@ public class AffiliatedOrganizationValidator {
     }
 
     public boolean isAffiliatedOrganizationValid () {
+        
+        boolean result = false;
 
-        return false;
+        if (isAddressAffiliatedOrganizationValid(affiliatedOrganizationDto.getAddress())) {
+            if (isPhoneNumberAffiliatedOrganizationValid(affiliatedOrganizationDto.getPhoneNumeber())) {
+                if (isEmailAffiliatedOrganizationValid(affiliatedOrganizationDto.getEmail())) {
+                    if (isGenaralTextValid()) {
+                        result = true;
+                    }
+                }
+            }
+        }
+        
+        return result;
+        
+    }
+
+    public boolean isGenaralTextValid(){
+        
+        boolean result = false;
+
+        if (isTextAffiliatedOrganizationValid(affiliatedOrganizationDto.getCity())) {
+            if (isTextAffiliatedOrganizationValid(affiliatedOrganizationDto.getState())){
+                if (isTextAffiliatedOrganizationValid(affiliatedOrganizationDto.getSector())) {
+                    if (isTextAffiliatedOrganizationValid(affiliatedOrganizationDto.getName())){
+                        result = true;
+                    }
+                }
+            }
+        }
+
+        return result;
+
     }
 
     public boolean isTextAffiliatedOrganizationValid(String text){

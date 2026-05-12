@@ -1,10 +1,5 @@
-
 package com.sistemapracticasprofesional.logic.dto;
 
-/**
- *
- * @author lopez
- */
 public class CourseDto {
     private int nrc;
     private int staffNumber;

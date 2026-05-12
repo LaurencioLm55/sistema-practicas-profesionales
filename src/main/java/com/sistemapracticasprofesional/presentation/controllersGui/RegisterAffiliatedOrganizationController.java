@@ -1,8 +1,9 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
+import com.sistemapracticasprofesional.logic.controllers.RegistrerAffiliatedOrganizationController;
 import com.sistemapracticasprofesional.logic.dto.AffiliatedOrganizationDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
-import com.sistemapracticasprofesional.logic.service.RegistrerAffiliatedOrganizationService;
+
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import javafx.fxml.FXML;
@@ -14,7 +15,7 @@ import javafx.scene.control.Alert;
 public class RegisterAffiliatedOrganizationController {
 
     private AffiliatedOrganizationDto affiliatedOrganizationDto = new AffiliatedOrganizationDto();
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginControllerGui.class);
     private Alert alert;
 
     @FXML
@@ -42,15 +43,15 @@ public class RegisterAffiliatedOrganizationController {
     private TextField emailTextField;
 
     @FXML
-    private void registerAffiliatedOrganization(){
+    private void handleRegisterAffiliatedOrganization(){
         
         getData(affiliatedOrganizationDto);
-        RegistrerAffiliatedOrganizationService registrerAffiliatedOrganizationService = new RegistrerAffiliatedOrganizationService();
+        RegistrerAffiliatedOrganizationController registrerAffiliatedOrganizationController = new RegistrerAffiliatedOrganizationController();
         boolean result;
 
         try{
 
-            result = registrerAffiliatedOrganizationService.RegistrerAffiliatedOrganization(affiliatedOrganizationDto);
+            result = registrerAffiliatedOrganizationController.RegistrerAffiliatedOrganization(affiliatedOrganizationDto);
 
             if (result) {
                 
@@ -72,7 +73,7 @@ public class RegisterAffiliatedOrganizationController {
 
     private void getData(AffiliatedOrganizationDto affiliatedOrganizationDto){
 
-        affiliatedOrganizationDto.setIdOrganization(Integer.parseInt(idOrganizationTextField.getText()));
+        affiliatedOrganizationDto.setIdOrganization(idOrganizationTextField.getText());
         affiliatedOrganizationDto.setName(nameTextField.getText());
         affiliatedOrganizationDto.setSector(sectorTextField.getText());
         affiliatedOrganizationDto.setAddress(addressTextField.getText());

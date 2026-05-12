@@ -1,9 +1,9 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
+import com.sistemapracticasprofesional.logic.controllers.UserRegisterController;
 import com.sistemapracticasprofesional.logic.dto.InternDto;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
-import com.sistemapracticasprofesional.logic.service.UserRegisterService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -40,7 +40,7 @@ public class RegisterInternController {
    @FXML
    private TextField textFieldMajor;
 
-   private final UserRegisterService userRegisterService = new UserRegisterService();
+   private final UserRegisterController userRegisterController = new UserRegisterController();
 
    @FXML
    private void handleRegisterIntern() {
@@ -48,7 +48,7 @@ public class RegisterInternController {
          UserDto userDto = getUserFromFields();
          InternDto internDto = getInternFromFields();
 
-         userRegisterService.registerIntern(userDto, confirmPasswordField.getText(), internDto);
+         userRegisterController.registerIntern(userDto, confirmPasswordField.getText(), internDto);
 
          showAlert(Alert.AlertType.INFORMATION, "Practicante registrado correctamente.");
          clearFields();

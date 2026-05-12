@@ -4,14 +4,12 @@ import com.sistemapracticasprofesional.logic.dao.UserDao;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.util.PasswordUtils;
-import com.sistemapracticasprofesional.logic.validators.UserValidator;
 import com.sistemapracticasprofesional.presentation.util.UserSession;
 
 
 public class UserLoginController {
 
     private UserDao userDao = new UserDao();
-    private UserValidator validator;
 
     public String logginUser(UserDto userDto) throws BusinessLogicException{
         

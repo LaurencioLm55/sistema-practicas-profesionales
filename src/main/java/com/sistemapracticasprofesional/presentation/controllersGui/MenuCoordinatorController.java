@@ -19,7 +19,7 @@ public class MenuCoordinatorController{
     @FXML
     private Label welcomeLabel;
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginControllerGui.class);
 
     @FXML
     public void handelStartRegistrerProjectAttendant( ActionEvent event) {
