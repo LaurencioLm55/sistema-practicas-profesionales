@@ -16,8 +16,13 @@ public final class RegistrationValidator {
 
         UserValidator validator = new UserValidator(userDto);
 
-        if (!validator.isUserValid()) {
-            throw new ValidationException("Datos del usuario invalidos");
+        if (!validator.isUserNameValid(userDto)) {
+            throw new ValidationException("El nombre de usuario solo puede contener letras y numeros");
+        }
+
+        if (!validator.isUserPasswordValid(userDto)) {
+            throw new ValidationException(
+                    "La contrasena debe tener minimo 10 caracteres, una mayuscula, una minuscula y un numero");
         }
 
         if (!userDto.getPassword().equals(confirmPassword)) {
