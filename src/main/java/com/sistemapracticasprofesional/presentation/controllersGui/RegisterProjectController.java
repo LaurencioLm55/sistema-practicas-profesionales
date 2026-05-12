@@ -48,18 +48,19 @@ public class RegisterProjectController {
     }
 
     private ProjectDto createProjectDtoFromFields() {
-        return new ProjectDto(
-                Integer.parseInt(projectIdField.getText()),
-                Integer.parseInt(organizationIdField.getText()),
-                projectNameField.getText(),
-                descriptionArea.getText(),
-                methodologyArea.getText(),
-                resourcesArea.getText(),
-                generalObjectivesArea.getText(),
-                attendantNameField.getText(),
-                attendantEmailField.getText(),
-                attendantPositionField.getText()
-        );
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setProjectId(Integer.parseInt(projectIdField.getText()));
+        projectDto.setLinkedOrganizationId(Integer.parseInt(organizationIdField.getText()));
+        projectDto.setProjectName(projectNameField.getText());
+        projectDto.setProjectDescription(descriptionArea.getText());
+        projectDto.setProjectMethodology(methodologyArea.getText());
+        projectDto.setProjectResources(resourcesArea.getText());
+        projectDto.setGeneralProjectObjectives(generalObjectivesArea.getText());
+        projectDto.setProjectAttendantName(attendantNameField.getText());
+        projectDto.setProjectAttendantEmail(attendantEmailField.getText());
+        projectDto.setProjectAttendantPosition(attendantPositionField.getText());
+
+        return projectDto;
     }
 
     private void clearFields() {
