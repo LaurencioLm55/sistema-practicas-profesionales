@@ -150,12 +150,12 @@ public class UserRegisterController {
         }
     }
 
-    @FunctionalInterface
+    
     private interface SpecializedRegister {
         boolean insert();
     }
 
-    @FunctionalInterface
+    
     private interface Validation {
         void validate() throws ValidationException;
     }

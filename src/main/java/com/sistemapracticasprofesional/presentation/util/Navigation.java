@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Window;
 import javafx.stage.Stage;
 
 public class Navigation {
@@ -18,30 +19,64 @@ public class Navigation {
     public static void changeScene(ActionEvent event, String fxmlName, String title)
             throws IOException {
 
-        URL resource = Navigation.class.getResource(VIEW_BASE_PATH + fxmlName);
-
-        if (resource == null) {
-            File fxmlFile = new File(LOCAL_VIEW_BASE_PATH + fxmlName);
-            resource = fxmlFile.toURI().toURL();
-        }
+        URL resource = getViewUrl(fxmlName);
 
         FXMLLoader loader = new FXMLLoader(resource);
         Scene scene = new Scene(loader.load());
 
         Stage stage = getStageFromEvent(event);
+        changeScene(stage, scene, title);
+    }
+
+    public static void changeScene(Stage stage, String fxmlName, String title)
+            throws IOException {
+
+        URL resource = getViewUrl(fxmlName);
+        FXMLLoader loader = new FXMLLoader(resource);
+        Scene scene = new Scene(loader.load());
+
+        changeScene(stage, scene, title);
+    }
+
+    private static URL getViewUrl(String fxmlName) throws IOException {
+        if (fxmlName == null || fxmlName.isBlank()) {
+            throw new IOException("El nombre del archivo FXML no puede estar vacio");
+        }
+
+        URL resource = Navigation.class.getResource(VIEW_BASE_PATH + fxmlName);
+
+        if (resource != null) {
+            return resource;
+        }
+
+        File fxmlFile = new File(LOCAL_VIEW_BASE_PATH + fxmlName);
+
+        if (fxmlFile.exists()) {
+            return fxmlFile.toURI().toURL();
+        }
+
+        throw new IOException("No se encontro el archivo FXML: " + fxmlName);
+    }
+
+    private static void changeScene(Stage stage, Scene scene, String title) {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
     }
 
-    private static Stage getStageFromEvent(ActionEvent event) {
-    Object source = event.getSource();
+    private static Stage getStageFromEvent(ActionEvent event) throws IOException {
+        Object source = event.getSource();
 
-    if (source instanceof MenuItem menuItem) {
-        return (Stage) menuItem.getParentPopup().getOwnerWindow();
-    } else {
-        return (Stage) ((Node) source).getScene().getWindow();
+        if (source instanceof MenuItem menuItem) {
+            Window window = menuItem.getParentPopup().getOwnerWindow();
+            return (Stage) window;
+        }
+
+        if (source instanceof Node node) {
+            return (Stage) node.getScene().getWindow();
+        }
+
+        throw new IOException("No se pudo obtener la ventana desde el evento");
     }
-}
 
 }

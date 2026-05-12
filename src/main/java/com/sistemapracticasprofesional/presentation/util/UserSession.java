@@ -33,8 +33,22 @@ public class UserSession {
     }
 
     public void closeSession () {
-        
-        instance = null;
+
+        this.idUser = 0;
+        this.name = null;
+        this.role = null;
+
+    }
+
+    public boolean isActive () {
+
+        return this.idUser > 0 && this.name != null && this.role != null;
+
+    }
+
+    public boolean hasRole ( String role ) {
+
+        return this.role != null && this.role.equals(role);
 
     }
 
