@@ -17,9 +17,12 @@ public class RegisterProjectController {
     @FXML private TextField organizationIdField;
     @FXML private TextField projectNameField;
     @FXML private TextArea descriptionArea;
-    @FXML private TextArea generalObjectivesArea;
     @FXML private TextArea methodologyArea;
     @FXML private TextArea resourcesArea;
+    @FXML private TextArea midtermObjectivesArea;
+    @FXML private TextArea generalObjectivesArea;
+    @FXML private TextArea immediateObjectivesArea;
+    @FXML private TextArea responsibilitiesArea;
     @FXML private TextField attendantNameField;
     @FXML private TextField attendantEmailField;
     @FXML private TextField attendantPositionField;
@@ -49,13 +52,16 @@ public class RegisterProjectController {
 
     private ProjectDto createProjectDtoFromFields() {
         ProjectDto projectDto = new ProjectDto();
-        projectDto.setProjectId(Integer.parseInt(projectIdField.getText()));
-        projectDto.setLinkedOrganizationId(Integer.parseInt(organizationIdField.getText()));
+        projectDto.setProjectId(parsePositiveInteger(projectIdField.getText(), "ID del proyecto"));
+        projectDto.setLinkedOrganizationId(parsePositiveInteger(organizationIdField.getText(), "ID de organización"));
         projectDto.setProjectName(projectNameField.getText());
         projectDto.setProjectDescription(descriptionArea.getText());
         projectDto.setProjectMethodology(methodologyArea.getText());
         projectDto.setProjectResources(resourcesArea.getText());
+        projectDto.setMidtermProjectObjectives(midtermObjectivesArea.getText());
         projectDto.setGeneralProjectObjectives(generalObjectivesArea.getText());
+        projectDto.setInmediateProjectObjectives(immediateObjectivesArea.getText());
+        projectDto.setProjectResponsabilities(responsibilitiesArea.getText());
         projectDto.setProjectAttendantName(attendantNameField.getText());
         projectDto.setProjectAttendantEmail(attendantEmailField.getText());
         projectDto.setProjectAttendantPosition(attendantPositionField.getText());
@@ -63,14 +69,25 @@ public class RegisterProjectController {
         return projectDto;
     }
 
+    private int parsePositiveInteger(String text, String fieldName) {
+        if (text == null || text.trim().isEmpty()) {
+            throw new NumberFormatException(fieldName + " es obligatorio");
+        }
+
+        return Integer.parseInt(text.trim());
+    }
+
     private void clearFields() {
         projectIdField.clear();
         organizationIdField.clear();
         projectNameField.clear();
         descriptionArea.clear();
-        generalObjectivesArea.clear();
         methodologyArea.clear();
         resourcesArea.clear();
+        midtermObjectivesArea.clear();
+        generalObjectivesArea.clear();
+        immediateObjectivesArea.clear();
+        responsibilitiesArea.clear();
         attendantNameField.clear();
         attendantEmailField.clear();
         attendantPositionField.clear();
