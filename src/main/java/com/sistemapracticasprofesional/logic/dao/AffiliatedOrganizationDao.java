@@ -29,7 +29,7 @@ public class AffiliatedOrganizationDao implements IAffiliatedOrganization{
         try(Connection connection = DatabaseConnection.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)){
         
-            preparedStatement.setInt(1, affiliatedOrganization.getIdOrganization());
+            preparedStatement.setString(1, affiliatedOrganization.getIdOrganization());
             preparedStatement.setString(2, affiliatedOrganization.getName());
             preparedStatement.setString(3, affiliatedOrganization.getAddress());
             preparedStatement.setString(4, affiliatedOrganization.getSector());
@@ -152,7 +152,7 @@ public class AffiliatedOrganizationDao implements IAffiliatedOrganization{
                 
                 AffiliatedOrganizationDto affiliatedOrganization = new AffiliatedOrganizationDto();
                 
-                affiliatedOrganization.setIdOrganization(resultSet.getInt("Id_organizacion"));
+                affiliatedOrganization.setIdOrganization(resultSet.getString("Id_organizacion"));
                 affiliatedOrganization.setName(resultSet.getString("Nombre"));
                 
                 affiliatedOrganizationList.add(affiliatedOrganization);

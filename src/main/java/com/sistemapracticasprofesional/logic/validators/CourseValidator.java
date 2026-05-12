@@ -14,6 +14,8 @@ public class CourseValidator {
             
             if ( nrc.matches("//d{5}") ){
 
+                result = true;
+                
             }
 
         }
