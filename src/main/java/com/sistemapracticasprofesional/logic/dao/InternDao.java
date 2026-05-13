@@ -156,6 +156,28 @@ public class InternDao implements IIntern {
         }
     }
 
+    @Override
+    public boolean assignProject(String studentId, int projectId) {
+
+        String query = "UPDATE practicante SET IdProyecto = ? WHERE Matricula = ?";
+
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            
+                preparedStatement.setInt(1, projectId);
+                preparedStatement.setString(2, studentId);
+
+                return preparedStatement.executeUpdate() > 0;
+
+        } catch (SQLException e){
+
+            LOGGER.error("Error al asigar proyrcyo", e);
+            throw new DaoException("Error al asignar proyecto", e);
+
+        }
+
+    }
+
     private InternDto mapResultSetToDto(ResultSet resultSet) throws SQLException {
         return new InternDto(
                 resultSet.getString("Matricula"),

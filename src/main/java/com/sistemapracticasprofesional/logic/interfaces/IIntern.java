@@ -15,4 +15,7 @@ public interface IIntern {
     InternDto getInternByStudentId(String studentId) throws DaoException;
 
     List<InternDto> getAllInterns() throws DaoException;
+
+    boolean assignProject(String studentId, int projectId) throws DaoException;
+
 }
