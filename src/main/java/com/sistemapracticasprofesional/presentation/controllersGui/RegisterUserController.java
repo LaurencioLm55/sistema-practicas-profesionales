@@ -9,6 +9,7 @@ import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
 import java.io.IOException;
+import java.time.LocalDate;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -136,10 +137,26 @@ public class RegisterUserController {
         coordinatorDto.setPersonnelNumber(parseInteger(coordinatorPersonnelNumberTextField.getText(),
                 "Numero de personal invalido"));
         coordinatorDto.setName(coordinatorNameTextField.getText());
-        coordinatorDto.setState(coordinatorStateTextField.getText());
-        coordinatorDto.setEntryDate(coordinatorEntryDatePicker.getValue());
+        coordinatorDto.setState(getCoordinatorState());
+        coordinatorDto.setEntryDate(getCoordinatorEntryDate());
         coordinatorDto.setExitDate(coordinatorExitDatePicker.getValue());
         return coordinatorDto;
+    }
+
+    private String getCoordinatorState() {
+        String state = coordinatorStateTextField.getText();
+        if (state == null || state.isBlank()) {
+            return "Activo";
+        }
+        return state;
+    }
+
+    private LocalDate getCoordinatorEntryDate() {
+        LocalDate entryDate = coordinatorEntryDatePicker.getValue();
+        if (entryDate == null) {
+            return LocalDate.now();
+        }
+        return entryDate;
     }
 
     private ProfessorDto createProfessorDto() {

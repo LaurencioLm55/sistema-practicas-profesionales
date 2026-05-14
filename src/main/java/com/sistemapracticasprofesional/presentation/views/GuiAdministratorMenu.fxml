@@ -44,6 +44,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Button onAction="#handleConsultProfessors" prefWidth="360.0" style="-fx-background-color: #09001F;" text="Consultar Profesores" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
             <Button mnemonicParsing="false" onAction="#handleCloseSession" prefWidth="360.0" style="-fx-background-color: #6b7280;" text="Cerrar sesion" textFill="WHITE">
                <font>
                   <Font size="18.0" />

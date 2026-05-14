@@ -33,10 +33,7 @@ public class ProjectDaoTest {
                 affiliatedOrganizationDao.getAffiliatedOrganization(testOrganizationId);
 
         if (existingOrganization.getName() == null) {
-            AffiliatedOrganizationDto organization = new AffiliatedOrganizationDto(
-                    testOrganizationId, "Project Test Organization", 
-                    "Test Address", "Technology", "Xalapa",
-                    "Veracruz", "2281234567", "project.organization@example.com" );
+            AffiliatedOrganizationDto organization = createAffiliatedOrganization();
             
             affiliatedOrganizationDao.insertOrganization(organization);
         }
@@ -54,21 +51,16 @@ public class ProjectDaoTest {
 
     @Test
     public void testInsertProjectSuccessfully() {
-        ProjectDto projectTest = new ProjectDto(testProjectId, testOrganizationId, "Test Project", 
-                "Test Description", "SCRUM", "Equipment and Software", "Midterm Objectives", 
-                "General Objective", "Immediate Objectives", "Test Responsibilities", "Ana Garcia",
-                "ana@example.com", "Monday to Friday" );
+        ProjectDto projectTest = createProjectDto("Test Project", "Test Description",
+                "SCRUM");
 
         assertTrue(projectDao.insertProject(projectTest));
     }
 
     @Test
     public void testUpdateProjectSuccessfully() {
-        ProjectDto projectTest = new ProjectDto(testProjectId, testOrganizationId, "Initial Project", 
-                "Initial Description", "Waterfall", "Initial Resources", "Initial Objectives", 
-                "Initial Objective", "Initial Immediate Objectives", "Initial Responsibilities", "Luis Perez",
-                "luis@example.com", "Tuesday and Thursday"
-        );
+        ProjectDto projectTest = createProjectDto("Initial Project", "Initial Description",
+                "Waterfall");
         projectDao.insertProject(projectTest);
 
         projectTest.setProjectName("Updated Project");
@@ -81,10 +73,8 @@ public class ProjectDaoTest {
 
     @Test
     public void testDeleteProjectSuccessfully() {
-        ProjectDto projectTest = new ProjectDto( testProjectId, testOrganizationId, 
-                "Delete Project", "Description", "SCRUM", "Resources", "Midterm Objectives", 
-                "General Objective", "Immediate Objectives", "Responsibilities", "Mario Diaz",
-                "mario@example.com", "Monday" );
+        ProjectDto projectTest = createProjectDto("Delete Project", "Description",
+                "SCRUM");
 
         projectDao.insertProject(projectTest);
 
@@ -95,10 +85,8 @@ public class ProjectDaoTest {
 
     @Test
     public void testGetProjectSuccessfully() {
-        ProjectDto projectTest = new ProjectDto( testProjectId, testOrganizationId, "Search Project", 
-                "Search Description", "XP", "Search Resources", "Search Midterm Objectives", 
-                "Search General Objective", "Search Immediate Objectives", "Search Responsibilities",
-                "Rosa Vega", "rosa@example.com", "Wednesday" );
+        ProjectDto projectTest = createProjectDto("Search Project", "Search Description",
+                "XP");
         projectDao.insertProject(projectTest);
 
         ProjectDto success = projectDao.getProjectById(testProjectId);
@@ -108,11 +96,8 @@ public class ProjectDaoTest {
 
     @Test
     public void testListProjectsSuccessfully() {
-        ProjectDto projectTest = new ProjectDto(testProjectId, testOrganizationId, "List Project", 
-                "List Description", "SCRUM", "List Resources", "List Midterm Objectives",
-                "List General Objective", "List Immediate Objectives", "List Responsibilities", 
-                "Elena Cruz", "elena@example.com", "Thursday"
-        );
+        ProjectDto projectTest = createProjectDto("List Project", "List Description",
+                "SCRUM");
         projectDao.insertProject(projectTest);
 
         List<ProjectDto> listProjects = projectDao.getAllProjects();
@@ -122,15 +107,45 @@ public class ProjectDaoTest {
 
     @Test
     public void testInsertProjectUnsuccessfully() {
-        
-        ProjectDto projectTest = new ProjectDto(testProjectId, 999999, "List Project",
-                "List Description", "SCRUM", "List Resources", "List Midterm Objectives",
-                "List General Objective", "List Immediate Objectives", "List Responsibilities", 
-                "Elena Cruz", "elena@example.com", "Thursday"
-        );
+        ProjectDto projectTest = createProjectDto("List Project", "List Description",
+                "SCRUM");
+        projectTest.setLinkedOrganizationId(999999);
         
         assertThrows(DaoException.class, () -> projectDao.insertProject(projectTest));
 
+    }
+
+    private ProjectDto createProjectDto(String name, String description, String methodology) {
+        ProjectDto project = new ProjectDto();
+        project.setProjectId(testProjectId);
+        project.setLinkedOrganizationId(testOrganizationId);
+        project.setProjectName(name);
+        project.setProjectDescription(description);
+        project.setProjectMethodology(methodology);
+        project.setProjectResources("Resources");
+        project.setMidtermProjectObjectives("Midterm Objectives");
+        project.setGeneralProjectObjectives("General Objective");
+        project.setInmediateProjectObjectives("Immediate Objectives");
+        project.setProjectResponsabilities("Responsibilities");
+        project.setProjectAttendantName("Project Attendant");
+        project.setProjectAttendantEmail("attendant@example.com");
+        project.setProjectAttendantPosition("Monday");
+
+        return project;
+    }
+
+    private AffiliatedOrganizationDto createAffiliatedOrganization() {
+        AffiliatedOrganizationDto organization = new AffiliatedOrganizationDto();
+        organization.setIdOrganization(String.valueOf(testOrganizationId));
+        organization.setName("Project Test Organization");
+        organization.setAddress("Test Address");
+        organization.setSector("Technology");
+        organization.setCity("Xalapa");
+        organization.setState("Veracruz");
+        organization.setPhoneNumber("2281234567");
+        organization.setEmail("project.organization@example.com");
+
+        return organization;
     }
 
 

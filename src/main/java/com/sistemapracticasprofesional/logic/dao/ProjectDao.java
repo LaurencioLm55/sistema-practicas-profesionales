@@ -171,24 +171,23 @@ public class ProjectDao implements IProject {
         return projects;
     }
 
-    private ProjectDto mapResultSetToDto(ResultSet rs) throws SQLException {
-        
-        return new ProjectDto(
-                rs.getInt("IdProyecto"),
-                rs.getInt("Id_organizacion"),
-                rs.getString("Nombre"),
-                rs.getString("Descripcion_general"),
-                rs.getString("Metodologia"),
-                rs.getString("Recursos"),
-                rs.getString("Objetivos_medios"),
-                rs.getString("Objetivo_general"),
-                rs.getString("Objetivos_inmediatos"),
-                rs.getString("Responsabilidades"),
-                rs.getString("Nombre_Encargado"),
-                rs.getString("e_mail_Encargado"),
-                rs.getString("cargo_Encargado")
-        );
+    private ProjectDto mapResultSetToDto(ResultSet resultSet) throws SQLException {
+        ProjectDto project = new ProjectDto();
+        project.setProjectId(resultSet.getInt("IdProyecto"));
+        project.setLinkedOrganizationId(resultSet.getInt("Id_organizacion"));
+        project.setProjectName(resultSet.getString("Nombre"));
+        project.setProjectDescription(resultSet.getString("Descripcion_general"));
+        project.setProjectMethodology(resultSet.getString("Metodologia"));
+        project.setProjectResources(resultSet.getString("Recursos"));
+        project.setMidtermProjectObjectives(resultSet.getString("Objetivos_medios"));
+        project.setGeneralProjectObjectives(resultSet.getString("Objetivo_general"));
+        project.setInmediateProjectObjectives(resultSet.getString("Objetivos_inmediatos"));
+        project.setProjectResponsabilities(resultSet.getString("Responsabilidades"));
+        project.setProjectAttendantName(resultSet.getString("Nombre_Encargado"));
+        project.setProjectAttendantEmail(resultSet.getString("e_mail_Encargado"));
+        project.setProjectAttendantPosition(resultSet.getString("cargo_Encargado"));
 
+        return project;
     }
 
 }

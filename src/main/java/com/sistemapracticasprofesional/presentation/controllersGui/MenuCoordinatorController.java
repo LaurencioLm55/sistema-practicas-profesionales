@@ -182,6 +182,21 @@ public class MenuCoordinatorController{
     }
 
     @FXML
+    public void handleRegisterProject(ActionEvent event) {
+        try {
+            Navigation.changeScene(
+                    event,
+                    "GuiRegisterProject.fxml",
+                    "Registrar Proyecto"
+            );
+        } catch (IOException e) {
+            LOGGER.error("Ruta no encontrada para registrar proyecto", e);
+            showAlert(AlertType.ERROR, "Error: no se encontró la ventana de registro de proyecto.");
+        }
+    }
+
+
+    @FXML
     public void handeCloseSession ( ActionEvent event ){
 
        try{
@@ -217,4 +232,3 @@ public class MenuCoordinatorController{
 
 
 }
-
