@@ -79,7 +79,12 @@ public class InternsMenuController {
 
     @FXML
     private void handeStartUpdateDataUser(ActionEvent event) {
-
+        try {
+            Navigation.changeScene(event, "GuiUptadeDataUser.fxml", "Actualizar datos de usuario");
+        } catch (IOException e) {
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo abrir la ventana.");
+        }
     }
 
     @FXML

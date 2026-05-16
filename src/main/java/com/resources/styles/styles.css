@@ -1,0 +1,118 @@
+
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #f0f4f8;
+}
+
+
+.btn-primary {
+    -fx-background-color: #09001F;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-padding: 10 28 10 28;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #1a0a36;
+}
+
+.btn-primary:pressed {
+    -fx-background-color: #00000f;
+}
+
+
+.btn-secondary {
+    -fx-background-color: #6b7280;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-padding: 10 28 10 28;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #4b5563;
+}
+
+.btn-secondary:pressed {
+    -fx-background-color: #374151;
+}
+
+
+.text-input {
+    -fx-background-color: white;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI";
+}
+
+.text-input:focused {
+    -fx-border-color: #00529e;
+    -fx-border-width: 2;
+}
+
+.form-card {
+    -fx-background-color: white;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 14, 0, 0, 4);
+    -fx-padding: 36;
+}
+
+
+.menu-bar {
+    -fx-background-color: #003d7a;
+    -fx-padding: 2 0 2 0;
+}
+
+.menu-bar .menu {
+    -fx-background-color: transparent;
+}
+
+.menu-bar .menu:hover,
+.menu-bar .menu:showing {
+    -fx-background-color: #00529e;
+}
+
+.menu-bar .menu > .label {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 4 10 4 10;
+}
+
+.menu-item {
+    -fx-background-color: white;
+}
+
+.menu-item:focused {
+    -fx-background-color: #e8f0fe;
+}
+
+.menu-item > .label {
+    -fx-text-fill: #1f2937;
+    -fx-font-size: 13px;
+}
+
+
+.section-title {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 28px;
+    -fx-text-fill: #1f2937;
+}
+
+.scroll-pane {
+    -fx-background-color: #f0f4f8;
+    -fx-background: #f0f4f8;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: #f0f4f8;
+}

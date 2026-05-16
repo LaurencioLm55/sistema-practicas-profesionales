@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -18,6 +19,9 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.RegisterProjectController">
+   <stylesheets>
+      <String fx:value="@../../../resources/styles/styles.css" />
+   </stylesheets>
    <top>
       <VBox alignment="CENTER" prefHeight="125.0" prefWidth="1280.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
          <children>
@@ -174,18 +178,10 @@
                         <Insets left="180.0" right="180.0" />
                      </VBox.margin>
                   </GridPane>
-                  <HBox alignment="CENTER" prefHeight="80.0" spacing="100.0">
+                  <HBox alignment="CENTER" prefHeight="80.0" spacing="60.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleBack" text="Cancelar">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="registerProjectButton" mnemonicParsing="false" onAction="#handleRegisterProject" style="-fx-background-color: #09001F;" text="Registrar proyecto" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleBack" styleClass="btn-secondary" text="Cancelar" prefWidth="150.0" />
+                        <Button fx:id="registerProjectButton" mnemonicParsing="false" onAction="#handleRegisterProject" styleClass="btn-primary" text="Registrar proyecto" prefWidth="180.0" />
                      </children>
                   </HBox>
                </children>

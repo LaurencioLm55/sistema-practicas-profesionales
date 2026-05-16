@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -12,7 +14,9 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.AffiliatedOrganizationsMenuController">
-
+   <stylesheets>
+      <String fx:value="@../../../resources/styles/styles.css" />
+   </stylesheets>
    <top>
       <VBox alignment="CENTER" prefHeight="125.0" style="-fx-background-color: #00529e;">
          <padding>
@@ -37,21 +41,19 @@
          </children>
       </VBox>
    </top>
-
    <center>
-      <VBox alignment="CENTER" spacing="25.0">
+      <VBox alignment="CENTER" spacing="0.0" style="-fx-background-color: #f0f4f8;">
          <children>
-            <Button fx:id="buttonRegistrarOrganizacion" onAction="#handleRegisterOrganization" prefWidth="360.0" style="-fx-background-color: #09001F;" text="Registrar organizacion" textFill="WHITE">
-               <font><Font size="18.0" /></font>
-            </Button>
-
-            <Button onAction="#handleConsultOrganizations" prefWidth="360.0" style="-fx-background-color: #09001F;" text="Consultar organizaciones" textFill="WHITE">
-               <font><Font size="18.0" /></font>
-            </Button>
-
-            <Button onAction="#handleBack" prefWidth="360.0" style="-fx-background-color: #6b7280;" text="Regresar" textFill="WHITE">
-               <font><Font size="18.0" /></font>
-            </Button>
+            <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="form-card" maxWidth="480.0">
+               <children>
+                  <Label text="Acciones disponibles" styleClass="section-title" />
+                  <Separator />
+                  <Button fx:id="buttonRegistrarOrganizacion" onAction="#handleRegisterOrganization" prefWidth="360.0" styleClass="btn-primary" text="Registrar organización" />
+                  <Button onAction="#handleConsultOrganizations" prefWidth="360.0" styleClass="btn-primary" text="Consultar organizaciones" />
+                  <Separator />
+                  <Button onAction="#handleBack" prefWidth="360.0" styleClass="btn-secondary" text="Regresar" />
+               </children>
+            </VBox>
          </children>
       </VBox>
    </center>

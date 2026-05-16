@@ -1,42 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.ProfessorListGuiController">
-<top>
-    <Label text="Lista de Profesores" BorderPane.alignment="CENTER">
-        <font>
-        <Font name="System Bold" size="24.0" />
-        </font>
-        <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-        </padding>
-    </Label>
-</top>
-<center>
-    <TableView fx:id="professorsTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-    <columns>
-        <TableColumn fx:id="staffNumberColumn" prefWidth="150.0" text="Número de Personal" />
-        <TableColumn fx:id="nameColumn" prefWidth="350.0" text="Nombre Completo" />
-        <TableColumn fx:id="shiftColumn" prefWidth="150.0" text="Turno" />
-    </columns>
-        <BorderPane.margin>
-        <Insets left="20.0" right="20.0" />
-        </BorderPane.margin>
-    </TableView>
-</center>
-<bottom>
-    <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-        <children>
-        <Button mnemonicParsing="false" onAction="#handleBack" text="Regresar" />
-        </children>
-    </VBox>
-</bottom>
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.ProfessorListGuiController">
+   <stylesheets>
+      <String fx:value="@../../../resources/styles/styles.css" />
+   </stylesheets>
+   <top>
+      <VBox alignment="CENTER" prefHeight="125.0" style="-fx-background-color: #00529e;">
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label text="Lista de Profesores" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Bold" size="42.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="100.0" fitWidth="120.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../resources/images/LogoUv.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="30.0" left="40.0" right="40.0" bottom="20.0" />
+         </padding>
+         <children>
+            <TableView fx:id="professorsTableView" prefHeight="480.0" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="staffNumberColumn" prefWidth="200.0" text="Número de Personal" />
+                  <TableColumn fx:id="nameColumn" prefWidth="600.0" text="Nombre Completo" />
+                  <TableColumn fx:id="shiftColumn" prefWidth="200.0" text="Turno" />
+               </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="30.0" top="16.0" />
+         </padding>
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleBack" prefWidth="150.0" styleClass="btn-secondary" text="Regresar" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

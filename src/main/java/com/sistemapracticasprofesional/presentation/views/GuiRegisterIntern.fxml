@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -17,6 +18,9 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.RegisterInternController">
+   <stylesheets>
+      <String fx:value="@../../../resources/styles/styles.css" />
+   </stylesheets>
    <top>
       <VBox alignment="CENTER" prefHeight="125.0" prefWidth="1280.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
          <padding>
@@ -47,98 +51,76 @@
    </top>
 
    <center>
-      <VBox alignment="TOP_CENTER" spacing="38.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" spacing="24.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
          <padding>
-            <Insets top="45.0" />
+            <Insets top="30.0" bottom="20.0" />
          </padding>
          <children>
-            <Label alignment="CENTER" text="Datos del practicante">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
+            <Label alignment="CENTER" text="Datos del practicante" styleClass="section-title" />
 
-            <GridPane hgap="30.0" maxWidth="720.0" vgap="24.0">
+            <GridPane hgap="30.0" maxWidth="740.0" vgap="14.0">
                <columnConstraints>
                   <ColumnConstraints halignment="RIGHT" minWidth="180.0" prefWidth="220.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="260.0" prefWidth="420.0" />
                </columnConstraints>
 
                <rowConstraints>
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
-                  <RowConstraints minHeight="34.0" prefHeight="40.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
+                  <RowConstraints minHeight="38.0" prefHeight="42.0" />
                </rowConstraints>
 
                <children>
                   <Label text="Nombre de usuario :">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="textFieldUserName" maxWidth="Infinity" GridPane.columnIndex="1" />
+                  <TextField fx:id="textFieldUserName" styleClass="text-input" maxWidth="Infinity" GridPane.columnIndex="1" />
 
-                  <Label text="Contrasena :" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                  <Label text="Contraseña :" GridPane.rowIndex="1">
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <PasswordField fx:id="passwordField" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="passwordField" styleClass="text-input" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                  <Label text="Confirmar contrasena :" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                  <Label text="Confirmar contraseña :" GridPane.rowIndex="2">
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <PasswordField fx:id="confirmPasswordField" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="confirmPasswordField" styleClass="text-input" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                  <Label text="Matricula :" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                  <Label text="Matrícula :" GridPane.rowIndex="3">
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="textFieldStudentId" maxWidth="Infinity" promptText="Ej. S22000000" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textFieldStudentId" styleClass="text-input" maxWidth="Infinity" promptText="Ej. S22000000" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                   <Label text="Edad :" GridPane.rowIndex="4">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="textFieldAge" maxWidth="Infinity" promptText="Ej. 21" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="textFieldAge" styleClass="text-input" maxWidth="Infinity" promptText="Ej. 21" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
                   <Label text="Nombre completo :" GridPane.rowIndex="5">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="textFieldName" maxWidth="Infinity" promptText="Nombre completo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="textFieldName" styleClass="text-input" maxWidth="Infinity" promptText="Nombre completo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-                  <Label text="Lengua indigena :" GridPane.rowIndex="6">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                  <Label text="Lengua indígena :" GridPane.rowIndex="6">
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="textFieldIndigenousLanguage" maxWidth="Infinity" promptText="Opcional" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="textFieldIndigenousLanguage" styleClass="text-input" maxWidth="Infinity" promptText="Opcional" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-                  <Label text="Genero :" GridPane.rowIndex="7">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                  <Label text="Género :" GridPane.rowIndex="7">
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="textFieldGender" maxWidth="Infinity" promptText="Genero" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="textFieldGender" styleClass="text-input" maxWidth="Infinity" promptText="Género" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
                   <Label text="Carrera :" GridPane.rowIndex="8">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                     <font><Font size="15.0" /></font>
                   </Label>
-                  <TextField fx:id="textFieldMajor" maxWidth="Infinity" promptText="Carrera" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="textFieldMajor" styleClass="text-input" maxWidth="Infinity" promptText="Carrera" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                </children>
             </GridPane>
          </children>
@@ -146,22 +128,13 @@
    </center>
 
    <bottom>
-      <HBox alignment="CENTER" spacing="35.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" spacing="35.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
          <padding>
-            <Insets bottom="48.0" left="32.0" right="32.0" top="18.0" />
+            <Insets bottom="32.0" left="32.0" right="32.0" top="16.0" />
          </padding>
          <children>
-            <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#handleCancel" prefWidth="140.0" style="-fx-background-color: #6b7280;" text="Cancelar" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-
-            <Button fx:id="buttonRegister" defaultButton="true" mnemonicParsing="false" onAction="#handleRegisterIntern" prefWidth="160.0" style="-fx-background-color: #09001F;" text="Registrar" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
+            <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#handleCancel" prefWidth="150.0" styleClass="btn-secondary" text="Cancelar" />
+            <Button fx:id="buttonRegister" defaultButton="true" mnemonicParsing="false" onAction="#handleRegisterIntern" prefWidth="160.0" styleClass="btn-primary" text="Registrar" />
          </children>
       </HBox>
    </bottom>

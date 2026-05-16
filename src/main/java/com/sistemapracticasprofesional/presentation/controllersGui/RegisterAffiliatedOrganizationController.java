@@ -3,9 +3,11 @@ package com.sistemapracticasprofesional.presentation.controllersGui;
 import com.sistemapracticasprofesional.logic.controllers.RegistrerAffiliatedOrganizationController;
 import com.sistemapracticasprofesional.logic.dto.AffiliatedOrganizationDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
-
+import com.sistemapracticasprofesional.presentation.util.Navigation;
+import java.io.IOException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -15,7 +17,7 @@ import javafx.scene.control.Alert;
 public class RegisterAffiliatedOrganizationController {
 
     private AffiliatedOrganizationDto affiliatedOrganizationDto = new AffiliatedOrganizationDto();
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginControllerGui.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterAffiliatedOrganizationController.class);
     private Alert alert;
 
     @FXML
@@ -83,6 +85,16 @@ public class RegisterAffiliatedOrganizationController {
         affiliatedOrganizationDto.setEmail(emailTextField.getText());
 
 
+    }
+
+    @FXML
+    private void handleBack(ActionEvent event) {
+        try {
+            Navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Menú del coordinador");
+        } catch (IOException e) {
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo regresar al menú.");
+        }
     }
 
      private void showAlert(Alert.AlertType type, String messange){
