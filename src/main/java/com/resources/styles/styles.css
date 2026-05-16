@@ -1,12 +1,22 @@
 
 .root {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 15px;
+    -fx-font-size: 14px;
     -fx-background-color: #f0f4f8;
 }
 
 .label {
     -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2937;
+}
+
+.header-title {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 38px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
 }
 
 .btn-primary {
@@ -52,14 +62,30 @@
     -fx-border-color: #d1d5db;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-padding: 9 12 9 12;
+    -fx-padding: 8 12 8 12;
     -fx-font-size: 16px;
     -fx-font-family: "Segoe UI";
+    -fx-pref-height: 40px;
+    -fx-pref-width: 280px;
 }
 
 .text-input:focused {
     -fx-border-color: #00529e;
     -fx-border-width: 2;
+}
+
+.combo-box,
+.date-picker {
+    -fx-pref-height: 40px;
+    -fx-pref-width: 280px;
+    -fx-background-radius: 5;
+    -fx-font-size: 16px;
+}
+
+.combo-box .list-cell,
+.date-picker .text-field {
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI";
 }
 
 .form-card {
@@ -89,6 +115,7 @@
 .menu-bar .menu > .label {
     -fx-text-fill: white;
     -fx-font-size: 15px;
+    -fx-font-weight: normal;
     -fx-padding: 4 12 4 12;
 }
 
@@ -103,12 +130,13 @@
 .menu-item > .label {
     -fx-text-fill: #1f2937;
     -fx-font-size: 15px;
+    -fx-font-weight: normal;
 }
 
 
 .section-title {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 40px;
+    -fx-font-size: 34px;
     -fx-font-weight: bold;
     -fx-text-fill: #09001F;
     -fx-text-alignment: center;
@@ -117,14 +145,14 @@
 
 .subsection-title {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 26px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
     -fx-text-fill: #09001F;
 }
 
 .support-text {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 20px;
+    -fx-font-size: 17px;
     -fx-font-weight: bold;
     -fx-text-fill: #4b5563;
     -fx-text-alignment: center;

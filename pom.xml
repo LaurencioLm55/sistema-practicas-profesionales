@@ -59,6 +59,7 @@
                     <include>**/*.fxml</include>
                     <include>**/*.jpg</include>
                     <include>**/*.png</include>
+                    <include>**/*.css</include>
                     <include>**/*.xml</include>
                 </includes>
             </resource>
