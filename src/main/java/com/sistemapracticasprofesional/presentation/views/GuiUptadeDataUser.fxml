@@ -16,12 +16,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.UpdateDataUserController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.UpdateDataUserController">
    <stylesheets>
       <String fx:value="@../../../resources/styles/styles.css" />
    </stylesheets>
    <top>
-      <VBox alignment="CENTER" prefHeight="125.0" prefWidth="1280.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="125.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="containerTitle" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -54,8 +54,8 @@
             <Insets top="40.0" />
          </padding>
          <children>
-            <Label fx:id="bodyTitle" alignment="CENTER" text="Datos del Usuario" styleClass="section-title" />
-            <GridPane hgap="30.0" vgap="20.0">
+            <Label fx:id="bodyTitle" alignment="CENTER" maxWidth="Infinity" text="Datos del Usuario" styleClass="section-title" maxWidth="Infinity" />
+            <GridPane hgap="30.0" maxWidth="640.0" vgap="20.0">
               <columnConstraints>
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="160.0" prefWidth="200.0" />
                 <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" prefWidth="340.0" />
@@ -67,21 +67,18 @@
               </rowConstraints>
                <children>
                   <Label fx:id="nameUserLabel" text="Nombre :">
-                     <font><Font size="15.0" /></font>
+                     <font><Font size="17.0" /></font>
                   </Label>
                   <TextField fx:id="userNameTextField" styleClass="text-input" maxWidth="Infinity" GridPane.columnIndex="1" />
                   <Label fx:id="passwordUserLabel" text="Nombre de usuario :" GridPane.rowIndex="1">
-                     <font><Font size="15.0" /></font>
+                     <font><Font size="17.0" /></font>
                   </Label>
                   <TextField fx:id="userNameTextField1" styleClass="text-input" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="passwordUserLabel11" text="Contraseña :" GridPane.rowIndex="2">
-                     <font><Font size="15.0" /></font>
+                     <font><Font size="17.0" /></font>
                   </Label>
                   <TextField fx:id="userNameTextField2" styleClass="text-input" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
-               <VBox.margin>
-                  <Insets left="200.0" right="200.0" />
-               </VBox.margin>
             </GridPane>
             <HBox alignment="CENTER">
                <children>

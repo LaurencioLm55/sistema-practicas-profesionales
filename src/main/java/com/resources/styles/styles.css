@@ -1,16 +1,20 @@
 
 .root {
     -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
     -fx-background-color: #f0f4f8;
 }
 
+.label {
+    -fx-font-size: 16px;
+}
 
 .btn-primary {
     -fx-background-color: #09001F;
     -fx-text-fill: white;
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 15px;
-    -fx-padding: 10 28 10 28;
+    -fx-font-size: 16px;
+    -fx-padding: 11 30 11 30;
     -fx-background-radius: 6;
     -fx-cursor: hand;
 }
@@ -28,8 +32,8 @@
     -fx-background-color: #6b7280;
     -fx-text-fill: white;
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 15px;
-    -fx-padding: 10 28 10 28;
+    -fx-font-size: 16px;
+    -fx-padding: 11 30 11 30;
     -fx-background-radius: 6;
     -fx-cursor: hand;
 }
@@ -48,8 +52,8 @@
     -fx-border-color: #d1d5db;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-padding: 8 12 8 12;
-    -fx-font-size: 14px;
+    -fx-padding: 9 12 9 12;
+    -fx-font-size: 16px;
     -fx-font-family: "Segoe UI";
 }
 
@@ -84,8 +88,8 @@
 
 .menu-bar .menu > .label {
     -fx-text-fill: white;
-    -fx-font-size: 13px;
-    -fx-padding: 4 10 4 10;
+    -fx-font-size: 15px;
+    -fx-padding: 4 12 4 12;
 }
 
 .menu-item {
@@ -98,14 +102,32 @@
 
 .menu-item > .label {
     -fx-text-fill: #1f2937;
-    -fx-font-size: 13px;
+    -fx-font-size: 15px;
 }
 
 
 .section-title {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 28px;
-    -fx-text-fill: #1f2937;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #09001F;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.subsection-title {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #09001F;
+}
+
+.support-text {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4b5563;
+    -fx-text-alignment: center;
 }
 
 .scroll-pane {

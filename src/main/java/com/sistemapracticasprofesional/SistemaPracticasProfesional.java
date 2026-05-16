@@ -15,7 +15,7 @@ public class SistemaPracticasProfesional extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getLoginViewUrl());
 
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load(), 960, 660);
         stage.setTitle("Inicio de sesion");
         stage.setScene(scene);
         stage.show();

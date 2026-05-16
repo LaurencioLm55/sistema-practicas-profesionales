@@ -17,12 +17,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.UserLoginControllerGui">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.UserLoginControllerGui">
    <stylesheets>
       <String fx:value="@../../../resources/styles/styles.css" />
    </stylesheets>
    <top>
-      <VBox alignment="CENTER" prefHeight="125.0" prefWidth="1280.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="125.0" prefWidth="1125.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="containerTitle" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -50,15 +50,14 @@
       </VBox>
    </top>
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="0.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="506.0" prefWidth="1168.0" spacing="0.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" spacing="32.0" styleClass="form-card" maxWidth="520.0">
+            <VBox alignment="TOP_CENTER" maxWidth="520.0" spacing="32.0" styleClass="form-card">
                <children>
-                  <Label fx:id="bodyTitle" alignment="CENTER" text="Inicia Sesión" styleClass="section-title" maxWidth="Infinity">
-                  </Label>
-                  <GridPane hgap="20.0" vgap="20.0" maxWidth="Infinity">
+                  <Label fx:id="bodyTitle" alignment="CENTER" maxWidth="Infinity" styleClass="section-title" text="Inicia sesión" />
+                  <GridPane hgap="20.0" maxWidth="Infinity" vgap="20.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="NEVER" minWidth="150.0" prefWidth="160.0" halignment="RIGHT" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="NEVER" minWidth="150.0" prefWidth="160.0" />
                         <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" prefWidth="280.0" />
                      </columnConstraints>
                      <rowConstraints>
@@ -68,21 +67,21 @@
                      <children>
                         <Label fx:id="nameUserLabel" text="Usuario :">
                            <font>
-                              <Font size="15.0" />
+                              <Font size="17.0" />
                            </font>
                         </Label>
                         <Label fx:id="passwordUserLabel" text="Contraseña :" GridPane.rowIndex="1">
                            <font>
-                              <Font size="15.0" />
+                              <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="userNameTextField" styleClass="text-input" maxWidth="Infinity" GridPane.columnIndex="1" />
-                        <PasswordField fx:id="passwordField" styleClass="text-input" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="userNameTextField" maxWidth="Infinity" styleClass="text-input" GridPane.columnIndex="1" />
+                        <PasswordField fx:id="passwordField" maxWidth="Infinity" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button fx:id="handelLogin" mnemonicParsing="false" onAction="#handelLogin" styleClass="btn-primary" text="Iniciar sesión" prefWidth="200.0">
+                        <Button fx:id="handelLogin" mnemonicParsing="false" onAction="#handelLogin" prefWidth="200.0" styleClass="btn-primary" text="Iniciar sesión">
                         </Button>
                      </children>
                   </HBox>

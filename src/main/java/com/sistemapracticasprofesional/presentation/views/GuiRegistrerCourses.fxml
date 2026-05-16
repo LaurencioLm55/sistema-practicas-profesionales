@@ -50,7 +50,7 @@
             <Insets top="30.0" bottom="20.0" />
          </padding>
          <children>
-            <Label text="Datos de la experiencia educativa" styleClass="section-title" />
+            <Label text="Datos de la experiencia educativa" styleClass="section-title" alignment="CENTER" maxWidth="Infinity" />
             <GridPane hgap="30.0" maxWidth="740.0" vgap="14.0">
                <columnConstraints>
                   <ColumnConstraints halignment="RIGHT" minWidth="180.0" prefWidth="240.0" />
@@ -64,19 +64,19 @@
                   <RowConstraints minHeight="38.0" prefHeight="42.0" />
                </rowConstraints>
                <children>
-                  <Label text="NRC :"><font><Font size="15.0" /></font></Label>
+                  <Label text="NRC :"><font><Font size="17.0" /></font></Label>
                   <TextField fx:id="textFieldNrc" styleClass="text-input" promptText="NRC" maxWidth="Infinity" GridPane.columnIndex="1" />
 
-                  <Label text="Número de personal :" GridPane.rowIndex="1"><font><Font size="15.0" /></font></Label>
+                  <Label text="Número de personal :" GridPane.rowIndex="1"><font><Font size="17.0" /></font></Label>
                   <TextField fx:id="textFieldStaffNumber" styleClass="text-input" promptText="Número de personal" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                  <Label text="Estado :" GridPane.rowIndex="2"><font><Font size="15.0" /></font></Label>
+                  <Label text="Estado :" GridPane.rowIndex="2"><font><Font size="17.0" /></font></Label>
                   <TextField fx:id="textFieldStatus" styleClass="text-input" promptText="Estado" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                  <Label text="Periodo :" GridPane.rowIndex="3"><font><Font size="15.0" /></font></Label>
+                  <Label text="Periodo :" GridPane.rowIndex="3"><font><Font size="17.0" /></font></Label>
                   <TextField fx:id="textFieldPeriod" styleClass="text-input" promptText="Periodo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                  <Label text="Sección :" GridPane.rowIndex="4"><font><Font size="15.0" /></font></Label>
+                  <Label text="Sección :" GridPane.rowIndex="4"><font><Font size="17.0" /></font></Label>
                   <TextField fx:id="textFieldSection" styleClass="text-input" promptText="Sección" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>

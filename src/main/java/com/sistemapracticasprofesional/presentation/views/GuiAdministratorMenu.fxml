@@ -46,7 +46,7 @@
          <children>
             <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="form-card" maxWidth="480.0">
                <children>
-                  <Label text="Acciones disponibles" styleClass="section-title" />
+                  <Label text="Acciones disponibles" styleClass="section-title" alignment="CENTER" maxWidth="Infinity" />
                   <Separator />
                   <Button mnemonicParsing="false" onAction="#handleOpenRegisterUser" prefWidth="380.0" styleClass="btn-primary" text="Registrar coordinador o profesor" />
                   <Button onAction="#handleConsultProfessors" prefWidth="380.0" styleClass="btn-primary" text="Consultar Profesores" />

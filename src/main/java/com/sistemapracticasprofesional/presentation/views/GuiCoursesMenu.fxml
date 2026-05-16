@@ -46,7 +46,7 @@
          <children>
             <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="form-card" maxWidth="480.0">
                <children>
-                  <Label text="Acciones disponibles" styleClass="section-title" />
+                  <Label text="Acciones disponibles" styleClass="section-title" alignment="CENTER" maxWidth="Infinity" />
                   <Separator />
                   <Button onAction="#handleRegisterCourse" prefWidth="380.0" styleClass="btn-primary" text="Registrar experiencia educativa" />
                   <Button onAction="#handleConsultCourses" prefWidth="380.0" styleClass="btn-primary" text="Consultar experiencias educativas" />

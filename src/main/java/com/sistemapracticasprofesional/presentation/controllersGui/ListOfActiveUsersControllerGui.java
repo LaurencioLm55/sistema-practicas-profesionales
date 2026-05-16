@@ -20,7 +20,7 @@ public class ListOfActiveUsersControllerGui {
     private ListView<String> listUsers;
 
     @FXML
-    private void handleSelectIntern(ActionEvent event) 
+    private void handleSelectIntern(ActionEvent event) {
 
     }
 
