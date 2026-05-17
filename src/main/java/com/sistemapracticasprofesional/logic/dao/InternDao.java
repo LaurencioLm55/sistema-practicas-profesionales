@@ -178,6 +178,38 @@ public class InternDao implements IIntern {
 
     }
 
+    public List<InternDto> getInternsActive() {
+
+        List<InternDto> listInternsActive = new ArrayList<>();
+
+        String query = "SELECT matricula, nombre FROM practicante WHERE EstadoPracticante = 1 AND IdProyecto IS null";
+
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery()){
+
+                while (resultSet.next()) {
+                    
+                    InternDto intern = new InternDto();
+
+                    intern.setStudentId(resultSet.getString("matricula"));
+                    intern.setName(resultSet.getString("nombre"));
+
+                    listInternsActive.add(intern);
+
+                }
+
+            } catch (SQLException e){
+
+                LOGGER.error("Error al obtener la lista de practicantes", e);
+                throw new DaoException("Error al obtener lista de alumnos");
+
+            }
+
+        return listInternsActive;
+        
+    }
+
     private InternDto mapResultSetToDto(ResultSet resultSet) throws SQLException {
         return new InternDto(
                 resultSet.getString("Matricula"),

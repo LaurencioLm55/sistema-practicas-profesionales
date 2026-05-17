@@ -99,5 +99,32 @@ public class InternDaoTest {
         assertEquals(expetedResult, result);
         
     }
+
+    @Test
+    public void testGetInternsActiveSuccess(){
+
+        List<InternDto> expetedResult = new ArrayList<>();
+
+        InternDto internDto1 = new InternDto();
+        InternDto internDto2 = new InternDto();
+        InternDto internDto3 = new InternDto();
+
+        internDto1.setStudentId("S23014080");
+        internDto2.setStudentId("S24014080");
+        internDto3.setStudentId("S24014581");
+
+        internDto1.setName("Leonardo Hernández Hernández");
+        internDto2.setName("Ana Lopez Beltran");
+        internDto3.setName("Juan Martin España");
+
+        expetedResult.add(internDto1);
+        expetedResult.add(internDto2);
+        expetedResult.add(internDto3);
+
+        List<InternDto> result = internDao.getInternsActive();
+        
+        assertEquals(expetedResult, result);
+
+    }
     
 }

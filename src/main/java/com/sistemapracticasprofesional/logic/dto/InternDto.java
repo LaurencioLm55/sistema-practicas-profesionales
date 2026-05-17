@@ -9,6 +9,10 @@ public class InternDto {
     private String gender;
     private String major;
 
+    public InternDto(){
+        
+    }
+
     public InternDto(String studentId, int age, String name, String indigenousLanguage,
                      String gender, String major) {
         this.studentId = studentId;
