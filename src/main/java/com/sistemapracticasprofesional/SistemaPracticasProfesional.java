@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import com.sistemapracticasprofesional.presentation.util.Navigation;
 
 public class SistemaPracticasProfesional extends Application {
 
@@ -15,8 +16,10 @@ public class SistemaPracticasProfesional extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getLoginViewUrl());
 
-        Scene scene = new Scene(loader.load());
-        stage.setTitle("Inicio de sesion");
+        Scene scene = new Scene(loader.load(), 960, 660);
+        Navigation.applyStylesheet(scene);
+        stage.setTitle("Inicio de sesión");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 

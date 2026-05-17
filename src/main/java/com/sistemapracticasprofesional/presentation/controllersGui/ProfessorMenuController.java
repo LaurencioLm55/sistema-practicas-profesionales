@@ -84,12 +84,22 @@ public class ProfessorMenuController {
 
     @FXML
     private void handleRegisterCourse(ActionEvent event) {
-
+        try {
+            Navigation.changeScene(event, "GuiRegistrerCourses.fxml", "Registrar experiencia educativa");
+        } catch (IOException e) {
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo abrir la ventana.");
+        }
     }
 
     @FXML
     private void handeStartUpdateDataUser(ActionEvent event) {
-
+        try {
+            Navigation.changeScene(event, "GuiUptadeDataUser.fxml", "Actualizar datos de usuario");
+        } catch (IOException e) {
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo abrir la ventana.");
+        }
     }
 
     @FXML

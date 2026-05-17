@@ -4,12 +4,18 @@ import com.sistemapracticasprofesional.logic.controllers.CourseController;
 import com.sistemapracticasprofesional.logic.dto.CourseDto;
 import com.sistemapracticasprofesional.logic.exception.ControllerException;
 import com.sistemapracticasprofesional.logic.exception.ValidationException;
-
+import com.sistemapracticasprofesional.presentation.util.Navigation;
+import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RegisterCourseController {
+
+   private static final Logger LOGGER = LoggerFactory.getLogger(RegisterCourseController.class);
 
    @FXML
    private TextField textFieldNrc;
@@ -50,8 +56,13 @@ public class RegisterCourseController {
    }
 
    @FXML
-   private void handleCancel() {
-      clearFields();
+   private void handleCancel(ActionEvent event) {
+      try {
+         Navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Menú del coordinador");
+      } catch (IOException e) {
+         LOGGER.error("Ruta no encontrada", e);
+         showAlert(Alert.AlertType.ERROR, "No se pudo regresar al menú.");
+      }
    }
 
    private CourseDto getCourseFromFields() {

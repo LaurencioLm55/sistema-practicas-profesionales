@@ -77,7 +77,7 @@ public class RegisterProjectController {
         return Integer.parseInt(text.trim());
     }
 
-    private void clearFields() {
+    private void clearFields() {    
         projectIdField.clear();
         organizationIdField.clear();
         projectNameField.clear();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -13,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.InternsMenuController">
+<BorderPane fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.InternsMenuController" stylesheets="@../../../resources/styles/styles.css">
    <top>
       <VBox alignment="CENTER" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="containerTitle" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="title" text="Pagina de inicio" textFill="WHITE">
+                  <Label fx:id="title" text="Página de Inicio" textFill="WHITE" styleClass="header-title">
                      <font>
                         <Font name="Segoe UI Bold" size="42.0" />
                      </font>
@@ -39,7 +40,7 @@
                   <Insets left="25.0" right="25.0" />
                </padding>
             </HBox>
-            <MenuBar prefHeight="32.0" prefWidth="1249.0">
+            <MenuBar prefHeight="32.0" prefWidth="1249.0" styleClass="menu-bar">
               <menus>
                 <Menu mnemonicParsing="false" text="Proyecto">
                   <items>
@@ -47,37 +48,43 @@
                         <MenuItem mnemonicParsing="false" onAction="#handelStartAssignProject" text="Subir aceptación" />
                   </items>
                 </Menu>
-                  
                 <Menu mnemonicParsing="false" text="Actividades">
                   <items>
                         <MenuItem fx:id="uploadActivityMenuItem" mnemonicParsing="false" onAction="#handleStartRegistrerIntern" text="Subir actividad" />
                   </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Reportes">
-                    <items>
-                      <MenuItem fx:id="generateMonthlyReportMenuItem" mnemonicParsing="false" text="Generar reporte mensual" />
-                        <MenuItem fx:id="generatePartialReportMenuItem" mnemonicParsing="false" text="Generara reporte parcial" />
-                        <MenuItem fx:id="uploadMonthlyReportMenuItem" mnemonicParsing="false" text="Subir reporte mensual" />
-                        <MenuItem fx:id="uploadPartialReportMenuItem" mnemonicParsing="false" text="Subir reporte parcial" />
-                    </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Mensajes" />
-                  <Menu mnemonicParsing="false" text="Cuenta">
-                    <items>
-                      <MenuItem fx:id="updateDataUserMenuItem" mnemonicParsing="false" onAction="#handeStartUpdateDataUser" text="Actualizar cuenta" />
-                        <MenuItem fx:id="closeSessionMenuItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Cerrar secion" />
-                    </items>
-                  </Menu>
+                <Menu mnemonicParsing="false" text="Reportes">
+                  <items>
+                    <MenuItem fx:id="generateMonthlyReportMenuItem" mnemonicParsing="false" text="Generar reporte mensual" />
+                    <MenuItem fx:id="generatePartialReportMenuItem" mnemonicParsing="false" text="Generar reporte parcial" />
+                    <MenuItem fx:id="uploadMonthlyReportMenuItem" mnemonicParsing="false" text="Subir reporte mensual" />
+                    <MenuItem fx:id="uploadPartialReportMenuItem" mnemonicParsing="false" text="Subir reporte parcial" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Mensajes" />
+                <Menu mnemonicParsing="false" text="Cuenta">
+                  <items>
+                    <MenuItem fx:id="updateDataUserMenuItem" mnemonicParsing="false" onAction="#handeStartUpdateDataUser" text="Actualizar cuenta" />
+                    <MenuItem fx:id="closeSessionMenuItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Cerrar Sesión" />
+                  </items>
+                </Menu>
               </menus>
             </MenuBar>
          </children>
       </VBox>
    </top>
    <center>
-      <Label fx:id="welcomeLabel" alignment="TOP_CENTER" text="¡Bienvenido!" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold" size="48.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" spacing="16.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" spacing="12.0" styleClass="form-card" maxWidth="560.0">
+               <children>
+                  <Label fx:id="welcomeLabel" text="¡Bienvenido!" styleClass="section-title" alignment="CENTER" maxWidth="Infinity" />
+                  <Label text="Usa el menú de navegación superior para gestionar tu proyecto, actividades y reportes."
+                        wrapText="true" maxWidth="460.0" styleClass="support-text" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </center>
 </BorderPane>
+

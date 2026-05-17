@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -17,13 +18,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.RegisterProjectController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.RegisterProjectController" stylesheets="@../../../resources/styles/styles.css">
    <top>
-      <VBox alignment="CENTER" prefHeight="125.0" prefWidth="1280.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="125.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="containerTitle" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="title" text="Registrar proyecto" textFill="WHITE">
+                  <Label fx:id="title" text="Registrar proyecto" textFill="WHITE" styleClass="header-title">
                      <font>
                         <Font name="Segoe UI Bold" size="42.0" />
                      </font>
@@ -51,11 +52,7 @@
          <content>
             <VBox alignment="TOP_CENTER" spacing="24.0">
                <children>
-                  <Label fx:id="bodyTitle" alignment="CENTER" text="Datos del proyecto">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                  <Label fx:id="bodyTitle" alignment="CENTER" text="Datos del proyecto" styleClass="section-title" maxWidth="Infinity" />
                   <GridPane hgap="30.0" vgap="16.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="180.0" prefWidth="280.0" />
@@ -77,67 +74,67 @@
                      <children>
                         <Label text="ID del proyecto :" GridPane.rowIndex="0">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextField fx:id="projectIdField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                         <Label text="ID de organización :" GridPane.rowIndex="1">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextField fx:id="organizationIdField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Nombre del proyecto :" GridPane.rowIndex="2">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextField fx:id="projectNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Descripción general :" GridPane.rowIndex="3">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="descriptionArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Metodología :" GridPane.rowIndex="4">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="methodologyArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Recursos :" GridPane.rowIndex="5">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="resourcesArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="Objetivos medios :" GridPane.rowIndex="6">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="midtermObjectivesArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label text="Objetivo general :" GridPane.rowIndex="7">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="generalObjectivesArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Label text="Objetivos inmediatos :" GridPane.rowIndex="8">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="immediateObjectivesArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label text="Responsabilidades :" GridPane.rowIndex="9">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="responsibilitiesArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                      </children>
                      <VBox.margin>
-                        <Insets left="180.0" right="180.0" />
+                        <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                   </GridPane>
                   <GridPane hgap="30.0" vgap="16.0">
@@ -153,39 +150,31 @@
                      <children>
                         <Label text="Nombre del encargado :" GridPane.rowIndex="0">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextField fx:id="attendantNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                         <Label text="Correo del encargado :" GridPane.rowIndex="1">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextField fx:id="attendantEmailField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Cargo del encargado :" GridPane.rowIndex="2">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <TextField fx:id="attendantPositionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <VBox.margin>
-                        <Insets left="180.0" right="180.0" />
+                        <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                   </GridPane>
-                  <HBox alignment="CENTER" prefHeight="80.0" spacing="100.0">
+                  <HBox alignment="CENTER" prefHeight="80.0" spacing="60.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleBack" text="Cancelar">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="registerProjectButton" mnemonicParsing="false" onAction="#handleRegisterProject" style="-fx-background-color: #09001F;" text="Registrar proyecto" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleBack" styleClass="btn-secondary" text="Cancelar" prefWidth="150.0" />
+                        <Button fx:id="registerProjectButton" mnemonicParsing="false" onAction="#handleRegisterProject" styleClass="btn-primary" text="Registrar proyecto" prefWidth="180.0" />
                      </children>
                   </HBox>
                </children>
@@ -197,3 +186,4 @@
       </ScrollPane>
    </center>
 </BorderPane>
+

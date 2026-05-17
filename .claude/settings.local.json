@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\lopez\\\\OneDrive - Universidad Veracruzana\\\\Cuarto semestre\\\\Principios de construccion\\\\sistema-web-practivas-profesionales\" -Directory)",
+      "Bash(Select-Object -ExpandProperty Name)"
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -13,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.MenuCoordinatorController">
+<BorderPane fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.MenuCoordinatorController" stylesheets="@../../../resources/styles/styles.css">
    <top>
       <VBox alignment="CENTER" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="containerTitle" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="title" text="Pagina de inicio" textFill="WHITE">
+                  <Label fx:id="title" text="Página de Inicio" textFill="WHITE" styleClass="header-title">
                      <font>
                         <Font name="Segoe UI Bold" size="42.0" />
                      </font>
@@ -39,50 +40,56 @@
                   <Insets left="25.0" right="25.0" />
                </padding>
             </HBox>
-            <MenuBar prefHeight="32.0" prefWidth="1249.0">
+            <MenuBar prefHeight="32.0" prefWidth="1249.0" styleClass="menu-bar">
               <menus>
-                <Menu mnemonicParsing="false" text="Gestion de proyectos">
+                <Menu mnemonicParsing="false" text="Gestión de proyectos">
                   <items>
                         <MenuItem fx:id="registrerProjectAttentanMenuItem" mnemonicParsing="false" onAction="#handelStartRegistrerProjectAttendant" text="Registrar Encargado de proyecto" />
                         <MenuItem fx:id="registrerProjectMenuItem" mnemonicParsing="false" onAction="#handleRegisterProject" text="Registrar proyecto" />
                         <MenuItem fx:id="assignProjectMenuItem" mnemonicParsing="false" onAction="#handelStartAssignProject" text="Asignar Proyecto" />
                   </items>
                 </Menu>
-                  
                 <Menu mnemonicParsing="false" text="Gestionar practicantes">
                   <items>
                         <MenuItem fx:id="registrerInternMenuItem" mnemonicParsing="false" onAction="#handleStartRegistrerIntern" text="Registrar practicante" />
                         <MenuItem fx:id="disableInternMenuItem" mnemonicParsing="false" onAction="#handelStartDisableIntern" text="Inactivar Practicante" />
                   </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Reportes">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Generar reportes" />
-                    </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Cursos">
-                    <items>
-                      <MenuItem fx:id="registrerCourse" mnemonicParsing="false" onAction="#handleRegisterCourse" text="Agregar curso" />
-                        <MenuItem mnemonicParsing="false" text="Actualizar curso" />
-                        <MenuItem fx:id="closeSessionMenuaItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Eliminar cusrso" />
-                    </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Cuenta">
-                    <items>
-                      <MenuItem fx:id="updateDataUserMenuItem" mnemonicParsing="false" onAction="#handeStartUpdateDataUser" text="Actualizar cuenta" />
-                        <MenuItem fx:id="closeSessionMenuItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Cerrar secion" />
-                    </items>
-                  </Menu>
+                <Menu mnemonicParsing="false" text="Reportes">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Generar reportes" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Cursos">
+                  <items>
+                    <MenuItem fx:id="registrerCourse" mnemonicParsing="false" onAction="#handleRegisterCourse" text="Agregar curso" />
+                    <MenuItem mnemonicParsing="false" text="Actualizar curso" />
+                    <MenuItem fx:id="closeSessionMenuaItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Eliminar Curso" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Cuenta">
+                  <items>
+                    <MenuItem fx:id="updateDataUserMenuItem" mnemonicParsing="false" onAction="#handeStartUpdateDataUser" text="Actualizar cuenta" />
+                    <MenuItem fx:id="closeSessionMenuItem" mnemonicParsing="false" onAction="#handeCloseSession" text="Cerrar Sesión" />
+                  </items>
+                </Menu>
               </menus>
             </MenuBar>
          </children>
       </VBox>
    </top>
    <center>
-      <Label fx:id="welcomeLabel" alignment="TOP_CENTER" text="¡Bienvenido!" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold" size="48.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" spacing="16.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" spacing="12.0" styleClass="form-card" maxWidth="560.0">
+               <children>
+                  <Label fx:id="welcomeLabel" text="¡Bienvenido!" styleClass="section-title" alignment="CENTER" maxWidth="Infinity" />
+                  <Label text="Usa el menú de navegación superior para gestionar proyectos, practicantes, cursos y reportes."
+                        wrapText="true" maxWidth="460.0" styleClass="support-text" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </center>
 </BorderPane>
+

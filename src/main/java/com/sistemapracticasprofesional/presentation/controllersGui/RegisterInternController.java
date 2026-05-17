@@ -4,13 +4,19 @@ import com.sistemapracticasprofesional.logic.controllers.UserRegisterController;
 import com.sistemapracticasprofesional.logic.dto.InternDto;
 import com.sistemapracticasprofesional.logic.dto.UserDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
+import com.sistemapracticasprofesional.presentation.util.Navigation;
+import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RegisterInternController {
 
+   private static final Logger LOGGER = LoggerFactory.getLogger(RegisterInternController.class);
    private static final int INTERN_ROLE_ID = 3;
 
    @FXML
@@ -59,8 +65,13 @@ public class RegisterInternController {
    }
 
    @FXML
-   private void handleCancel() {
-      clearFields();
+   private void handleCancel(ActionEvent event) {
+      try {
+         Navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Menú del coordinador");
+      } catch (IOException e) {
+         LOGGER.error("Ruta no encontrada", e);
+         showAlert(Alert.AlertType.ERROR, "No se pudo regresar al menú.");
+      }
    }
 
    private void clearFields() {
