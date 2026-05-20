@@ -37,4 +37,25 @@ public class RoleDao {
             throw new DaoException("Error getting roles", e);
         }
     }
+
+    public int getRoleIdByName(String name) {
+        String query = "SELECT Id_rol FROM rol WHERE Nombre = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, name);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("Id_rol");
+                }
+            }
+
+            throw new DaoException("No se encontró el rol: " + name, null);
+        } catch (SQLException e) {
+            LOGGER.error("Error al obtener el rol por nombre", e);
+            throw new DaoException("Error al obtener el rol por nombre", e);
+        }
+    }
 }

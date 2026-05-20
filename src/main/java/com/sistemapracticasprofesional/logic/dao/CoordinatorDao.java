@@ -193,6 +193,43 @@ public class CoordinatorDao implements ICoordinator{
         return coordinatorObject;
     }
 
+    public boolean existsActiveCoordinator() {
+        String query = "SELECT EXISTS (SELECT 1 FROM coordinador WHERE EstadoCoordinador = true) AS existe";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            if (resultSet.next()) {
+                return resultSet.getInt("existe") == 1;
+            }
+            return false;
+        } catch (SQLException e) {
+            LOGGER.error("Error checking for active coordinator", e);
+            throw new DaoException("Error verificando coordinador activo", e);
+        }
+    }
+
+    public boolean existsByPersonalNumber(int personnelNumber) {
+        String query = "SELECT EXISTS (SELECT 1 FROM coordinador WHERE Numero_de_personal = ?) AS existe";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, personnelNumber);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("existe") == 1;
+                }
+            }
+            return false;
+        } catch (SQLException e) {
+            LOGGER.error("Error checking personnel number {}", personnelNumber, e);
+            throw new DaoException("Error verificando número de personal", e);
+        }
+    }
+
     private boolean mapStateToDatabaseValue(String state) {
         return state != null && (state.equalsIgnoreCase("activo")
                 || state.equalsIgnoreCase("true")
