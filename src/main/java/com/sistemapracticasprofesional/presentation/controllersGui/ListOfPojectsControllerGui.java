@@ -2,19 +2,23 @@ package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import com.sistemapracticasprofesional.logic.controllers.AssignProjectController;
 import com.sistemapracticasprofesional.logic.dto.ProjectDto;
+import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.presentation.util.IReceiveData;
 import com.sistemapracticasprofesional.logic.dto.InternDto;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 
 public class ListOfPojectsControllerGui implements IReceiveData {
 
     private InternDto internDto;
     private AssignProjectController assignProjectController = new AssignProjectController();
+    private Alert alert;
 
 
     @FXML
@@ -37,19 +41,40 @@ public class ListOfPojectsControllerGui implements IReceiveData {
 
             @Override
             protected void updateItem(ProjectDto item, boolean empty) {
-                super.updateItem(item, empty);
 
+                super.updateItem(item, empty);
+                    
                 if (empty || item == null) {
+
                     setGraphic(null);
+
                 } else {
-                    label.setText(item.getProjectName());
-                    button.setOnAction(e -> {
-                        assignProjectController.assingProject(internDto.getStudentId(), item.getProjectId());
-                    });
-                    setGraphic(hbox);
-                }
+
+                        label.setText(item.getProjectName());
+
+                        button.setOnAction(e -> {
+
+                            try{
+
+                            assignProjectController.assingProject(internDto.getStudentId()
+                            , item.getProjectId());
+
+                            } catch (BusinessLogicException ex){
+
+                                showAlert(AlertType.ERROR, ex.getMessage());
+
+                            }
+
+                        });
+
+                        setGraphic(hbox);
+
+                    }
+            
             }
+
         });
+
     }
 
     @Override
@@ -64,5 +89,14 @@ public class ListOfPojectsControllerGui implements IReceiveData {
 
     public void setData(InternDto internDto){
         this.internDto = internDto;
+    }
+
+     private void showAlert(Alert.AlertType type, String messange){
+
+            alert = new Alert(type);
+            alert.setTitle(null);
+            alert.setHeaderText(messange);
+            alert.showAndWait();
+
     }
 }

@@ -2,19 +2,18 @@ package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import com.sistemapracticasprofesional.logic.dto.InternDto;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
-
-import java.io.IOException;
-
 import com.sistemapracticasprofesional.logic.controllers.AssignProjectController;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;  
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import java.io.IOException;
 
 
 public class ListOfInternsControllerGui {
@@ -29,6 +28,8 @@ public class ListOfInternsControllerGui {
 
     private ObservableList<InternDto> completeList = FXCollections.observableArrayList();
 
+    private Alert alert;
+
     @FXML
     private void initialize(){
 
@@ -37,19 +38,27 @@ public class ListOfInternsControllerGui {
         filteredList = new FilteredList<>( completeList, p -> true );
         internsListView.setItems(filteredList);
 
-        internsListView.getSelectionModel().selectedItemProperty().addListener((obs, anterior, nuevo) -> {
-            if (nuevo != null){
+        internsListView.getSelectionModel().selectedItemProperty().addListener(
+            (observerItem, lastItem, newItem) -> {
+
+            if ( newItem != null ){
 
                 Stage stage = (Stage) internsListView.getScene().getWindow();
+
                 try{
                     
-                    Navigation.changeSceneData(stage, "ListOfProjects.fxml", "Asignat proyecto", internsListView.getSelectionModel().getSelectedItem());
+                    Navigation.changeSceneData(stage, "GuiListOfProjects.fxml"
+                    , "Asignat proyecto", 
+                    internsListView.getSelectionModel().getSelectedItem());
 
                 }catch(IOException e){
-                    e.printStackTrace();
+
+                    showAlert(AlertType.ERROR, "No se puedo abrir la ventana");
+
                 }
 
             }
+
         });
 
     }
@@ -86,7 +95,17 @@ public class ListOfInternsControllerGui {
             }
 
             return false;
+
         });
+
+    }
+
+    private void showAlert(Alert.AlertType type, String messange){
+
+            alert = new Alert(type);
+            alert.setTitle(null);
+            alert.setHeaderText(messange);
+            alert.showAndWait();
 
     }
 
