@@ -16,6 +16,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;  
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class ListOfInternsControllerGui {
@@ -30,6 +32,8 @@ public class ListOfInternsControllerGui {
 
     private ObservableList<InternDto> completeList = FXCollections.observableArrayList();
 
+    private Alert alert;
+
     @FXML
     private void initialize(){
 
@@ -39,18 +43,23 @@ public class ListOfInternsControllerGui {
         internsListView.setItems(filteredList);
 
         internsListView.getSelectionModel().selectedItemProperty().addListener((obs, anterior, nuevo) -> {
+
             if (nuevo != null){
 
                 Stage stage = (Stage) internsListView.getScene().getWindow();
+
                 try{
                     
-                    Navigation.changeSceneData(stage, "ListOfProjects.fxml", "Asignat proyecto", internsListView.getSelectionModel().getSelectedItem());
+                    Navigation.changeSceneData(stage, "GuiListOfProjects.fxml", "Asignat proyecto", internsListView.getSelectionModel().getSelectedItem());
 
                 }catch(IOException e){
-                    e.printStackTrace();
+
+                    showAlert(AlertType.ERROR, "No se puedo abrir la ventana");
+
                 }
 
             }
+
         });
 
     }
@@ -88,6 +97,15 @@ public class ListOfInternsControllerGui {
 
             return false;
         });
+
+    }
+
+    private void showAlert(Alert.AlertType type, String messange){
+
+            alert = new Alert(type);
+            alert.setTitle(null);
+            alert.setHeaderText(messange);
+            alert.showAndWait();
 
     }
 
