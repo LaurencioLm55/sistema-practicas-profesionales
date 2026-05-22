@@ -6,29 +6,53 @@ import com.sistemapracticasprofesional.logic.dto.ProjectDto;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.dao.ProjectDao;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class AssignProjectController {
 
-    public List<InternDto> getListIntern(){
+    public List<InternDto> getListIntern() throws BusinessLogicException{
 
         InternDao internDao = new InternDao();
-        List<InternDto> listInterns = internDao.getInternsActive();
+        List<InternDto> listInterns = new ArrayList<>();
+
+        try {
+
+            listInterns.addAll(internDao.getInternsActive());
+
+        } catch (DaoException e){
+
+            throw new BusinessLogicException("No se pudo recuperar la" + 
+            "lista de practicantes");
+
+        }
         
         return listInterns;
 
     }
 
-    public List<ProjectDto> getListProjects(){
+    public List<ProjectDto> getListProjects() throws BusinessLogicException {
 
         ProjectDao projectDao = new ProjectDao();
-        List <ProjectDto> listProjects = projectDao.getAllProjects();
+        List <ProjectDto> listProjects = new ArrayList<>();
+
+        try{ 
+
+           listProjects.addAll(projectDao.getAllProjects());
+
+        } catch (DaoException e) {
+
+            throw new BusinessLogicException("No se pudo obtener la" +
+            "lista de projectos");
+
+        }
 
         return listProjects;
 
     }
 
-    public boolean assingProject( String studentId, int projectId ) 
+    public boolean assingProject(String studentId, int projectId) 
     throws BusinessLogicException {
 
         boolean result = false;
@@ -37,9 +61,9 @@ public class AssignProjectController {
 
         try{
 
-            internDao.assignProject( studentId, projectId );
+            internDao.assignProject(studentId, projectId);
 
-            if( internDao.isProjectAssignedIntern( studentId, projectId ) ){
+            if(internDao.isProjectAssignedIntern(studentId, projectId)){
 
                 result = true;
 

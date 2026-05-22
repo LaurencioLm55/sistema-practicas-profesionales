@@ -1,6 +1,7 @@
 package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import com.sistemapracticasprofesional.logic.dto.InternDto;
+import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
 import com.sistemapracticasprofesional.logic.controllers.AssignProjectController;
 import javafx.collections.FXCollections;
@@ -14,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
-
 
 public class ListOfInternsControllerGui {
 
@@ -41,7 +41,7 @@ public class ListOfInternsControllerGui {
         internsListView.getSelectionModel().selectedItemProperty().addListener(
             (observerItem, lastItem, newItem) -> {
 
-            if ( newItem != null ){
+            if (newItem != null){
 
                 Stage stage = (Stage) internsListView.getScene().getWindow();
 
@@ -65,20 +65,24 @@ public class ListOfInternsControllerGui {
 
     public void getListIntern(){
 
-        AssignProjectController listOfInternsController = new AssignProjectController();
-        
-        completeList.addAll(listOfInternsController.getListIntern());
+        AssignProjectController assignProjectController = new AssignProjectController();
+
+        try {
+
+            completeList.addAll(assignProjectController.getListIntern());
+
+        } catch (BusinessLogicException e) {
+
+            showAlert(AlertType.ERROR, e.getMessage());
+
+        }
 
     }
 
     @FXML
     public void  handleSearch (ActionEvent event) {
 
-        System.out.println("d");
-
         String searchText = searchTextField.getText().trim().toLowerCase();
-
-        System.out.println(searchText);
 
         filteredList.setPredicate(item -> {
 

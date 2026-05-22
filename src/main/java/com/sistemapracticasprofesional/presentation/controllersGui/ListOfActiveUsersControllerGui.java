@@ -12,7 +12,8 @@ import org.slf4j.LoggerFactory;
 
 public class ListOfActiveUsersControllerGui {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ListOfActiveUsersControllerGui.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger( 
+        ListOfActiveUsersControllerGui.class );
 
     private Alert alert;
 
@@ -26,18 +27,26 @@ public class ListOfActiveUsersControllerGui {
 
     @FXML
     private void handleBack(ActionEvent event) {
+        
         try {
-            Navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Menú del coordinador");
+
+            Navigation.changeScene(event, "GuiCoordinatorMenu.fxml",
+             "Menú del coordinador");
+
         } catch (IOException e) {
+
             LOGGER.error("Ruta no encontrada", e);
             showAlert(AlertType.ERROR, "No se pudo regresar al menú.");
+
         }
     }
 
     private void showAlert(Alert.AlertType type, String message) {
+
         alert = new Alert(type);
         alert.setTitle(null);
         alert.setHeaderText(message);
         alert.showAndWait();
+
     }
 }
