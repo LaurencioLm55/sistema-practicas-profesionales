@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\lopez\\\\OneDrive - Universidad Veracruzana\\\\Cuarto semestre\\\\Principios de construccion\\\\sistema-web-practivas-profesionales\" -Directory)",
-      "Bash(Select-Object -ExpandProperty Name)"
+      "Bash(Select-Object -ExpandProperty Name)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\lopez\\\\OneDrive - Universidad Veracruzana\\\\Cuarto semestre\\\\Principios de construccion\\\\sistema-web-practivas-profesionales\" -Recurse -Directory)",
+      "Bash(Select-Object FullName)",
+      "PowerShell(head *)",
+      "Bash(mvn clean *)",
+      "Bash(mvn javafx:run)"
     ]
   }
 }

@@ -66,6 +66,16 @@ public class AdministratorMenuController {
     }
 
     @FXML
+    private void handleConsultCoordinators(ActionEvent event) {
+        try {
+            Navigation.changeScene(event, "GuiCoordinatorList.fxml", "Consultar Coordinadores");
+        } catch (IOException e) {
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo abrir la ventana de consulta de coordinadores");
+        }
+    }
+
+    @FXML
     private void handleCloseSession(ActionEvent event) {
         try {
             UserSession.getInstance().closeSession();

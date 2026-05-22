@@ -47,6 +47,7 @@
                   <Separator />
                   <Button mnemonicParsing="false" onAction="#handleOpenRegisterUser" prefWidth="380.0" styleClass="btn-primary" text="Registrar coordinador o profesor" />
                   <Button onAction="#handleConsultProfessors" prefWidth="380.0" styleClass="btn-primary" text="Consultar Profesores" />
+                  <Button onAction="#handleConsultCoordinators" prefWidth="380.0" styleClass="btn-primary" text="Consultar Coordinadores" />
                   <Separator />
                   <Button mnemonicParsing="false" onAction="#handleCloseSession" prefWidth="380.0" styleClass="btn-secondary" text="Cerrar Sesión" />
                </children>

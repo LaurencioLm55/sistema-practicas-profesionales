@@ -57,7 +57,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Reportes">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Generar reportes" />
+                    <MenuItem mnemonicParsing="false" onAction="#handeStartGenerateReports" text="Generar reporte de indicadores" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Cursos">
