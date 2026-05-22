@@ -132,19 +132,13 @@ public class MenuCoordinatorController{
 
     
     @FXML
-    public void handeStartGenerateReports ( ActionEvent event ){
-
-        try{
-
-            Navigation.changeScene(event, null, null);
-
-        }catch( IOException e ){
-
+    public void handeStartGenerateReports(ActionEvent event) {
+        try {
+            Navigation.changeScene(event, "GuiIndicatorsReport.fxml", "Reporte de indicadores");
+        } catch (IOException e) {
             LOGGER.error("Ruta no encontrada", e);
-            showAlert(AlertType.ERROR, "Error no se encontro la vetana");
-
+            showAlert(AlertType.ERROR, "Error no se encontró la ventana");
         }
-
     }
 
     @FXML

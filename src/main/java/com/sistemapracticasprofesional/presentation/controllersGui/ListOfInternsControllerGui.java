@@ -6,7 +6,6 @@ import com.sistemapracticasprofesional.presentation.util.Navigation;
 import java.io.IOException;
 
 import com.sistemapracticasprofesional.logic.controllers.AssignProjectController;
-import com.sistemapracticasprofesional.logic.controllers.ListOfInternsController;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
