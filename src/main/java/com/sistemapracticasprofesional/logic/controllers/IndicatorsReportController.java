@@ -13,18 +13,31 @@ public class IndicatorsReportController {
     private final IndicatorsReportDao indicatorsReportDao = new IndicatorsReportDao();
 
     public IndicatorsReportDto getIndicators() throws BusinessLogicException {
+
         try {
+
             return indicatorsReportDao.getIndicators();
+
         } catch (DaoException e) {
+
             throw new BusinessLogicException("Ocurrió un error al obtener los indicadores.");
+
         }
+
     }
 
     public void generatePdfReport(IndicatorsReportDto indicators, String filePath) throws BusinessLogicException {
+
         try {
+
             PdfReportGenerator.generate(indicators, filePath);
+
         } catch (DocumentException | IOException e) {
+
             throw new BusinessLogicException("No se pudo generar el reporte PDF.");
+
         }
+
     }
+
 }

@@ -11,10 +11,17 @@ public class CoordinatorListController {
     private final CoordinatorDao coordinatorDao = new CoordinatorDao();
 
     public List<CoordinatorDto> getAllCoordinators() throws BusinessLogicException {
+
         try {
+
             return coordinatorDao.getAllCoordinators();
+
         } catch (DaoException e) {
+
             throw new BusinessLogicException("Ocurrió un error al recuperar la lista de coordinadores.");
+
         }
+
     }
+
 }
