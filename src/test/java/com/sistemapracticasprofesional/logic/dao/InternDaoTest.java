@@ -94,9 +94,7 @@ public class InternDaoTest {
     public void testAssignProjectSuccess(){
 
         boolean expetedResult = true;
-        boolean result = internDao.assignProject("S24013248", 1213);
-
-        assertEquals(expetedResult, result);
+        internDao.assignProject("S24014080", 1);
         
     }
 
@@ -125,6 +123,15 @@ public class InternDaoTest {
         
         assertEquals(expetedResult, result);
 
+    }
+
+    @Test
+    public void testIsProjectAssignedInetern(){
+        boolean expetedResult = true;
+        boolean result = internDao.isProjectAssignedIntern("S23014080", 1213);
+
+        assertEquals(expetedResult, result);
+        
     }
     
 }

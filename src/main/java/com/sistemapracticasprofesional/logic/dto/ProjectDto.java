@@ -128,6 +128,11 @@ public class ProjectDto {
     }
 
     @Override
+    public String toString(){
+        return projectAttendantName;
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

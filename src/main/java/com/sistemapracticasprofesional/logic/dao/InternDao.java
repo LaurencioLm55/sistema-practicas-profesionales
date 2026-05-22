@@ -157,24 +157,61 @@ public class InternDao implements IIntern {
     }
 
     @Override
-    public boolean assignProject(String studentId, int projectId) {
+    public void assignProject(String studentId, int projectId) {
 
-        String query = "UPDATE practicante SET IdProyecto = ? WHERE Matricula = ?";
+        String query = "CALL asignar_proyecto (?,?)";
 
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)){
+
+                preparedStatement.setString(1, studentId);
+                preparedStatement.setInt(2, projectId);
+                preparedStatement.execute();
+
+
+            }catch(SQLException e){
+
+                LOGGER.error("No se pudo asignar el proyecto");
+                throw new DaoException("No se pudo asignar el proyecto", e);
+
+            }
+
+    }
+
+    public boolean isProjectAssignedIntern(String internID, int projectId){
+
+        boolean result = false;
+
+        String query = "SELECT EXISTS (SELECT 1 FROM practicante WHERE matricula = ?" +
+        " AND IdProyecto = ?) AS existe";
+
+        try( Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query) ){    
+
+                preparedStatement.setString(1, internID);
+                preparedStatement.setInt(2, projectId);
+                
+                try (ResultSet resultSet = preparedStatement.executeQuery()){
+                    if (resultSet.next()) {
+
+                        if (resultSet.getInt("existe") == 1) {
+
+                            result = true;
+                            
+                        }    
+
+                    }
+
+                }
+                 
+        } catch ( SQLException e ){
             
-                preparedStatement.setInt(1, projectId);
-                preparedStatement.setString(2, studentId);
-
-                return preparedStatement.executeUpdate() > 0;
-
-        } catch (SQLException e){
-
-            LOGGER.error("Error al asigar proyrcyo", e);
-            throw new DaoException("Error al asignar proyecto", e);
-
+            LOGGER.error("No se puede vericar si el practicante se le asigno un proyecto");
+            throw new DaoException("No se pudeo verificar si el practicante tiene un proyecto asignado", e);
+        
         }
+
+        return result;
 
     }
 

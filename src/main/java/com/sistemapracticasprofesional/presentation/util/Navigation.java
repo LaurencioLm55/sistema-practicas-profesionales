@@ -6,6 +6,7 @@ import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
@@ -43,6 +44,26 @@ public class Navigation {
 
         changeScene(stage, scene, title);
     }
+
+    public static void changeSceneData(Stage stage, String fxmlName, String title, Object data)
+            throws IOException {
+
+        URL resource = getViewUrl(fxmlName);
+        FXMLLoader loader = new FXMLLoader(resource);
+        Parent root = loader.load();
+        Object controllerGui = loader.getController();
+        if (controllerGui instanceof IReceiveData) {
+            ((IReceiveData) controllerGui).setData(data);
+        }
+
+        Scene scene = new Scene(root, DEFAULT_SCENE_WIDTH, DEFAULT_SCENE_HEIGHT);
+        applyStylesheet(scene);
+
+        changeScene(stage, scene, title);
+
+    }
+
+    
 
     public static void applyStylesheet(Scene scene) {
         URL stylesheet = Navigation.class.getResource(STYLESHEET_PATH);

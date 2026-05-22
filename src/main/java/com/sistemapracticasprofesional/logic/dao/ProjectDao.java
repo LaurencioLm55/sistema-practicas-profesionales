@@ -171,6 +171,33 @@ public class ProjectDao implements IProject {
         return projects;
     }
 
+    @Override
+    public boolean isProjectRegistrer (ProjectDto projectDto){
+
+        String query = "SELECT EXISTS ("
+                + "SELECT 1 FROM usuario WHERE nombre = ? AND Contraseña = ?"
+                + ") AS existe";
+
+         try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, projectDto.getProjectName());
+            preparedStatement.setString(2, projectDto.getProjectDescription());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("existe") == 1;
+                }
+            }
+
+            return false;
+
+        } catch (SQLException e) {
+            LOGGER.error("Error checking if user is registered: {}", projectDto.getProjectAttendantName(), e);
+            throw new DaoException("Error verifying user", e);
+        }
+    }
+
     private ProjectDto mapResultSetToDto(ResultSet resultSet) throws SQLException {
         ProjectDto project = new ProjectDto();
         project.setProjectId(resultSet.getInt("IdProyecto"));
