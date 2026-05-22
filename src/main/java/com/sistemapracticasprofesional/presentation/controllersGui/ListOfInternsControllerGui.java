@@ -2,22 +2,18 @@ package com.sistemapracticasprofesional.presentation.controllersGui;
 
 import com.sistemapracticasprofesional.logic.dto.InternDto;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
-
-import java.io.IOException;
-
 import com.sistemapracticasprofesional.logic.controllers.AssignProjectController;
-import com.sistemapracticasprofesional.logic.controllers.ListOfInternsController;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;  
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import java.io.IOException;
 
 
 public class ListOfInternsControllerGui {
@@ -42,15 +38,18 @@ public class ListOfInternsControllerGui {
         filteredList = new FilteredList<>( completeList, p -> true );
         internsListView.setItems(filteredList);
 
-        internsListView.getSelectionModel().selectedItemProperty().addListener((obs, anterior, nuevo) -> {
+        internsListView.getSelectionModel().selectedItemProperty().addListener(
+            (observerItem, lastItem, newItem) -> {
 
-            if (nuevo != null){
+            if ( newItem != null ){
 
                 Stage stage = (Stage) internsListView.getScene().getWindow();
 
                 try{
                     
-                    Navigation.changeSceneData(stage, "GuiListOfProjects.fxml", "Asignat proyecto", internsListView.getSelectionModel().getSelectedItem());
+                    Navigation.changeSceneData(stage, "GuiListOfProjects.fxml"
+                    , "Asignat proyecto", 
+                    internsListView.getSelectionModel().getSelectedItem());
 
                 }catch(IOException e){
 
@@ -96,6 +95,7 @@ public class ListOfInternsControllerGui {
             }
 
             return false;
+
         });
 
     }
