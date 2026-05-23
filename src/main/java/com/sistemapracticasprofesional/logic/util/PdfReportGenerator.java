@@ -33,9 +33,11 @@ public class PdfReportGenerator {
         addIndicatorsTable(document, indicators);
 
         document.close();
+
     }
 
     private static void addTitle(Document document) throws DocumentException {
+
         Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, BaseColor.WHITE);
         Paragraph title = new Paragraph("Reporte de Indicadores\nSistema de Prácticas Profesionales", titleFont);
         title.setAlignment(Element.ALIGN_CENTER);
@@ -51,14 +53,17 @@ public class PdfReportGenerator {
 
         document.add(titleTable);
         document.add(new Paragraph(" "));
+
     }
 
     private static void addDate(Document document) throws DocumentException {
+
         Font dateFont = FontFactory.getFont(FontFactory.HELVETICA, 10, BaseColor.GRAY);
         Paragraph date = new Paragraph("Fecha de generación: " + LocalDate.now(), dateFont);
         date.setAlignment(Element.ALIGN_RIGHT);
         document.add(date);
         document.add(new Paragraph(" "));
+
     }
 
     private static void addIndicatorsTable(Document document, IndicatorsReportDto indicators)
@@ -85,18 +90,22 @@ public class PdfReportGenerator {
         addRow(table, "Organizaciones vinculadas", String.valueOf(indicators.getTotalAffiliatedOrganizations()), cellFont, valueFont, false);
 
         document.add(table);
+
     }
 
     private static void addHeaderCell(PdfPTable table, String text, Font font) {
+
         PdfPCell cell = new PdfPCell(new Phrase(text, font));
         cell.setBackgroundColor(HEADER_COLOR);
         cell.setPadding(8);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
+
     }
 
     private static void addRow(PdfPTable table, String label, String value,
             Font labelFont, Font valueFont, boolean alternate) {
+
         BaseColor bg = alternate ? ROW_ALT_COLOR : BaseColor.WHITE;
 
         PdfPCell labelCell = new PdfPCell(new Phrase(label, labelFont));
@@ -109,5 +118,7 @@ public class PdfReportGenerator {
         valueCell.setPadding(8);
         valueCell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(valueCell);
+
     }
+
 }

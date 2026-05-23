@@ -15,9 +15,11 @@ public class IndicatorsReportDao {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndicatorsReportDao.class);
 
     public IndicatorsReportDto getIndicators() {
+
         IndicatorsReportDto indicators = new IndicatorsReportDto();
 
         try (Connection connection = DatabaseConnection.getConnection()) {
+
             indicators.setTotalActiveInterns(queryCount(connection,
                     "SELECT COUNT(*) FROM practicante WHERE EstadoPracticante = 1"));
 
@@ -40,30 +42,44 @@ public class IndicatorsReportDao {
                     "SELECT AVG(Calificacion) FROM reporteavances"));
 
         } catch (SQLException e) {
+
             LOGGER.error("Error obteniendo indicadores", e);
             throw new DaoException("Error al obtener los indicadores del reporte", e);
+
         }
 
         return indicators;
+
     }
 
     private int queryCount(Connection connection, String sql) throws SQLException {
+
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
+
             if (rs.next()) {
                 return rs.getInt(1);
             }
+
         }
+
         return 0;
+
     }
 
     private float queryAverage(Connection connection, String sql) throws SQLException {
+
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
+
             if (rs.next()) {
                 return rs.getFloat(1);
             }
+
         }
+
         return 0f;
+
     }
+
 }
