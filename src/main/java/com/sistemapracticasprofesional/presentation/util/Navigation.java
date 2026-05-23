@@ -3,10 +3,6 @@ package com.sistemapracticasprofesional.presentation.util;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
-import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
-import com.sistemapracticasprofesional.logic.exception.PresentationException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -162,7 +158,7 @@ public class Navigation {
         }
 
         throw new IOException("No se pudo obtener la ventana desde el evento");
-        
+
     }
 
 }

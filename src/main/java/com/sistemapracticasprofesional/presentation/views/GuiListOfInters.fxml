@@ -59,7 +59,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="searchTextField" prefHeight="35.0" prefWidth="340.0" />
-                  <Button fx:id="handleSearch" mnemonicParsing="false" styleClass="btn-primary" text="Buscar" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" styleClass="btn-primary" text="Buscar" />
                </children>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
@@ -70,6 +70,11 @@
                   <ListView fx:id="internsListView" prefHeight="198.0" prefWidth="962.0" styleClass="list-cell" />
                </content>
             </ScrollPane>
+            <HBox onDragDetected="#handleSearch" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="returnButton" mnemonicParsing="false" onAction="#handleBack" styleClass="btn-secondary" text="Regresar" />
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets left="150.0" right="150.0" top="50.0" />

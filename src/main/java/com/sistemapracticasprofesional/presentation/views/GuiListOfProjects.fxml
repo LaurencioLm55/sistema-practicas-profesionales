@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
@@ -69,6 +70,11 @@
                   <ListView fx:id="proyectsListView" prefHeight="198.0" prefWidth="962.0" />
                </content>
             </ScrollPane>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="returnButton" mnemonicParsing="false" onAction="#handleBack" styleClass="btn-secondary" text="Regresar" />
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets left="150.0" right="150.0" top="50.0" />

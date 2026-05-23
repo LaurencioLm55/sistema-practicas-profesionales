@@ -15,18 +15,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class ListOfInternsControllerGui {
+
+    private FilteredList<InternDto> filteredList; 
+    private ObservableList<InternDto> completeList = FXCollections.observableArrayList();
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginControllerGui.class);
 
     @FXML
     private ListView<InternDto> internsListView;
 
     @FXML
     private TextField searchTextField;
-
-    private FilteredList<InternDto> filteredList; 
-
-    private ObservableList<InternDto> completeList = FXCollections.observableArrayList();
 
     private Alert alert;
 
@@ -35,7 +37,7 @@ public class ListOfInternsControllerGui {
 
         getListIntern();
 
-        filteredList = new FilteredList<>( completeList, p -> true );
+        filteredList = new FilteredList<>( completeList, predicate -> true );
         internsListView.setItems(filteredList);
 
         internsListView.getSelectionModel().selectedItemProperty().addListener(
@@ -84,6 +86,8 @@ public class ListOfInternsControllerGui {
 
         String searchText = searchTextField.getText().trim().toLowerCase();
 
+        filteredList.setPredicate(null);
+
         filteredList.setPredicate(item -> {
 
             if (searchText.isEmpty()) {
@@ -102,6 +106,21 @@ public class ListOfInternsControllerGui {
 
         });
 
+    }
+
+    @FXML
+    private void handleBack(ActionEvent event) {
+
+        try {
+
+            Navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Menú del coordinador");
+        
+        } catch (IOException e) {
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(Alert.AlertType.ERROR, "No se pudo volver al menú anterior.");
+        
+        }
     }
 
     private void showAlert(Alert.AlertType type, String messange){
