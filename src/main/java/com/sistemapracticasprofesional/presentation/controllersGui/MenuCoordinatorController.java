@@ -87,7 +87,7 @@ public class MenuCoordinatorController{
 
         try{
 
-            Navigation.changeScene(event, "GuiListOfActiveUsers.fxml", "Asignar proyecto");
+            Navigation.changeScene(event, "GuiListOfInters.fxml", "Asignar proyecto");
 
         }catch( IOException e ){
             
