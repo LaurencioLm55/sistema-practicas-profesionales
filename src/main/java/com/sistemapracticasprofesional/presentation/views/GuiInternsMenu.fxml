@@ -55,10 +55,8 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Reportes">
                   <items>
-                    <MenuItem fx:id="generateMonthlyReportMenuItem" mnemonicParsing="false" text="Generar reporte mensual" />
-                    <MenuItem fx:id="generatePartialReportMenuItem" mnemonicParsing="false" text="Generar reporte parcial" />
-                    <MenuItem fx:id="uploadMonthlyReportMenuItem" mnemonicParsing="false" text="Subir reporte mensual" />
-                    <MenuItem fx:id="uploadPartialReportMenuItem" mnemonicParsing="false" text="Subir reporte parcial" />
+                    <MenuItem fx:id="uploadMonthlyReportMenuItem" mnemonicParsing="false" onAction="#handleOpenMonthlyReport" text="Subir reporte mensual" />
+                    <MenuItem fx:id="uploadPartialReportMenuItem" mnemonicParsing="false" onAction="#handleOpenPartialReport" text="Subir reporte parcial" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Mensajes" />

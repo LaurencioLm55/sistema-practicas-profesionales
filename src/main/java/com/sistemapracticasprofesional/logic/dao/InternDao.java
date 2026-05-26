@@ -247,6 +247,34 @@ public class InternDao implements IIntern {
         
     }
 
+    public InternDto getInternByUserId(int userId) {
+
+        String query = "SELECT * FROM practicante WHERE Id_usuario = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                if (resultSet.next()) {
+                    return mapResultSetToDto(resultSet);
+                }
+
+            }
+
+            return null;
+
+        } catch (SQLException e) {
+
+            LOGGER.error("Error getting intern with user id {}", userId, e);
+            throw new DaoException("Error getting intern", e);
+
+        }
+
+    }
+
     private InternDto mapResultSetToDto(ResultSet resultSet) throws SQLException {
         return new InternDto(
                 resultSet.getString("Matricula"),

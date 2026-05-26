@@ -83,6 +83,22 @@ public class ProfessorMenuController {
     }
 
     @FXML
+    private void handleOpenGradeReport(ActionEvent event) {
+
+        try {
+
+            Navigation.changeScene(event, "GuiGradeMonthlyReport.fxml", "Calificar reporte mensual");
+
+        } catch (IOException e) {
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo abrir el formulario de calificación.");
+
+        }
+
+    }
+
+    @FXML
     private void handleRegisterCourse(ActionEvent event) {
         try {
             Navigation.changeScene(event, "GuiRegistrerCourses.fxml", "Registrar experiencia educativa");

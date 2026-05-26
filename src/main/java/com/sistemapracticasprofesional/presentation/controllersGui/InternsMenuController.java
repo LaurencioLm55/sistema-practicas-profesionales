@@ -78,6 +78,38 @@ public class InternsMenuController {
     }
 
     @FXML
+    private void handleOpenMonthlyReport(ActionEvent event) {
+
+        try {
+
+            Navigation.changeScene(event, "GuiRegisterMonthlyReport.fxml", "Registrar reporte mensual");
+
+        } catch (IOException e) {
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo abrir el formulario de reporte mensual.");
+
+        }
+
+    }
+
+    @FXML
+    private void handleOpenPartialReport(ActionEvent event) {
+
+        try {
+
+            Navigation.changeScene(event, "GuiRegisterPartialReport.fxml", "Registrar reporte parcial");
+
+        } catch (IOException e) {
+
+            LOGGER.error("Ruta no encontrada", e);
+            showAlert(AlertType.ERROR, "No se pudo abrir el formulario de reporte parcial.");
+
+        }
+
+    }
+
+    @FXML
     private void handeStartUpdateDataUser(ActionEvent event) {
         try {
             Navigation.changeScene(event, "GuiUptadeDataUser.fxml", "Actualizar datos de usuario");

@@ -51,7 +51,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Reportes de alumnos">
                   <items>
-                        <MenuItem fx:id="reviewMonthlyReportMenuItem" mnemonicParsing="false" onAction="#handleStartRegistrerIntern" text="Evaluar reportes" />
+                        <MenuItem fx:id="reviewMonthlyReportMenuItem" mnemonicParsing="false" onAction="#handleOpenGradeReport" text="Evaluar reportes" />
                         <MenuItem fx:id="reviewPartialReportMenuItem" mnemonicParsing="false" text="Evaluar reporte parcial" />
                         <MenuItem fx:id="viewReportsMenuItem" mnemonicParsing="false" onAction="#handelStartDisableIntern" text="Consultar reportes" />
                         <MenuItem fx:id="editReportMenuItem" mnemonicParsing="false" text="Modificar reportes" />

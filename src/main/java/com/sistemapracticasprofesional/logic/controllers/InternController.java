@@ -2,6 +2,7 @@ package com.sistemapracticasprofesional.logic.controllers;
 
 import com.sistemapracticasprofesional.logic.dao.InternDao;
 import com.sistemapracticasprofesional.logic.dto.InternDto;
+import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
 import com.sistemapracticasprofesional.logic.exception.ControllerException;
 import com.sistemapracticasprofesional.logic.exception.ValidationException;
@@ -32,6 +33,20 @@ public class InternController {
             , e);
 
         }
+    }
+
+    public InternDto getInternByUserId(int userId) throws BusinessLogicException {
+
+        try {
+
+            return internDao.getInternByUserId(userId);
+
+        } catch (DaoException e) {
+
+            throw new BusinessLogicException("Ocurrió un error al obtener los datos del practicante.");
+
+        }
+
     }
 
     private void validateIntern(InternDto internDto)
