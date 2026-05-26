@@ -14,6 +14,7 @@ public class SistemaPracticasProfesional extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getLoginViewUrl());
 
         Scene scene = new Scene(loader.load(), 960, 660);
@@ -26,22 +27,31 @@ public class SistemaPracticasProfesional extends Application {
     }
 
     private URL getLoginViewUrl() throws IOException {
+
         URL resource = getClass().getResource(
                 "/com/sistemapracticasprofesional/presentation/views/GuiUserLogin.fxml"
         );
 
         if (resource != null) {
+
             return resource;
+
         }
 
         File fxmlFile = new File(
-                "src/main/java/com/sistemapracticasprofesional/presentation/views/GuiUserLogin.fxml"
+
+            "src/main/java/com/sistemapracticasprofesional/presentation/views/GuiUserLogin.fxml"
+        
         );
 
         return fxmlFile.toURI().toURL();
+
     }
 
     public static void main(String[] args) {
+
         launch(args);
+
     }
+    
 }

@@ -18,7 +18,7 @@ public class MessageDao implements IMessage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageDao.class);
 
     @Override
-    public boolean sendMessage(MessageDto message) {
+    public boolean insertMessage(MessageDto message) {
         String query = "INSERT INTO mensaje (Remitente, Destinatario, Asunto, "
                 + "Contenido_de_mensaje) VALUES (?, ?, ?, ?)";
 

@@ -67,10 +67,6 @@ public class AssignProjectController {
 
                 result = true;
 
-            } else {
-
-                throw new BusinessLogicException("No se pudo asignar el proyecto");
-
             }
             
         } catch ( DaoException e ){

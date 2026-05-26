@@ -36,7 +36,9 @@ public class RegisterCourseController {
 
    @FXML
    private void handleRegisterCourse() {
+
       try {
+
          CourseDto courseDto = getCourseFromFields();
 
          courseController.registerCourse(courseDto);
@@ -45,27 +47,38 @@ public class RegisterCourseController {
          clearFields();
 
       } catch (NumberFormatException e) {
+
          showAlert(Alert.AlertType.WARNING, "El NRC y el numero de personal deben ser numericos.");
 
       } catch (ValidationException e) {
+
          showAlert(Alert.AlertType.WARNING, e.getMessage());
 
       } catch (ControllerException e) {
+
          showAlert(Alert.AlertType.ERROR, "No se pudo completar la operación.");
+
       }
    }
 
    @FXML
    private void handleCancel(ActionEvent event) {
+
       try {
+
          Navigation.changeScene(event, "GuiCoordinatorMenu.fxml", "Menú del coordinador");
+      
       } catch (IOException e) {
+
          LOGGER.error("Ruta no encontrada", e);
          showAlert(Alert.AlertType.ERROR, "No se pudo regresar al menú.");
+      
       }
+
    }
 
    private CourseDto getCourseFromFields() {
+
       CourseDto courseDto = new CourseDto();
 
       courseDto.setNrc(Integer.parseInt(textFieldNrc.getText().trim()));
@@ -76,21 +89,26 @@ public class RegisterCourseController {
       courseDto.setFormatFile(null);
 
       return courseDto;
+
    }
 
    private void clearFields() {
+
       textFieldNrc.clear();
       textFieldStaffNumber.clear();
       
       textFieldStatus.clear();
       textFieldPeriod.clear();
       textFieldSection.clear();
+
    }
 
    private void showAlert(Alert.AlertType type, String message) {
+
       Alert alert = new Alert(type);
       alert.setHeaderText(null);
       alert.setContentText(message);
       alert.showAndWait();
+      
    }
 }
