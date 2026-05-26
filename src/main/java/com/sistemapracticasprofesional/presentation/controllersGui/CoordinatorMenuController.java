@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import javafx.scene.control.Alert;
 
 
-public class MenuCoordinatorController{
+public class CoordinatorMenuController{
 
     private Alert alert;
 

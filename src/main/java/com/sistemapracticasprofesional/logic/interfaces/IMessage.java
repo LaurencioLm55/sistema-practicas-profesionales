@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IMessage {
 
-    boolean sendMessage(MessageDto message) throws DaoException;
+    boolean insertMessage(MessageDto message) throws DaoException;
 
     MessageDto getMessageById(int messageId) throws DaoException;
 
@@ -15,4 +15,5 @@ public interface IMessage {
     List<MessageDto> getSentMessagesByUserId(int senderUserId) throws DaoException;
 
     boolean deleteMessage(int messageId) throws DaoException;
+    
 }

@@ -20,11 +20,17 @@ public class InternController {
             boolean registered = internDao.insertIntern(internDto);
 
             if (!registered) {
-                throw new ControllerException("No se pudo registrar el practicante.", null);
+
+                throw new ControllerException("No se pudo registrar el practicante.",
+                 null);
+
             }
 
         } catch (DaoException e) {
-            throw new ControllerException("Ocurrio un error al registrar el practicante.", e);
+
+            throw new ControllerException("Ocurrio un error al registrar el practicante."
+            , e);
+
         }
     }
 
@@ -32,5 +38,6 @@ public class InternController {
             throws ValidationException {
 
         RegistrationValidator.validateIntern(internDto);
+
     }
 }
