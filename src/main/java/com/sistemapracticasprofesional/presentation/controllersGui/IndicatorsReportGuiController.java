@@ -23,27 +23,28 @@ public class IndicatorsReportGuiController implements Initializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndicatorsReportGuiController.class);
 
     @FXML
-    private Label activeInternsValue;
+    private Label totalActiveInternsLabel;
 
     @FXML
-    private Label inactiveInternsValue;
+    private Label totalInactiveInternsLabel;
 
     @FXML
-    private Label internsWithProjectValue;
+    private Label internsWithProjectLabel;
 
     @FXML
-    private Label internsWithoutProjectValue;
+    private Label internsWithoutProjectLabel;
 
     @FXML
-    private Label averageScoreValue;
+    private Label totalProjectsLabel;
 
     @FXML
-    private Label totalProjectsValue;
+    private Label totalAffiliatedOrganizationsLabel;
 
     @FXML
-    private Label totalOrganizationsValue;
+    private Label averageMonthlyScoreLabel;
 
     private final IndicatorsReportController indicatorsReportController = new IndicatorsReportController();
+
     private IndicatorsReportDto currentIndicators;
 
     @Override
@@ -58,14 +59,7 @@ public class IndicatorsReportGuiController implements Initializable {
         try {
 
             currentIndicators = indicatorsReportController.getIndicators();
-
-            activeInternsValue.setText(String.valueOf(currentIndicators.getTotalActiveInterns()));
-            inactiveInternsValue.setText(String.valueOf(currentIndicators.getTotalInactiveInterns()));
-            internsWithProjectValue.setText(String.valueOf(currentIndicators.getInternsWithProject()));
-            internsWithoutProjectValue.setText(String.valueOf(currentIndicators.getInternsWithoutProject()));
-            averageScoreValue.setText(String.format("%.2f", currentIndicators.getAverageMonthlyScore()));
-            totalProjectsValue.setText(String.valueOf(currentIndicators.getTotalProjects()));
-            totalOrganizationsValue.setText(String.valueOf(currentIndicators.getTotalAffiliatedOrganizations()));
+            populateLabels(currentIndicators);
 
         } catch (BusinessLogicException e) {
 
@@ -75,13 +69,48 @@ public class IndicatorsReportGuiController implements Initializable {
 
     }
 
+    private void populateLabels(IndicatorsReportDto indicators) {
+
+        totalActiveInternsLabel.setText(String.valueOf(indicators.getTotalActiveInterns()));
+        totalInactiveInternsLabel.setText(String.valueOf(indicators.getTotalInactiveInterns()));
+        internsWithProjectLabel.setText(String.valueOf(indicators.getInternsWithProject()));
+        internsWithoutProjectLabel.setText(String.valueOf(indicators.getInternsWithoutProject()));
+        totalProjectsLabel.setText(String.valueOf(indicators.getTotalProjects()));
+        totalAffiliatedOrganizationsLabel.setText(String.valueOf(indicators.getTotalAffiliatedOrganizations()));
+        averageMonthlyScoreLabel.setText(String.format("%.2f", indicators.getAverageMonthlyScore()));
+
+    }
+
     @FXML
     private void handleGeneratePdf(ActionEvent event) {
 
         if (currentIndicators == null) {
-            showAlert(Alert.AlertType.WARNING, "No hay datos disponibles para generar el reporte.");
+
+            showAlert(Alert.AlertType.WARNING, "No hay indicadores cargados para generar el reporte.");
+            return;
+
+        }
+
+        File outputFile = selectOutputFile(event);
+        if (outputFile == null) {
             return;
         }
+
+        try {
+
+            indicatorsReportController.generatePdfReport(currentIndicators, outputFile);
+            showAlert(Alert.AlertType.INFORMATION, "Reporte generado correctamente en:\n" + outputFile.getAbsolutePath());
+
+        } catch (BusinessLogicException e) {
+
+            LOGGER.error("Error al generar el PDF", e);
+            showAlert(Alert.AlertType.ERROR, "No se pudo generar el reporte PDF.");
+
+        }
+
+    }
+
+    private File selectOutputFile(ActionEvent event) {
 
         Window window = ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
@@ -90,22 +119,7 @@ public class IndicatorsReportGuiController implements Initializable {
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Archivo PDF", "*.pdf"));
 
-        File file = fileChooser.showSaveDialog(window);
-        if (file == null) {
-            return;
-        }
-
-        try {
-
-            indicatorsReportController.generatePdfReport(currentIndicators, file.getAbsolutePath());
-            showAlert(Alert.AlertType.INFORMATION, "Reporte generado correctamente en:\n" + file.getAbsolutePath());
-
-        } catch (BusinessLogicException e) {
-
-            LOGGER.error("Error al generar el PDF", e);
-            showAlert(Alert.AlertType.ERROR, "No se pudo generar el reporte PDF.");
-
-        }
+        return fileChooser.showSaveDialog(window);
 
     }
 

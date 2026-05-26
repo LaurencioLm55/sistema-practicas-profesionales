@@ -14,32 +14,34 @@ public class IndicatorsReportDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IndicatorsReportDao.class);
 
-    public IndicatorsReportDto getIndicators() {
+    public IndicatorsReportDto getIndicators() throws DaoException {
 
         IndicatorsReportDto indicators = new IndicatorsReportDto();
 
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        String query = "SELECT "
+                + "(SELECT COUNT(*) FROM practicante WHERE EstadoPracticante = 1) AS totalActiveInterns, "
+                + "(SELECT COUNT(*) FROM practicante WHERE EstadoPracticante = 0) AS totalInactiveInterns, "
+                + "(SELECT COUNT(*) FROM practicante WHERE IdProyecto IS NOT NULL) AS internsWithProject, "
+                + "(SELECT COUNT(*) FROM practicante WHERE EstadoPracticante = 1 AND IdProyecto IS NULL) AS internsWithoutProject, "
+                + "(SELECT COUNT(*) FROM proyecto) AS totalProjects, "
+                + "(SELECT COUNT(*) FROM organizacion_vinculada) AS totalAffiliatedOrganizations, "
+                + "(SELECT AVG(Calificacion) FROM reporteavances) AS averageMonthlyScore";
 
-            indicators.setTotalActiveInterns(queryCount(connection,
-                    "SELECT COUNT(*) FROM practicante WHERE EstadoPracticante = 1"));
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            indicators.setTotalInactiveInterns(queryCount(connection,
-                    "SELECT COUNT(*) FROM practicante WHERE EstadoPracticante = 0"));
+            if (resultSet.next()) {
 
-            indicators.setInternsWithProject(queryCount(connection,
-                    "SELECT COUNT(*) FROM practicante WHERE IdProyecto IS NOT NULL"));
+                indicators.setTotalActiveInterns(resultSet.getInt("totalActiveInterns"));
+                indicators.setTotalInactiveInterns(resultSet.getInt("totalInactiveInterns"));
+                indicators.setInternsWithProject(resultSet.getInt("internsWithProject"));
+                indicators.setInternsWithoutProject(resultSet.getInt("internsWithoutProject"));
+                indicators.setTotalProjects(resultSet.getInt("totalProjects"));
+                indicators.setTotalAffiliatedOrganizations(resultSet.getInt("totalAffiliatedOrganizations"));
+                indicators.setAverageMonthlyScore(resultSet.getFloat("averageMonthlyScore"));
 
-            indicators.setInternsWithoutProject(queryCount(connection,
-                    "SELECT COUNT(*) FROM practicante WHERE EstadoPracticante = 1 AND IdProyecto IS NULL"));
-
-            indicators.setTotalProjects(queryCount(connection,
-                    "SELECT COUNT(*) FROM proyecto"));
-
-            indicators.setTotalAffiliatedOrganizations(queryCount(connection,
-                    "SELECT COUNT(*) FROM organizacion_vinculada"));
-
-            indicators.setAverageMonthlyScore(queryAverage(connection,
-                    "SELECT AVG(Calificacion) FROM reporteavances"));
+            }
 
         } catch (SQLException e) {
 
@@ -49,36 +51,6 @@ public class IndicatorsReportDao {
         }
 
         return indicators;
-
-    }
-
-    private int queryCount(Connection connection, String sql) throws SQLException {
-
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-
-        }
-
-        return 0;
-
-    }
-
-    private float queryAverage(Connection connection, String sql) throws SQLException {
-
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            if (rs.next()) {
-                return rs.getFloat(1);
-            }
-
-        }
-
-        return 0f;
 
     }
 

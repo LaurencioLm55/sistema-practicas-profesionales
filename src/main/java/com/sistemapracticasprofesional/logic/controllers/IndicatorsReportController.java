@@ -6,9 +6,14 @@ import com.sistemapracticasprofesional.logic.dto.IndicatorsReportDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
 import com.sistemapracticasprofesional.logic.util.PdfReportGenerator;
+import java.io.File;
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class IndicatorsReportController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndicatorsReportController.class);
 
     private final IndicatorsReportDao indicatorsReportDao = new IndicatorsReportDao();
 
@@ -26,14 +31,15 @@ public class IndicatorsReportController {
 
     }
 
-    public void generatePdfReport(IndicatorsReportDto indicators, String filePath) throws BusinessLogicException {
+    public void generatePdfReport(IndicatorsReportDto indicators, File outputFile) throws BusinessLogicException {
 
         try {
 
-            PdfReportGenerator.generate(indicators, filePath);
+            PdfReportGenerator.generate(indicators, outputFile);
 
         } catch (DocumentException | IOException e) {
 
+            LOGGER.error("Error al generar el PDF", e);
             throw new BusinessLogicException("No se pudo generar el reporte PDF.");
 
         }

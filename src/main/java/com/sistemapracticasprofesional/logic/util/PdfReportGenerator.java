@@ -12,6 +12,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.sistemapracticasprofesional.logic.dto.IndicatorsReportDto;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,20 +20,29 @@ import java.time.LocalDate;
 public class PdfReportGenerator {
 
     private static final BaseColor HEADER_COLOR = new BaseColor(0, 82, 158);
-    private static final BaseColor ROW_ALT_COLOR = new BaseColor(240, 244, 248);
+    private static final BaseColor BORDER_COLOR = new BaseColor(220, 220, 220);
 
-    public static void generate(IndicatorsReportDto indicators, String filePath)
+    private PdfReportGenerator() {
+
+    }
+
+    public static void generate(IndicatorsReportDto indicators, File outputFile)
             throws DocumentException, IOException {
 
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(filePath));
-        document.open();
 
-        addTitle(document);
-        addDate(document);
-        addIndicatorsTable(document, indicators);
+        try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
 
-        document.close();
+            PdfWriter.getInstance(document, outputStream);
+            document.open();
+
+            addTitle(document);
+            addDate(document);
+            addIndicatorsTable(document, indicators);
+
+            document.close();
+
+        }
 
     }
 
@@ -69,54 +79,51 @@ public class PdfReportGenerator {
     private static void addIndicatorsTable(Document document, IndicatorsReportDto indicators)
             throws DocumentException {
 
-        Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, BaseColor.WHITE);
-        Font cellFont = FontFactory.getFont(FontFactory.HELVETICA, 11, BaseColor.BLACK);
-        Font valueFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, BaseColor.BLACK);
-
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
         table.setWidths(new float[]{3f, 1f});
 
-        addHeaderCell(table, "Indicador", headerFont);
-        addHeaderCell(table, "Valor", headerFont);
+        addHeaderCell(table, "Indicador");
+        addHeaderCell(table, "Valor");
 
-        addRow(table, "Practicantes activos", String.valueOf(indicators.getTotalActiveInterns()), cellFont, valueFont, false);
-        addRow(table, "Practicantes inactivos", String.valueOf(indicators.getTotalInactiveInterns()), cellFont, valueFont, true);
-        addRow(table, "Practicantes con proyecto asignado", String.valueOf(indicators.getInternsWithProject()), cellFont, valueFont, false);
-        addRow(table, "Practicantes sin proyecto asignado", String.valueOf(indicators.getInternsWithoutProject()), cellFont, valueFont, true);
-        addRow(table, "Promedio de calificaciones (reportes mensuales)",
-                String.format("%.2f", indicators.getAverageMonthlyScore()), cellFont, valueFont, false);
-        addRow(table, "Proyectos registrados", String.valueOf(indicators.getTotalProjects()), cellFont, valueFont, true);
-        addRow(table, "Organizaciones vinculadas", String.valueOf(indicators.getTotalAffiliatedOrganizations()), cellFont, valueFont, false);
+        addIndicatorRow(table, "Practicantes activos", String.valueOf(indicators.getTotalActiveInterns()));
+        addIndicatorRow(table, "Practicantes inactivos", String.valueOf(indicators.getTotalInactiveInterns()));
+        addIndicatorRow(table, "Con proyecto asignado", String.valueOf(indicators.getInternsWithProject()));
+        addIndicatorRow(table, "Sin proyecto asignado", String.valueOf(indicators.getInternsWithoutProject()));
+        addIndicatorRow(table, "Proyectos registrados", String.valueOf(indicators.getTotalProjects()));
+        addIndicatorRow(table, "Organizaciones vinculadas", String.valueOf(indicators.getTotalAffiliatedOrganizations()));
+        addIndicatorRow(table, "Promedio de calificaciones mensuales", String.format("%.2f", indicators.getAverageMonthlyScore()));
 
         document.add(table);
 
     }
 
-    private static void addHeaderCell(PdfPTable table, String text, Font font) {
+    private static void addHeaderCell(PdfPTable table, String text) {
 
-        PdfPCell cell = new PdfPCell(new Phrase(text, font));
+        Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.WHITE);
+        PdfPCell cell = new PdfPCell(new Phrase(text, headerFont));
         cell.setBackgroundColor(HEADER_COLOR);
         cell.setPadding(8);
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setBorder(PdfPCell.NO_BORDER);
         table.addCell(cell);
 
     }
 
-    private static void addRow(PdfPTable table, String label, String value,
-            Font labelFont, Font valueFont, boolean alternate) {
+    private static void addIndicatorRow(PdfPTable table, String indicatorLabel, String indicatorValue) {
 
-        BaseColor bg = alternate ? ROW_ALT_COLOR : BaseColor.WHITE;
+        Font rowFont = FontFactory.getFont(FontFactory.HELVETICA, 11, BaseColor.DARK_GRAY);
 
-        PdfPCell labelCell = new PdfPCell(new Phrase(label, labelFont));
-        labelCell.setBackgroundColor(bg);
+        PdfPCell labelCell = new PdfPCell(new Phrase(indicatorLabel, rowFont));
         labelCell.setPadding(8);
+        labelCell.setBorder(PdfPCell.BOX);
+        labelCell.setBorderColor(BORDER_COLOR);
         table.addCell(labelCell);
 
-        PdfPCell valueCell = new PdfPCell(new Phrase(value, valueFont));
-        valueCell.setBackgroundColor(bg);
+        PdfPCell valueCell = new PdfPCell(new Phrase(indicatorValue, rowFont));
         valueCell.setPadding(8);
         valueCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        valueCell.setBorder(PdfPCell.BOX);
+        valueCell.setBorderColor(BORDER_COLOR);
         table.addCell(valueCell);
 
     }

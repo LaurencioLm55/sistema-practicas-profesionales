@@ -7,8 +7,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -49,47 +47,67 @@
             <Insets top="24.0" left="40.0" right="40.0" bottom="24.0" />
          </padding>
          <children>
-            <VBox styleClass="form-card" maxWidth="700.0" spacing="10.0">
+            <VBox styleClass="form-card" spacing="14.0">
                <children>
-                  <Label text="Indicadores del sistema" styleClass="subsection-title" alignment="CENTER" maxWidth="Infinity" />
+                  <Label text="Indicadores del período actual" styleClass="subsection-title" />
                   <Separator />
 
-                  <GridPane hgap="20.0" vgap="8.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="ALWAYS" />
-                        <ColumnConstraints minWidth="60.0" />
-                     </columnConstraints>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Practicantes activos:" prefWidth="320.0" />
+                        <Label fx:id="totalActiveInternsLabel" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" />
+                     </children>
+                  </HBox>
 
-                     <Label text="Practicantes activos:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                     <Label fx:id="activeInternsValue" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Practicantes inactivos:" prefWidth="320.0" />
+                        <Label fx:id="totalInactiveInternsLabel" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" />
+                     </children>
+                  </HBox>
 
-                     <Label text="Practicantes inactivos:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                     <Label fx:id="inactiveInternsValue" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Con proyecto asignado:" prefWidth="320.0" />
+                        <Label fx:id="internsWithProjectLabel" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" />
+                     </children>
+                  </HBox>
 
-                     <Label text="Practicantes con proyecto asignado:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                     <Label fx:id="internsWithProjectValue" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Sin proyecto asignado:" prefWidth="320.0" />
+                        <Label fx:id="internsWithoutProjectLabel" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" />
+                     </children>
+                  </HBox>
 
-                     <Label text="Practicantes sin proyecto asignado:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                     <Label fx:id="internsWithoutProjectValue" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Proyectos registrados:" prefWidth="320.0" />
+                        <Label fx:id="totalProjectsLabel" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" />
+                     </children>
+                  </HBox>
 
-                     <Label text="Promedio de calificaciones (reportes mensuales):" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-                     <Label fx:id="averageScoreValue" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Organizaciones vinculadas:" prefWidth="320.0" />
+                        <Label fx:id="totalAffiliatedOrganizationsLabel" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" />
+                     </children>
+                  </HBox>
 
-                     <Label text="Proyectos registrados:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
-                     <Label fx:id="totalProjectsValue" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+                  <Separator />
 
-                     <Label text="Organizaciones vinculadas:" GridPane.rowIndex="6" GridPane.columnIndex="0" />
-                     <Label fx:id="totalOrganizationsValue" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" GridPane.rowIndex="6" GridPane.columnIndex="1" />
-                  </GridPane>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Promedio de calificaciones (reportes mensuales):" prefWidth="320.0" />
+                        <Label fx:id="averageMonthlyScoreLabel" text="-" style="-fx-font-weight: bold; -fx-text-fill: #00529e;" />
+                     </children>
+                  </HBox>
 
                   <Separator />
 
                   <HBox alignment="CENTER" spacing="20.0">
-                     <padding>
-                        <Insets top="4.0" />
-                     </padding>
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleGeneratePdf" prefWidth="180.0" styleClass="btn-primary" text="Generar PDF" />
+                        <Button mnemonicParsing="false" onAction="#handleGeneratePdf" prefWidth="160.0" styleClass="btn-primary" text="Generar PDF" />
                         <Button mnemonicParsing="false" onAction="#handleBack" prefWidth="150.0" styleClass="btn-secondary" text="Regresar" />
                      </children>
                   </HBox>
