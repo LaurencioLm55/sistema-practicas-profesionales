@@ -99,6 +99,26 @@ public class UserDao implements IUser {
     }
 
     @Override
+    public boolean deactivateUser(int idUser){
+
+        String query = "UPDATE usuario_rol SET estado = 0 WHERE id_usuario = ?";
+
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            
+            preparedStatement.setInt(1, idUser);
+
+            return preparedStatement.executeUpdate() > 0;
+
+        } catch (SQLException e){
+
+            LOGGER.error("Errorr al desactivar el usuario con el id {}", idUser);
+            throw new DaoException("No se pudo desactivar el usuario", e);
+
+        }
+    }
+
+    @Override
     public UserDto getUser(int idUser) {
         String query = "SELECT * FROM usuario WHERE Id_usuario = ?";
 
@@ -214,6 +234,7 @@ public class UserDao implements IUser {
         }
         
     }
+
     public boolean existsUserId(int idUser) {
         String query = "SELECT EXISTS (SELECT 1 FROM usuario WHERE Id_usuario = ?) AS existe";
 

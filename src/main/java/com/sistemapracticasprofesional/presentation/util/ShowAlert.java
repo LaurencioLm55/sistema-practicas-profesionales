@@ -21,7 +21,7 @@ public class ShowAlert {
     @FunctionalInterface
     public interface RunnableShowAlert {
         
-        void run() throws BusinessLogicException;
+        boolean run() throws BusinessLogicException;
         
     }
     
@@ -83,6 +83,7 @@ public class ShowAlert {
 
     public void showAlertConfirmation(String questionText, RunnableShowAlert acctionYes){
 
+        boolean result = false;
         ButtonType buttonYes = new ButtonType("Si");
         ButtonType buttonNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
@@ -91,14 +92,25 @@ public class ShowAlert {
         alert.setHeaderText(questionText);
         alert.getButtonTypes().setAll(buttonYes, buttonNo);
 
-        Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType> resultButton = alert.showAndWait();
 
         
-        if (result.isPresent()){
+        if (resultButton.isPresent()){
             try{
-                if(result.get() == buttonYes){
-                    acctionYes.run();
+                if(resultButton.get() == buttonYes){
+                    result = acctionYes.run();
                 }
+
+                if (result) {
+
+                    showAlertInformation("Se desactivo el usuario con exito");
+
+                } else {
+
+                    showAlertInformation("No se pudo desactivar el usuario");
+
+                }
+                
             } catch (BusinessLogicException e){
 
                 showAlertError(e.getMessage());

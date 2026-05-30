@@ -12,7 +12,7 @@ public class UserRoleDao {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserRoleDao.class);
 
     public boolean insertUserRole(Connection connection, int idUser, int idRole) {
-        String query = "INSERT INTO usuario_rol (Id_usuario, Id_rol) VALUES (?, ?)";
+        String query = "INSERT INTO usuario_rol (Id_usuario, Id_rol, estado) VALUES (?, ?, 1)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, idUser);
