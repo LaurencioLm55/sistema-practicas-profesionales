@@ -17,8 +17,12 @@ import com.sistemapracticasprofesional.logic.util.PasswordUtils;
 import com.sistemapracticasprofesional.logic.validators.RegistrationValidator;
 import java.sql.Connection;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserRegisterController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserRegisterController.class);
 
     private static final int MIN_USER_ID = 100000;
     private static final int USER_ID_RANGE = 900000;
@@ -37,8 +41,7 @@ public class UserRegisterController {
         prepareUser(userDto);
         coordinatorDto.setUserId(userDto.getIdUser());
 
-        executeRegistration(userDto, connection -> coordinatorDao.insertCoordinator(connection, coordinatorDto));
-
+        executeRegistration(userDto, () -> coordinatorDao.insertCoordinator(getConnection(), coordinatorDto));
     }
 
     public void registerProfessor(UserDto userDto, String confirmPassword, ProfessorDto professorDto)
@@ -49,8 +52,7 @@ public class UserRegisterController {
         prepareUser(userDto);
         professorDto.setUserId(userDto.getIdUser());
 
-        executeRegistration(userDto, connection -> professorDao.insertProfessor(connection, professorDto));
-
+        executeRegistration(userDto, () -> professorDao.insertProfessor(getConnection(), professorDto));
     }
 
     public void registerIntern(UserDto userDto, String confirmPassword, InternDto internDto)
@@ -58,30 +60,30 @@ public class UserRegisterController {
 
         validateRegistrationData(userDto, confirmPassword);
         validateInternData(internDto);
+
+        if (internDao.existsStudentId(internDto.getStudentId())) {
+            throw new BusinessLogicException("La matricula ya se encuentra registrada");
+        }
+
         prepareUser(userDto);
         internDto.setUserId(userDto.getIdUser());
 
-        executeRegistration(userDto, connection -> internDao.insertIntern(connection, internDto));
-
+        executeRegistration(userDto, () -> internDao.insertIntern(getConnection(), internDto));
     }
 
     private void validateRegistrationData(UserDto userDto, String confirmPassword)
             throws BusinessLogicException {
-
         validate(() -> RegistrationValidator.validateUser(userDto, confirmPassword));
 
         if (userDao.existsUserName(userDto.getUserName())) {
-            throw new BusinessLogicException("El nombre de usuario ya existe.");
+            throw new BusinessLogicException("El nombre del usuario ya existe");
         }
-
     }
 
     private void prepareUser(UserDto userDto) {
-
         userDto.setIdUser(generateUserId());
         userDto.setUserName(userDto.getUserName().trim());
         userDto.setPassword(PasswordUtils.hashPassword(userDto.getPassword()));
-
     }
 
     private void executeRegistration(UserDto userDto, SpecializedRegister specializedRegister)
@@ -91,111 +93,80 @@ public class UserRegisterController {
         boolean previousAutoCommit = true;
 
         try {
-
             previousAutoCommit = connection.getAutoCommit();
             connection.setAutoCommit(false);
 
             userDao.insertUser(connection, userDto);
-            specializedRegister.insert(connection);
+            specializedRegister.insert();
             userRoleDao.insertUserRole(connection, userDto.getIdUser(), userDto.getIdRole());
 
             connection.commit();
-
         } catch (SQLException | DaoException e) {
-
             rollback(connection);
-            throw new BusinessLogicException("No se pudo registrar el usuario.");
-
+            LOGGER.error("Error al registrar usuario", e);
+            throw new BusinessLogicException("No se pudo completar el registro. Verifique los datos e intente de nuevo.");
         } finally {
-
             restoreAutoCommit(connection, previousAutoCommit);
-
         }
-
     }
 
     private int generateUserId() {
-
-        int generatedId;
+        int idUser;
 
         do {
-            generatedId = MIN_USER_ID + (int) (Math.random() * USER_ID_RANGE);
-        } while (userDao.existsUserId(generatedId));
+            idUser = MIN_USER_ID + (int) (Math.random() * USER_ID_RANGE);
+        } while (userDao.existsUserId(idUser));
 
-        return generatedId;
-
+        return idUser;
     }
 
     private void validateCoordinatorData(CoordinatorDto coordinatorDto) throws BusinessLogicException {
-
         validate(() -> RegistrationValidator.validateCoordinator(coordinatorDto));
-
     }
 
     private void validateProfessorData(ProfessorDto professorDto) throws BusinessLogicException {
-
         validate(() -> RegistrationValidator.validateProfessor(professorDto));
-
     }
 
     private void validateInternData(InternDto internDto) throws BusinessLogicException {
-
         validate(() -> RegistrationValidator.validateIntern(internDto));
+    }
 
+    private Connection getConnection() {
+        return DatabaseConnection.getConnection();
     }
 
     private void rollback(Connection connection) {
-
         try {
-
             connection.rollback();
-
         } catch (SQLException e) {
-
-            throw new DaoException("Error al revertir la transacción.", e);
-
+            throw new DaoException("Error rolling back registration", e);
         }
-
     }
 
     private void restoreAutoCommit(Connection connection, boolean previousAutoCommit) {
-
         try {
-
             connection.setAutoCommit(previousAutoCommit);
-
         } catch (SQLException e) {
-
-            throw new DaoException("Error al restaurar el estado de la conexión.", e);
-
+            throw new DaoException("Error restoring connection state", e);
         }
-
     }
 
     private void validate(Validation validation) throws BusinessLogicException {
-
         try {
-
             validation.validate();
-
         } catch (ValidationException e) {
-
             throw new BusinessLogicException(e.getMessage());
-
         }
-
     }
 
+    
     private interface SpecializedRegister {
-
-        boolean insert(Connection connection);
-
+        boolean insert();
     }
 
+    
     private interface Validation {
-
         void validate() throws ValidationException;
-
     }
-
 }

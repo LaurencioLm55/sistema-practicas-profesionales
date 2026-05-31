@@ -14,15 +14,27 @@ public final class RegistrationValidator {
     public static void validateUser(UserDto userDto, String confirmPassword)
             throws ValidationException {
 
+        if (userDto == null || isBlank(userDto.getUserName())) {
+            throw new ValidationException("El nombre de usuario es requerido");
+        }
+
         UserValidator validator = new UserValidator(userDto);
 
         if (!validator.isUserNameValid(userDto)) {
             throw new ValidationException("El nombre de usuario solo puede contener letras y numeros");
         }
 
+        if (isBlank(userDto.getPassword())) {
+            throw new ValidationException("La contrasena es requerida");
+        }
+
         if (!validator.isUserPasswordValid(userDto)) {
             throw new ValidationException(
                     "La contrasena debe tener minimo 10 caracteres, una mayuscula, una minuscula y un numero");
+        }
+
+        if (isBlank(confirmPassword)) {
+            throw new ValidationException("Confirmar contrasena es requerido");
         }
 
         if (!userDto.getPassword().equals(confirmPassword)) {
@@ -62,13 +74,28 @@ public final class RegistrationValidator {
     public static void validateIntern(InternDto internDto)
             throws ValidationException {
 
-        if (internDto == null
-                || isBlank(internDto.getStudentId())
-                || internDto.getAge() <= 0
-                || isBlank(internDto.getName())
-                || isBlank(internDto.getGender())
-                || isBlank(internDto.getMajor())) {
-            throw new ValidationException("Datos del practicante invalidos");
+        if (internDto == null) {
+            throw new ValidationException("Los datos del practicante son requeridos");
+        }
+
+        if (isBlank(internDto.getStudentId())) {
+            throw new ValidationException("La matricula es requerida");
+        }
+
+        if (internDto.getAge() <= 0) {
+            throw new ValidationException("La edad debe ser mayor a cero");
+        }
+
+        if (isBlank(internDto.getName())) {
+            throw new ValidationException("El nombre completo es requerido");
+        }
+
+        if (isBlank(internDto.getGender())) {
+            throw new ValidationException("El genero es requerido");
+        }
+
+        if (isBlank(internDto.getMajor())) {
+            throw new ValidationException("La carrera es requerida");
         }
 
         internDto.setStudentId(internDto.getStudentId().trim());

@@ -20,8 +20,8 @@ public class InternDao implements IIntern {
     @Override
     public boolean insertIntern(InternDto intern) {
         String query = "INSERT INTO practicante "
-                + "(Matricula, Id_usuario, Nombre, Edad, Genero, Carrera, LenguaIndigena) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + "(Matricula, Id_usuario, Nombre, Edad, Genero, Carrera, LenguaIndigena, EstadoPracticante) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -48,8 +48,8 @@ public class InternDao implements IIntern {
 
     public boolean insertIntern(Connection connection, InternDto intern) {
         String query = "INSERT INTO practicante "
-                + "(Matricula, Id_usuario, Nombre, Edad, Genero, Carrera, LenguaIndigena) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + "(Matricula, Id_usuario, Nombre, Edad, Genero, Carrera, LenguaIndigena, EstadoPracticante) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -245,6 +245,30 @@ public class InternDao implements IIntern {
 
         return listInternsActive;
         
+    }
+
+    public boolean existsStudentId(String studentId) {
+
+        String query = "SELECT EXISTS (SELECT 1 FROM practicante WHERE Matricula = ?) AS existe";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, studentId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("existe") == 1;
+                }
+            }
+
+            return false;
+
+        } catch (SQLException e) {
+            LOGGER.error("Error checking if student id exists {}", studentId, e);
+            throw new DaoException("Error al verificar la matricula", e);
+        }
+
     }
 
     public InternDto getInternByUserId(int userId) {
