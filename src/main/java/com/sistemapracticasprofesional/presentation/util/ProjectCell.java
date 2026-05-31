@@ -20,12 +20,9 @@ import org.slf4j.Logger;
 public class ProjectCell extends ListCell<ProjectDto>{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginControllerGui.class);
-
     private final Button button = new Button("Asignar");
     private final Label label = new Label();
     private final HBox hbox = new HBox(10, label, button);
-
-
     private final AssignProjectController assignProjectController;
     private final InternDto internDto;
 
@@ -54,12 +51,12 @@ public class ProjectCell extends ListCell<ProjectDto>{
     private void handleAssign(ActionEvent e, ProjectDto item) {
         try {
 
-            boolean result = assignProjectController.assingProject(
-                internDto.getStudentId(), item.getProjectId());
+            int result = assignProjectController.assingProject(internDto.getStudentId(), item.getProjectId());
 
-            if (result) {
+            if (result == 1) {
 
                 showAlert(AlertType.CONFIRMATION, "Se asigno el proyecto correctamente");
+
                 try {
 
                     Navigation.changeScene(e, "GuiListOfInters.fxml", "Menú del coordinador");
@@ -71,6 +68,17 @@ public class ProjectCell extends ListCell<ProjectDto>{
                 
                 }
 
+            } else {
+
+                if (result == 0) {
+
+                    showAlert(AlertType.INFORMATION, "El proyecto no tiene cupo");
+
+                } else {
+
+                    showAlert(AlertType.ERROR, "Erro al asignar el proyecto");
+
+                }
             }
             
         } catch (BusinessLogicException ex) {

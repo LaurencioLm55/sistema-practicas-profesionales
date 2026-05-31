@@ -6,7 +6,6 @@ import com.sistemapracticasprofesional.logic.dto.ProjectDto;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.logic.dao.ProjectDao;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,29 +51,25 @@ public class AssignProjectController {
 
     }
 
-    public boolean assingProject(String studentId, int projectId) 
+    public int assingProject(String studentId, int projectId) 
     throws BusinessLogicException {
 
-        boolean result = false;
+        int result;
 
         InternDao internDao = new InternDao();
-
-        try{
+        
+        try {
 
             internDao.assignProject(studentId, projectId);
-
-            if(internDao.isProjectAssignedIntern(studentId, projectId)){
-
-                result = true;
-
-            }
             
-        } catch ( DaoException e ){
+            result = internDao.isProjectAssignedIntern();
+
+        } catch (DaoException e){
 
             throw new BusinessLogicException("Error al asignar proyecto", e);
 
         }
-        
+
         return result;
 
     }

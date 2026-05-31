@@ -10,6 +10,7 @@ public interface IUser {
     boolean insertUser(UserDto userDto) throws DaoException;
     boolean insertUser(Connection connection, UserDto userDto) throws DaoException;
     boolean updateUser(UserDto userDto) throws DaoException;
+    boolean deactivateUser(int idUser) throws DaoException;
     UserDto getUser(int idUser) throws DaoException;
     int getIdUser( UserDto userDto ) throws DaoException;
     String getUserType(UserDto userDto) throws DaoException;

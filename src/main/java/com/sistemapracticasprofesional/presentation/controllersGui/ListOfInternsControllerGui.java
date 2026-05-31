@@ -4,6 +4,7 @@ import com.sistemapracticasprofesional.logic.dto.InternDto;
 import com.sistemapracticasprofesional.logic.exception.BusinessLogicException;
 import com.sistemapracticasprofesional.presentation.util.Navigation;
 import com.sistemapracticasprofesional.logic.controllers.AssignProjectController;
+import com.sistemapracticasprofesional.logic.controllers.DeactivateInternController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
