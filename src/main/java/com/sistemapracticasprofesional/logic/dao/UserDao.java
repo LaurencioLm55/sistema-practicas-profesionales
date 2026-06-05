@@ -40,6 +40,60 @@ public class UserDao implements IUser {
         }
     }
 
+    public boolean isRecipientRegistred(String userName) {
+
+        String query = "SELECT EXISTS ("
+                + "SELECT 1 FROM usuario WHERE nombre = ? "
+                + ") AS existe";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userName);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("existe") == 1;
+                }
+            }
+
+            return false;
+
+        } catch (SQLException e) {
+
+            LOGGER.error("Error checking if user is registered: {}", userName, e);
+            throw new DaoException("Error verifying user", e);
+
+        }
+    }
+
+    public boolean isUserActive (int userId){
+
+        String query = "SELECT EXISTS (SELECT 1 FROM usuario_rol WHERE estado = 1 AND Id_usuario = ?) AS existe";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("existe") == 1;
+                }
+            }
+
+            return false;
+
+        } catch (SQLException e) {
+
+            LOGGER.error("Error checking if user is registered: {}", userId, e);
+            throw new DaoException("Error verifying user", e);
+
+        }
+
+    }
+
+
     @Override
     public boolean insertUser(UserDto userDto) {
         String query = "INSERT INTO usuario (Id_usuario, nombre, Contraseña, Id_rol) VALUES (?, ?, ?, ?)";
@@ -177,6 +231,38 @@ public class UserDao implements IUser {
 
     }
 
+    public int getIdUserByUserName(String userName){
+        
+        int result = 0;
+        
+        String query = "SELECT Id_usuario FROM usuario WHERE nombre = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userName);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                if (resultSet.next()) {
+                   
+                    result = resultSet.getInt("Id_usuario");
+                    
+                }
+
+            }
+
+            return result;
+
+        } catch (SQLException e) {
+
+            LOGGER.error("Error getting id {}", userName, e);
+            throw new DaoException("Error getting user", e);
+
+        }
+
+    }
+
     @Override
     public String getUserType( UserDto userDto ) {
         
@@ -251,4 +337,6 @@ public class UserDao implements IUser {
             throw new DaoException("Error verifying user id", e);
         }
     }
+
+    
 }

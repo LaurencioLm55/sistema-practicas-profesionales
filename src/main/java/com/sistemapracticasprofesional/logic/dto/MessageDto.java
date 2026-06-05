@@ -1,5 +1,6 @@
-
 package com.sistemapracticasprofesional.logic.dto;
+
+import java.time.LocalDate;
 
 public class MessageDto {
 
@@ -8,16 +9,20 @@ public class MessageDto {
     private int receiverUserId;
     private String subject;
     private String content;
+    private String senderUserName;
+    private String reciverUserName;
+    private LocalDate messageDate;
 
     public MessageDto() {
     }
 
     public MessageDto(int senderUserId, int receiverUserId, String subject,
                       String content) {
+
         this.senderUserId = senderUserId;
         this.receiverUserId = receiverUserId;
         this.subject = subject;
-        this.content = content;
+       
     }
 
     public MessageDto(int messageId, int senderUserId, int receiverUserId,
@@ -27,6 +32,20 @@ public class MessageDto {
         this.receiverUserId = receiverUserId;
         this.subject = subject;
         this.content = content;
+    }
+
+
+    public MessageDto(int messageId, int senderUserId, int receiverUserId,
+                      String subject, String content, String senderUserName, String reciverUserName,
+                      LocalDate messageDate) {
+        this.messageId = messageId;
+        this.senderUserId = senderUserId;
+        this.receiverUserId = receiverUserId;
+        this.subject = subject;
+        this.content = content;
+        this.senderUserName = senderUserName;
+        this.reciverUserName = reciverUserName;
+        this.messageDate = messageDate;
     }
 
     public int getMessageId() {
@@ -69,6 +88,30 @@ public class MessageDto {
         this.content = content;
     }
 
+     public String getSenderUserName() {
+        return senderUserName;
+    }
+
+    public void setSenderUserName(String senderUserName) {
+        this.senderUserName = senderUserName;
+    }
+    
+     public String getReciverUserName() {
+        return reciverUserName;
+    }
+
+    public void setReciverUserName(String reciverUserName) {
+        this.reciverUserName = reciverUserName;
+    }
+
+    public LocalDate getMessageDate() {
+        return messageDate;
+    }
+
+    public void setMessageDate(LocalDate messageDate) {
+        this.messageDate = messageDate;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -78,8 +121,11 @@ public class MessageDto {
         result = prime * result + receiverUserId;
         result = prime * result + ((subject == null) ? 0 : subject.hashCode());
         result = prime * result + ((content == null) ? 0 : content.hashCode());
+        result = prime * result + ((senderUserName == null) ? 0 : senderUserName.hashCode());
+        result = prime * result + ((reciverUserName == null) ? 0 : reciverUserName.hashCode());
+        result = prime * result + ((messageDate == null) ? 0 : messageDate.hashCode());
         return result;
-    }
+    } 
 
     @Override
     public boolean equals(Object obj) {
@@ -106,8 +152,22 @@ public class MessageDto {
                 return false;
         } else if (!content.equals(other.content))
             return false;
+        if (senderUserName == null) {
+            if (other.senderUserName != null)
+                return false;
+        } else if (!senderUserName.equals(other.senderUserName))
+            return false;
+        if (reciverUserName == null) {
+            if (other.reciverUserName != null)
+                return false;
+        } else if (!reciverUserName.equals(other.reciverUserName))
+            return false;
+        if (messageDate == null) {
+            if (other.messageDate != null)
+                return false;
+        } else if (!messageDate.equals(other.messageDate))
+            return false;
         return true;
     }
 
-    
 }

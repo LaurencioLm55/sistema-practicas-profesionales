@@ -4,6 +4,7 @@ import com.sistemapracticasprofesional.dataaccess.DatabaseConnection;
 import com.sistemapracticasprofesional.logic.dto.MessageDto;
 import com.sistemapracticasprofesional.logic.exception.DaoException;
 import com.sistemapracticasprofesional.logic.interfaces.IMessage;
+import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,8 @@ public class MessageDao implements IMessage {
     @Override
     public boolean insertMessage(MessageDto message) {
         String query = "INSERT INTO mensaje (Remitente, Destinatario, Asunto, "
-                + "Contenido_de_mensaje) VALUES (?, ?, ?, ?)";
+                + "Contenido_de_mensaje, Nombre_remitente, Nombre_Destinatario, Fecha)" 
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -29,6 +31,9 @@ public class MessageDao implements IMessage {
             preparedStatement.setInt(2, message.getReceiverUserId());
             preparedStatement.setString(3, message.getSubject());
             preparedStatement.setString(4, message.getContent());
+            preparedStatement.setString(5, message.getSenderUserName());
+            preparedStatement.setString(6, message.getSenderUserName());
+            preparedStatement.setDate(7, Date.valueOf(message.getMessageDate()));
 
             return preparedStatement.executeUpdate() > 0;
 
@@ -49,9 +54,13 @@ public class MessageDao implements IMessage {
             preparedStatement.setInt(1, messageId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
                 if (resultSet.next()) {
+
                     return mapResultSetToDto(resultSet);
+                    
                 }
+
             }
 
             return null;
@@ -64,8 +73,9 @@ public class MessageDao implements IMessage {
 
     @Override
     public List<MessageDto> getInboxByUserId(int receiverUserId) {
+        
         List<MessageDto> messageList = new ArrayList<>();
-        String query = "SELECT * FROM mensaje WHERE Destinatario = ? ORDER BY "
+        String query = "SELECT Id_mensaje, Nombre_remitente, asunto, Contenido_de_mensaje FROM mensaje WHERE Destinatario = ? ORDER BY "
                 + "Id_mensaje DESC";
 
         try (Connection connection = DatabaseConnection.getConnection();
@@ -75,7 +85,16 @@ public class MessageDao implements IMessage {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    messageList.add(mapResultSetToDto(resultSet));
+                    
+                    MessageDto messageDto = new MessageDto();
+
+                    messageDto.setMessageId(resultSet.getInt("Id_mensaje"));
+                    messageDto.setSenderUserName(resultSet.getString("Nombre_remitente"));
+                    messageDto.setSubject(resultSet.getString("asunto"));
+                    messageDto.setContent(resultSet.getString("Contenido_de_mensaje"));
+
+                    messageList.add(messageDto);
+
                 }
             }
 
@@ -134,7 +153,10 @@ public class MessageDao implements IMessage {
                 resultSet.getInt("Remitente"),
                 resultSet.getInt("Destinatario"),
                 resultSet.getString("Asunto"),
-                resultSet.getString("Contenido_de_mensaje")
+                resultSet.getString("Contenido_de_mensaje"),
+                resultSet.getString("Nombre_remitente"),
+                resultSet.getString("Nombre_Destinatario"),
+                resultSet.getDate("fecha").toLocalDate()
         );
     }
 }

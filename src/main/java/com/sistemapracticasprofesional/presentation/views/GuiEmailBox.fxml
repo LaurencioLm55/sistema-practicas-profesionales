@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane alignment="BOTTOM_RIGHT" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../resources/styles/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemapracticasprofesional.presentation.controllersGui.MessageControllerGui">
+   <children>
+      <BorderPane>
+         <top>
+            <VBox prefHeight="115.0" prefWidth="1280.0" style="-fx-background-color: #00529e;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox fx:id="containerTitle" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="title" styleClass="header-title" text="Buzon" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Bold" size="42.0" />
+                           </font>
+                        </Label>
+                        <Region prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="24.0" right="24.0" />
+                           </padding>
+                        </Region>
+                        <ImageView fx:id="logo" fitHeight="100.0" fitWidth="120.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../resources/images/LogoUv.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets left="25.0" right="25.0" />
+                     </padding>
+                  </HBox>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                    <items>
+                        <Button mnemonicParsing="false" onAction="#hadleReturnBack" text="Regresar" />
+                      <Button mnemonicParsing="false" onAction="#handleWriteEmail" text="Escribir correo" />
+                    </items>
+                  </ToolBar>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </top>
+         <left>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ListView fx:id="emailList" prefHeight="595.0" prefWidth="234.0" />
+               </children>
+            </HBox>
+         </left>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="28.0" prefWidth="1019.0">
+                     <children>
+                        <AnchorPane prefHeight="28.0" prefWidth="744.0">
+                           <children>
+                              <Label fx:id="senderNameLabel" styleClass="subsection-title" text="Remitente">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="dataLabel" prefHeight="28.0" prefWidth="245.0" styleClass="subsection-title" text="Fecha">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Label fx:id="subjectLabel" styleClass="subsection-title" text="Asunto">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="contentLabel" text="Contenido">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="30.0" right="30.0" />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+      </BorderPane>
+      <Pane fx:id="messagePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #EDFBFF;">
+         <children>
+            <VBox fx:id="contenteMessagePane" prefHeight="400.0" prefWidth="600.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="600.0" style="-fx-background-color: #00529e;">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleCloseWriterEmail" style="-fx-border-radius: 100;" text="x" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="receiverUserTextField" promptText="Destinatario" />
+                  <TextField fx:id="subjectTextField" promptText="Asunto" />
+                  <TextArea fx:id="contentTextField" prefHeight="238.0" prefWidth="600.0" promptText="Contenido" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="600.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleSendMessage" text="Enviar" />
+                     </children>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</StackPane>

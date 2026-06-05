@@ -33,23 +33,31 @@ public class CoordinatorMenuController{
     }
 
     private void validateAccess() {
+
         UserSession session = UserSession.getInstance();
 
         if (!session.isActive() || !session.hasRole("Coordinador")) {
             Platform.runLater(this::redirectToLogin);
         }
+
     }
 
     private void redirectToLogin() {
+
         try {
+
             showAlert(AlertType.ERROR, "Acceso no autorizado");
             UserSession.getInstance().closeSession();
             Stage stage = (Stage) rootPane.getScene().getWindow();
             Navigation.changeScene(stage, "GuiUserLogin.fxml", "Inicio de sesion");
+        
         } catch (IOException e) {
+
             LOGGER.error("No se pudo regresar al inicio de sesion", e);
             showAlert(AlertType.ERROR, "No se pudo regresar al inicio de sesion");
+        
         }
+        
     }
 
     @FXML
@@ -119,7 +127,7 @@ public class CoordinatorMenuController{
 
         try{
 
-            Navigation.changeScene(event, "GuiListOfActiveUsers.fxml", "Desabilitar interno");
+            Navigation.changeScene(event, "GuiListOfActiveInterns.fxml", "Desabilitar interno");
 
         }catch( IOException e ){
 
@@ -176,6 +184,19 @@ public class CoordinatorMenuController{
     }
 
     @FXML
+    public void handleOpenEmailBox(ActionEvent event){
+        try{
+            
+            Navigation.changeScene(event, "GuiEmailBox.fxml", "Buzon de correo");
+
+        } catch (IOException e){
+
+            showAlert(AlertType.ERROR, "Error: no se encontró la ventana de buzon");
+
+        }
+    }
+
+    @FXML
     public void handleRegisterProject(ActionEvent event) {
         try {
             Navigation.changeScene(
@@ -209,9 +230,9 @@ public class CoordinatorMenuController{
 
     }
 
-    public void setWelcomeLabel( String userName ){
+    public void setWelcomeLabel(String name){
 
-        welcomeLabel.setText( "¡Bienvenido " + userName + "!" );
+        welcomeLabel.setText( "¡Bienvenido " +  name  + "!" );
 
     }
 

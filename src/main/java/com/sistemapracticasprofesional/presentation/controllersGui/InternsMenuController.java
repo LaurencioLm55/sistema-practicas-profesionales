@@ -130,6 +130,19 @@ public class InternsMenuController {
         }
     }
 
+    @FXML
+    public void handleOpenEmailBox(ActionEvent event){
+        try{
+            
+            Navigation.changeScene(event, "GuiEmailBox.fxml", "Buzon de correo");
+
+        } catch (IOException e){
+
+            showAlert(AlertType.ERROR, "Error: no se encontró la ventana de buzon");
+
+        }
+    }
+
     private void showAlert(Alert.AlertType type, String message) {
         alert = new Alert(type);
         alert.setTitle(null);
