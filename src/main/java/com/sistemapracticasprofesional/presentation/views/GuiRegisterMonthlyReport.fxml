@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -45,64 +47,95 @@
       </VBox>
    </top>
    <center>
-      <VBox alignment="TOP_CENTER" spacing="16.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets top="24.0" left="40.0" right="40.0" bottom="24.0" />
-         </padding>
-         <children>
-            <VBox styleClass="form-card" spacing="14.0">
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox alignment="TOP_CENTER" spacing="16.0" style="-fx-background-color: #f0f4f8;">
+               <padding>
+                  <Insets top="24.0" left="40.0" right="40.0" bottom="24.0" />
+               </padding>
                <children>
-                  <Label text="Datos del reporte mensual" styleClass="subsection-title" />
-                  <Separator />
 
-                  <HBox alignment="CENTER_LEFT" spacing="16.0">
+                  <!-- Dates and description card -->
+                  <VBox styleClass="form-card" spacing="12.0">
                      <children>
-                        <Label text="ID de actividad:" prefWidth="220.0" />
-                        <TextField fx:id="activityIdField" promptText="Ej. 101" styleClass="text-input" />
-                     </children>
-                  </HBox>
+                        <Label text="Datos del reporte mensual" styleClass="subsection-title" />
+                        <Separator />
 
-                  <HBox alignment="CENTER_LEFT" spacing="16.0">
-                     <children>
-                        <Label text="Archivo del reporte:" prefWidth="220.0" />
-                        <TextField fx:id="reportFileField" promptText="Nombre o ruta del archivo" styleClass="text-input" />
-                     </children>
-                  </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Fecha de realización:" prefWidth="220.0" />
+                              <DatePicker fx:id="completionDatePicker" styleClass="date-picker" />
+                           </children>
+                        </HBox>
 
-                  <HBox alignment="CENTER_LEFT" spacing="16.0">
-                     <children>
-                        <Label text="Fecha de realización:" prefWidth="220.0" />
-                        <DatePicker fx:id="completionDatePicker" styleClass="date-picker" />
-                     </children>
-                  </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Fecha de entrega:" prefWidth="220.0" />
+                              <DatePicker fx:id="deliveryDatePicker" styleClass="date-picker" />
+                           </children>
+                        </HBox>
 
-                  <HBox alignment="CENTER_LEFT" spacing="16.0">
-                     <children>
-                        <Label text="Fecha de entrega:" prefWidth="220.0" />
-                        <DatePicker fx:id="deliveryDatePicker" styleClass="date-picker" />
+                        <HBox alignment="TOP_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Descripción general:" prefWidth="220.0" />
+                              <TextArea fx:id="descriptionArea" promptText="Describe las actividades realizadas en el mes..."
+                                        prefHeight="100.0" wrapText="true" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
 
-                  <HBox alignment="TOP_LEFT" spacing="16.0">
+                  <!-- Activity form card -->
+                  <VBox styleClass="form-card" spacing="12.0">
                      <children>
-                        <Label text="Descripción:" prefWidth="220.0" />
-                        <TextArea fx:id="descriptionArea" promptText="Describe las actividades realizadas..."
-                                  prefHeight="120.0" prefWidth="400.0" wrapText="true" />
+                        <Label text="Agregar Actividad del Mes" styleClass="subsection-title" />
+                        <Separator />
+
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Nombre de actividad:" prefWidth="220.0" />
+                              <TextField fx:id="activityNameField" promptText="Ej. Análisis de requerimientos" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="TOP_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Descripción:" prefWidth="220.0" />
+                              <TextArea fx:id="activityDescriptionArea" promptText="Describe la actividad..."
+                                        prefHeight="80.0" wrapText="true" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleAddActivity" styleClass="btn-primary" text="Agregar actividad" />
+                              <Button mnemonicParsing="false" onAction="#handleRemoveActivity" styleClass="btn-secondary" text="Eliminar seleccionada" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
+
+                  <!-- Activity list card -->
+                  <VBox styleClass="form-card" spacing="12.0">
+                     <children>
+                        <Label text="Actividades agregadas" styleClass="subsection-title" />
+                        <Separator />
+                        <ListView fx:id="activitiesListView" prefHeight="140.0" />
+                     </children>
+                  </VBox>
 
                   <Separator />
 
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleRegister" prefWidth="160.0" styleClass="btn-primary" text="Registrar" />
+                        <Button mnemonicParsing="false" onAction="#handleGenerateReport" prefWidth="200.0" styleClass="btn-primary" text="Generar Reporte PDF" />
                         <Button mnemonicParsing="false" onAction="#handleBack" prefWidth="150.0" styleClass="btn-secondary" text="Cancelar" />
                      </children>
                   </HBox>
 
                </children>
             </VBox>
-         </children>
-      </VBox>
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>

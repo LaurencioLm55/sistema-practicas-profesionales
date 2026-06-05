@@ -62,7 +62,11 @@ public class AssignProjectController {
 
             internDao.assignProject(studentId, projectId);
             
-            result = internDao.isProjectAssignedIntern();
+            if (internDao.isProjectAssignedIntern(studentId, projectId)) {
+                result = 1;
+            } else {
+                result = 0;
+            }
 
         } catch (DaoException e){
 

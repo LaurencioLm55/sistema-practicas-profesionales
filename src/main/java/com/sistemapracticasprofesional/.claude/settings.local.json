@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\lopez\\\\OneDrive - Universidad Veracruzana\\\\Cuarto semestre\\\\Principios de construccion\\\\sistema-web-practivas-profesionales\" -Recurse -Directory)",
+      "Bash(Select-Object -First 50)",
+      "Bash(Format-Table FullName)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\lopez\\\\OneDrive - Universidad Veracruzana\\\\Cuarto semestre\\\\Principios de construccion\\\\sistema-web-practivas-profesionales\" -Recurse -Directory | Select-Object -First 100 | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\lopez\\\\OneDrive - Universidad Veracruzana\\\\Cuarto semestre\\\\Principios de construccion\\\\sistema-web-practivas-profesionales\\\\src\\\\main\\\\resources\" -Recurse -File | ForEach-Object { $_.FullName })",
+      "Bash(mvn compile *)"
+    ]
+  }
+}

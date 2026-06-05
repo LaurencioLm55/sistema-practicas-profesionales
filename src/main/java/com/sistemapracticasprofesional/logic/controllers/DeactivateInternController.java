@@ -16,7 +16,7 @@ public class DeactivateInternController {
     
     public List<InternDto> getListInterns(){
 
-        List<InternDto> list = internDao.getAllInternsActive();
+        List<InternDto> list = internDao.getInternsActive();
 
         return list;
 

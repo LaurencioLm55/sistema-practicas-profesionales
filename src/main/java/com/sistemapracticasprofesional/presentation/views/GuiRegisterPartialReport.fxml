@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -44,65 +46,137 @@
       </VBox>
    </top>
    <center>
-      <VBox alignment="TOP_CENTER" spacing="16.0" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets top="24.0" left="40.0" right="40.0" bottom="24.0" />
-         </padding>
-         <children>
-            <VBox styleClass="form-card" spacing="14.0">
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #f0f4f8;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox alignment="TOP_CENTER" spacing="16.0" style="-fx-background-color: #f0f4f8;">
+               <padding>
+                  <Insets top="24.0" left="40.0" right="40.0" bottom="24.0" />
+               </padding>
                <children>
-                  <Label text="Datos del reporte parcial" styleClass="subsection-title" />
-                  <Separator />
 
-                  <HBox alignment="CENTER_LEFT" spacing="16.0">
+                  <!-- EE Data card -->
+                  <VBox styleClass="form-card" spacing="12.0">
                      <children>
-                        <Label text="ID de actividad:" prefWidth="220.0" />
-                        <TextField fx:id="activityIdField" promptText="Ej. 101" styleClass="text-input" />
-                     </children>
-                  </HBox>
+                        <Label text="Experiencia Educativa" styleClass="subsection-title" />
+                        <Separator />
 
-                  <HBox alignment="CENTER_LEFT" spacing="16.0">
-                     <children>
-                        <Label text="Tiempo planeado:" prefWidth="220.0" />
-                        <TextField fx:id="plannedTimeField" promptText="Ej. 10 horas" styleClass="text-input" />
-                     </children>
-                  </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Nombre de la EE:" prefWidth="220.0" />
+                              <TextField fx:id="educationalExperienceNameField" promptText="Ej. Prácticas Profesionales" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
 
-                  <HBox alignment="CENTER_LEFT" spacing="16.0">
-                     <children>
-                        <Label text="Tiempo real:" prefWidth="220.0" />
-                        <TextField fx:id="realTimeField" promptText="Ej. 12 horas" styleClass="text-input" />
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="NRC:" prefWidth="220.0" />
+                              <TextField fx:id="courseRegistrationNumberField" promptText="Ej. 12345" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
 
-                  <HBox alignment="TOP_LEFT" spacing="16.0">
+                  <!-- Project data card -->
+                  <VBox styleClass="form-card" spacing="12.0">
                      <children>
-                        <Label text="Resultados:" prefWidth="220.0" />
-                        <TextArea fx:id="resultsArea" promptText="Describe los resultados obtenidos..."
-                                  prefHeight="100.0" prefWidth="400.0" wrapText="true" />
-                     </children>
-                  </HBox>
+                        <Label text="Datos del Proyecto" styleClass="subsection-title" />
+                        <Separator />
 
-                  <HBox alignment="TOP_LEFT" spacing="16.0">
-                     <children>
-                        <Label text="Observaciones:" prefWidth="220.0" />
-                        <TextArea fx:id="observationsArea" promptText="Agrega observaciones adicionales..."
-                                  prefHeight="100.0" prefWidth="400.0" wrapText="true" />
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Nombre del proyecto:" prefWidth="220.0" />
+                              <TextField fx:id="projectNameField" promptText="Ej. Sistema de gestión" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Organización vinculada:" prefWidth="220.0" />
+                              <TextField fx:id="organizationNameField" promptText="Ej. Empresa XYZ" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
+
+                  <!-- Activity form card -->
+                  <VBox styleClass="form-card" spacing="12.0">
+                     <children>
+                        <Label text="Agregar Actividad" styleClass="subsection-title" />
+                        <Separator />
+
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Nombre de actividad:" prefWidth="220.0" />
+                              <TextField fx:id="activityNameField" promptText="Ej. Desarrollo de módulo" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="TOP_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Descripción:" prefWidth="220.0" />
+                              <TextArea fx:id="activityDescriptionArea" promptText="Describe la actividad realizada..."
+                                        prefHeight="80.0" wrapText="true" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Tiempo planeado:" prefWidth="220.0" />
+                              <TextField fx:id="plannedTimeField" promptText="Ej. 10 hrs" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Tiempo real:" prefWidth="220.0" />
+                              <TextField fx:id="realTimeField" promptText="Ej. 12 hrs" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Mes:" prefWidth="220.0" />
+                              <TextField fx:id="monthField" promptText="Ej. Enero" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="16.0">
+                           <children>
+                              <Label text="Semana:" prefWidth="220.0" />
+                              <TextField fx:id="weekField" promptText="Ej. 1" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleAddActivity" styleClass="btn-primary" text="Agregar actividad" />
+                              <Button mnemonicParsing="false" onAction="#handleRemoveActivity" styleClass="btn-secondary" text="Eliminar seleccionada" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <!-- Activity list card -->
+                  <VBox styleClass="form-card" spacing="12.0">
+                     <children>
+                        <Label text="Actividades agregadas" styleClass="subsection-title" />
+                        <Separator />
+                        <ListView fx:id="activitiesListView" prefHeight="140.0" />
+                     </children>
+                  </VBox>
 
                   <Separator />
 
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleRegister" prefWidth="160.0" styleClass="btn-primary" text="Registrar" />
+                        <Button mnemonicParsing="false" onAction="#handleGenerateReport" prefWidth="200.0" styleClass="btn-primary" text="Generar Reporte PDF" />
                         <Button mnemonicParsing="false" onAction="#handleBack" prefWidth="150.0" styleClass="btn-secondary" text="Cancelar" />
                      </children>
                   </HBox>
 
                </children>
             </VBox>
-         </children>
-      </VBox>
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>
